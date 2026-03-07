@@ -38,6 +38,27 @@ class ItemSchema(BaseModel):
             return "unknown"
         return v.lower().strip()
 
+    @field_validator("sockets", mode="before")
+    @classmethod
+    def normalize_sockets(cls, v):
+        if v in (None, "", "null"):
+            return 0
+        if isinstance(v, str):
+            digits = "".join(ch for ch in v if ch.isdigit())
+            return int(digits) if digits else 0
+        return v
+
+    @field_validator("damage", mode="before")
+    @classmethod
+    def normalize_damage(cls, v):
+        if isinstance(v, dict):
+            min_dmg = v.get("min")
+            max_dmg = v.get("max")
+            if min_dmg is not None and max_dmg is not None:
+                return f"{min_dmg}-{max_dmg}"
+            return json.dumps(v)
+        return v
+
 
 class EvaluationSchema(BaseModel):
     grade: str
