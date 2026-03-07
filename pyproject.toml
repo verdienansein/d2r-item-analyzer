@@ -13,6 +13,10 @@ authors = [
     {name = "Guglielmo Carnemolla", email = "gugli90@gmail.com"}
 ]
 keywords = ["diablo", "d2r", "item", "analyzer"]
+dependencies = [
+    "bettercam",
+    "opencv-python",
+]
 
 [project.optional-dependencies]
 dev = [
