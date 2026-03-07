@@ -2,9 +2,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import pynput
-
 import cv2
+import pynput
 from pynput import keyboard
 
 TIMEOUT = 200000000
