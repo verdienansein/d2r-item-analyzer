@@ -5,13 +5,18 @@ from pynput import keyboard
 TIMEOUT = 10
 
 try:
-    from d2r_analyzer.capture import capture_screenshot
-    from d2r_analyzer.capture import frame_to_base64
+    from d2r_analyzer.capture import capture_screenshot, frame_to_base64
 except ModuleNotFoundError:
-    from capture import capture_screenshot
-    from capture import frame_to_base64
+    from capture import capture_screenshot, frame_to_base64
 
-hotkeys = {"<ctrl>+<shift>+a": capture_screenshot}
+
+def capture_and_print_base64() -> None:
+    frame = capture_screenshot()
+    encoded = frame_to_base64(frame)
+    print(encoded)
+
+
+hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
 
 with keyboard.GlobalHotKeys(hotkeys) as h:
     info("D2R Item Analyzer is running. Press Ctrl+Shift+A to capture a screenshot.")

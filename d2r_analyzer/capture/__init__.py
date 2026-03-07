@@ -1,5 +1,5 @@
-from .screenshot import capture_screenshot
 from .image_utils import frame_to_base64
+from .screenshot import capture_screenshot
 
 """Capture module for D2R Item Analyzer."""
 

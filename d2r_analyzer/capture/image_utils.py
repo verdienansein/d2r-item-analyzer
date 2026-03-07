@@ -1,7 +1,7 @@
 import base64
 import io
 
-from numpy import np
+import numpy as np
 from PIL import Image
 
 
