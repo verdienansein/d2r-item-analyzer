@@ -2,10 +2,12 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+import pynput
+
 import cv2
 from pynput import keyboard
 
-TIMEOUT = 10
+TIMEOUT = 200000000
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -13,9 +15,11 @@ if __package__ in (None, ""):
 try:
     from d2r_analyzer.capture import capture_screenshot, frame_to_base64
     from d2r_analyzer.evaluator import Evaluator
+    from d2r_analyzer.ui.overlay import ItemOverlay
 except ModuleNotFoundError:
     from capture import capture_screenshot, frame_to_base64
     from evaluator import Evaluator
+    from ui.overlay import ItemOverlay
 
 
 def capture_and_print_base64() -> None:
@@ -36,6 +40,10 @@ def capture_and_print_base64() -> None:
     evaluation = evaluator.evaluate_item(item)
     print("Evaluation result:")
     print(evaluation.model_dump_json(indent=2))
+    overlay = ItemOverlay()
+    mouse = pynput.mouse.Controller()
+    mx, my = mouse.position
+    overlay.show(evaluation, x=mx, y=my)
 
 
 hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
