@@ -1,7 +1,8 @@
 import sys
-from logging import info
+from datetime import datetime
 from pathlib import Path
 
+import cv2
 from pynput import keyboard
 
 TIMEOUT = 10
@@ -19,6 +20,14 @@ except ModuleNotFoundError:
 
 def capture_and_print_base64() -> None:
     frame = capture_screenshot()
+
+    screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
+    screenshots_dir.mkdir(exist_ok=True)
+    filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+    save_path = screenshots_dir / filename
+    cv2.imwrite(str(save_path), frame)
+    print(f"Screenshot saved to {save_path}")
+
     encoded = frame_to_base64(frame)
     item = evaluator.parse_item(encoded)
     print("Extracted item info:")
@@ -30,5 +39,5 @@ hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
 evaluator = Evaluator()
 
 with keyboard.GlobalHotKeys(hotkeys) as h:
-    info("D2R Item Analyzer is running. Press Ctrl+Shift+A to capture a screenshot.")
+    print("D2R Item Analyzer is running. Press Ctrl+Shift+A to capture a screenshot.")
     h.join(timeout=TIMEOUT)

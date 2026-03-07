@@ -1,7 +1,7 @@
 import bettercam
 import pynput
 
-WIDTH, HEIGHT = 300, 400
+WIDTH, HEIGHT = 800, 800
 camera = bettercam.create()
 
 

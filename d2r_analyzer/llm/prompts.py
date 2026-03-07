@@ -27,7 +27,6 @@ Return this exact structure:
 
 Rules:
 - Extract EVERY stat line visible, even if you don't recognize it
-- For magic/rare items with no proper name, set name to null
 - is_ethereal is true if the word "Ethereal" appears
 - If a value is not visible or not applicable, use null
 """
