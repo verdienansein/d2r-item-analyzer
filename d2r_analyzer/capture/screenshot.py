@@ -15,6 +15,7 @@ def capture_screenshot():
     region = (left, top, right, bottom)
     try:
         frame = camera.grab(region=region)
+        print("Screenshot captured.")
     except ModuleNotFoundError as exc:
         if exc.name == "cv2":
             raise RuntimeError(
