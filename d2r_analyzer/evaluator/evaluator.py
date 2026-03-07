@@ -7,7 +7,7 @@ except ModuleNotFoundError:
     from llm.client import LLMClient
     from llm.parser import ItemSchema, parse_item
 
-llm_model = os.getenv("LLM_MODEL", "llama-3.2-11b-vision-preview")
+llm_model = os.getenv("LLM_MODEL", "meta-llama/llama-4-scout-17b-16e-instruct")
 llm_base_url = os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1")
 llm_api_key = os.getenv("GROQ_API_KEY", "")
 

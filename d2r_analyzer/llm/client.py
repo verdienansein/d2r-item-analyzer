@@ -22,9 +22,9 @@ class LLMClient:
                 {
                     "role": "user",
                     "content": [
-                        {"type": "input_text", "text": ITEM_EXTRACTION_PROMPT},
+                        {"type": "text", "text": ITEM_EXTRACTION_PROMPT},
                         {
-                            "type": "input_image",
+                            "type": "image_url",
                             "image_url": {
                                 "url": f"data:image/png;base64,{image_base64}"
                             },

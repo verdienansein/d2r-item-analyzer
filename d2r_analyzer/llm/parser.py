@@ -1,3 +1,5 @@
+import json
+
 from pydantic import BaseModel, field_validator
 
 
@@ -11,7 +13,7 @@ class AffixSchema(BaseModel):
 class ItemSchema(BaseModel):
     name: str | None = None
     base_type: str | None = None
-    quality: str = "unknown"
+    quality: str | None = "unknown"
     item_level: int | None = None
     required_level: int | None = None
     affixes: list[AffixSchema] = []
@@ -20,12 +22,16 @@ class ItemSchema(BaseModel):
     defense: int | None = None
     damage: str | None = None
 
-    @field_validator("quality")
+    @field_validator("quality", mode="before")
     @classmethod
-    def normalize_quality(cls, v: str) -> str:
+    def normalize_quality(cls, v: str | None) -> str:
+        if v is None:
+            return "unknown"
         return v.lower().strip()
 
 
-def parse_item(raw: dict) -> ItemSchema:
+def parse_item(raw: dict | str) -> ItemSchema:
     """Validate LLM output against schema. Raises ValidationError if malformed."""
+    if isinstance(raw, str):
+        raw = json.loads(raw)
     return ItemSchema(**raw)

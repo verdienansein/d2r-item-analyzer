@@ -1,6 +1,6 @@
 import sys
-from pathlib import Path
 from logging import info
+from pathlib import Path
 
 from pynput import keyboard
 
@@ -21,7 +21,8 @@ def capture_and_print_base64() -> None:
     frame = capture_screenshot()
     encoded = frame_to_base64(frame)
     item = evaluator.parse_item(encoded)
-    print(item.json(indent=2))
+    print("Extracted item info:")
+    print(item.model_dump_json(indent=2))
 
 
 hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
