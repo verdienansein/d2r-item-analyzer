@@ -16,6 +16,9 @@ keywords = ["diablo", "d2r", "item", "analyzer"]
 dependencies = [
     "bettercam",
     "opencv-python",
+    "pynput",
+    "openai",
+    "pillow",
 ]
 
 [project.optional-dependencies]
