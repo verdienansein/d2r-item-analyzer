@@ -49,7 +49,11 @@ hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
 
 evaluator = Evaluator()
 
-if __name__ == "__main__":
+def main() -> None:
     with keyboard.GlobalHotKeys(hotkeys) as h:
         print("D2R Item Analyzer is running. Press Ctrl+Shift+A to capture a screenshot.")
         h.join(timeout=TIMEOUT)
+
+
+if __name__ == "__main__":
+    main()
