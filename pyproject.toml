@@ -21,6 +21,9 @@ dependencies = [
     "pillow",
 ]
 
+[project.scripts]
+d2r-analyzer = "d2r_analyzer.main:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
