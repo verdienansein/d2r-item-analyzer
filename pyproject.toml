@@ -7,8 +7,8 @@ name = "d2r-item-analyzer"
 version = "0.1.0"
 description = "A tool for analyzing Diablo 2 Resurrected items"
 readme = "README.md"
-requires-python = ">=3.14"
-license = {text = "MIT"}
+requires-python = ">=3.13"
+license = "MIT"
 authors = [
     {name = "Guglielmo Carnemolla", email = "gugli90@gmail.com"}
 ]
@@ -34,16 +34,16 @@ dev = [
 
 [tool.black]
 line-length = 88
-target-version = ['py314']
+target-version = ['py313']
 
 [tool.mypy]
-python_version = "3.14"
+python_version = "3.13"
 warn_return_any = true
 warn_unused_configs = true
 
 [tool.ruff]
 line-length = 88
-target-version = "py314"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
@@ -52,3 +52,6 @@ ignore = ["E501"]
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.setuptools.packages.find]
+include = ["d2r_analyzer*"]
