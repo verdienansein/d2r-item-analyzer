@@ -1,9 +1,9 @@
 from openai import OpenAI
 
 try:
-    from d2r_analyzer.llm.prompts import ITEM_EXTRACTION_PROMPT
+    from d2r_analyzer.llm.prompts import EVALUATION_PROMPT, ITEM_EXTRACTION_PROMPT
 except ModuleNotFoundError:
-    from llm.prompts import ITEM_EXTRACTION_PROMPT
+    from llm.prompts import EVALUATION_PROMPT, ITEM_EXTRACTION_PROMPT
 
 
 class LLMClient:
@@ -29,6 +29,25 @@ class LLMClient:
                                 "url": f"data:image/png;base64,{image_base64}"
                             },
                         },
+                    ],
+                }
+            ],
+        )
+        raw = response.choices[0].message.content.strip()
+        return raw
+
+    def evaluate_item(self, item_json: str) -> dict:
+        response = self.client.chat.completions.create(
+            model=self.model_name,
+            max_tokens=1000,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": EVALUATION_PROMPT.replace("{item_json}", item_json),
+                        }
                     ],
                 }
             ],

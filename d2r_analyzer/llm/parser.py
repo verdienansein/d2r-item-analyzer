@@ -1,6 +1,15 @@
 import json
+import re
 
 from pydantic import BaseModel, field_validator
+
+
+def _strip_fences(text: str) -> str:
+    """Strip markdown code fences and whitespace from LLM output."""
+    text = text.strip()
+    text = re.sub(r"^```(?:json)?\s*", "", text)
+    text = re.sub(r"\s*```$", "", text)
+    return text.strip()
 
 
 class AffixSchema(BaseModel):
@@ -30,8 +39,28 @@ class ItemSchema(BaseModel):
         return v.lower().strip()
 
 
+class EvaluationSchema(BaseModel):
+    grade: str
+    verdict: str
+    best_build: str | None
+    trade_value: str
+    reasoning: str
+    good_affixes: list[str]
+    wasted_slots: list[str]
+    roll_quality: str
+
+
 def parse_item(raw: dict | str) -> ItemSchema:
     """Validate LLM output against schema. Raises ValidationError if malformed."""
     if isinstance(raw, str):
-        raw = json.loads(raw)
+        raw = json.loads(_strip_fences(raw))
     return ItemSchema(**raw)
+
+
+def parse_evaluation(raw: dict | str) -> EvaluationSchema:
+    if isinstance(raw, str):
+        raw = _strip_fences(raw)
+        if not raw:
+            raise ValueError("LLM returned empty response for evaluation")
+        raw = json.loads(raw)
+    return EvaluationSchema(**raw)

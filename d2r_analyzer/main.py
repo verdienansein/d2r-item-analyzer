@@ -32,6 +32,10 @@ def capture_and_print_base64() -> None:
     item = evaluator.parse_item(encoded)
     print("Extracted item info:")
     print(item.model_dump_json(indent=2))
+    print("Evaluating item...")
+    evaluation = evaluator.evaluate_item(item)
+    print("Evaluation result:")
+    print(evaluation.model_dump_json(indent=2))
 
 
 hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}

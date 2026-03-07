@@ -2,10 +2,15 @@ import os
 
 try:
     from d2r_analyzer.llm.client import LLMClient
-    from d2r_analyzer.llm.parser import ItemSchema, parse_item
+    from d2r_analyzer.llm.parser import (
+        EvaluationSchema,
+        ItemSchema,
+        parse_evaluation,
+        parse_item,
+    )
 except ModuleNotFoundError:
     from llm.client import LLMClient
-    from llm.parser import ItemSchema, parse_item
+    from llm.parser import EvaluationSchema, ItemSchema, parse_evaluation, parse_item
 
 llm_model = os.getenv("LLM_MODEL", "meta-llama/llama-4-scout-17b-16e-instruct")
 llm_base_url = os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1")
@@ -21,3 +26,7 @@ class Evaluator:
     def parse_item(self, image_base64: str) -> ItemSchema:
         raw = self.llm.extract_item_info(image_base64)
         return parse_item(raw)
+
+    def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:
+        raw = self.llm.evaluate_item(item.model_dump_json())
+        return parse_evaluation(raw)

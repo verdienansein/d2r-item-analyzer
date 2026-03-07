@@ -30,3 +30,28 @@ Rules:
 - is_ethereal is true if the word "Ethereal" appears
 - If a value is not visible or not applicable, use null
 """
+
+EVALUATION_PROMPT = """
+You are an 2026 expert Diablo 2 Resurrected player with deep knowledge 
+of itemization, meta builds, and trading.
+
+Given this item, evaluate it and return ONLY valid JSON:
+
+Item:
+{item_json}
+
+Return this exact structure:
+{
+  "grade": "S|A|B|C|D",
+  "verdict": "KEEP | KEEP_FOR_ALT | TRASH",
+  "best_build": "build name or null",
+  "trade_value": "high | medium | low | worthless",
+  "reasoning": "2-3 sentence explanation",
+  "good_affixes": ["list of affixes that make it good"],
+  "wasted_slots": ["list of affixes that hurt the item"],
+  "roll_quality": "perfect | great | average | poor"
+}
+
+Be strict. Most items are trash. Only grade B+ if the item is 
+genuinely useful for a real meta build.
+"""
