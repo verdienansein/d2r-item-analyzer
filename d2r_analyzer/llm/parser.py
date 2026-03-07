@@ -18,6 +18,35 @@ class AffixSchema(BaseModel):
     value: float | int | None = None
     unit: str | None = None
 
+    @field_validator("value", mode="before")
+    @classmethod
+    def normalize_value(cls, v):
+        if v in (None, "", "null"):
+            return None
+
+        if isinstance(v, list) and len(v) >= 2:
+            nums = [n for n in v if isinstance(n, (int, float))]
+            if len(nums) >= 2:
+                return (nums[0] + nums[1]) / 2
+
+        if isinstance(v, dict):
+            min_v = v.get("min")
+            max_v = v.get("max")
+            if isinstance(min_v, (int, float)) and isinstance(max_v, (int, float)):
+                return (min_v + max_v) / 2
+
+        if isinstance(v, str):
+            # Accept many real-world patterns: "12-45", "12 to 45", "43 of 55".
+            nums = re.findall(r"-?\d+(?:\.\d+)?", v)
+            if len(nums) >= 2:
+                a = float(nums[0])
+                b = float(nums[1])
+                return (a + b) / 2
+            if len(nums) == 1:
+                return float(nums[0])
+
+        return v
+
 
 class ItemSchema(BaseModel):
     name: str | None = None

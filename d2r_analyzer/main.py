@@ -1,4 +1,5 @@
 import sys
+import traceback
 from datetime import datetime
 from pathlib import Path
 
@@ -22,36 +23,43 @@ except ModuleNotFoundError:
 
 
 def capture_and_print_base64() -> None:
-    frame = capture_screenshot()
+    try:
+        frame = capture_screenshot()
 
-    screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
-    screenshots_dir.mkdir(exist_ok=True)
-    filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
-    save_path = screenshots_dir / filename
-    cv2.imwrite(str(save_path), frame)
-    print(f"Screenshot saved to {save_path}")
+        screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
+        screenshots_dir.mkdir(exist_ok=True)
+        filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+        save_path = screenshots_dir / filename
+        cv2.imwrite(str(save_path), frame)
+        print(f"Screenshot saved to {save_path}")
 
-    encoded = frame_to_base64(frame)
-    item = evaluator.parse_item(encoded)
-    print("Extracted item info:")
-    print(item.model_dump_json(indent=2))
-    print("Evaluating item...")
-    evaluation = evaluator.evaluate_item(item)
-    print("Evaluation result:")
-    print(evaluation.model_dump_json(indent=2))
-    overlay = ItemOverlay()
-    mouse = pynput.mouse.Controller()
-    mx, my = mouse.position
-    overlay.show(evaluation, x=mx, y=my)
+        encoded = frame_to_base64(frame)
+        item = evaluator.parse_item(encoded)
+        print("Extracted item info:")
+        print(item.model_dump_json(indent=2))
+        print("Evaluating item...")
+        evaluation = evaluator.evaluate_item(item)
+        print("Evaluation result:")
+        print(evaluation.model_dump_json(indent=2))
+        overlay = ItemOverlay()
+        mouse = pynput.mouse.Controller()
+        mx, my = mouse.position
+        overlay.show(evaluation, x=mx, y=my)
+    except Exception as exc:
+        print(f"Capture/evaluation failed: {exc}")
+        traceback.print_exc()
 
 
 hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
 
 evaluator = Evaluator()
 
+
 def main() -> None:
     with keyboard.GlobalHotKeys(hotkeys) as h:
-        print("D2R Item Analyzer is running. Press Ctrl+Shift+A to capture a screenshot.")
+        print(
+            "D2R Item Analyzer is running. Press Ctrl+Shift+A to capture a screenshot."
+        )
         h.join(timeout=TIMEOUT)
 
 

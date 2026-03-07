@@ -21,14 +21,21 @@ def capture_screenshot():
 
     screen_w = getattr(camera, "width", None)
     screen_h = getattr(camera, "height", None)
-    if isinstance(screen_w, int) and isinstance(screen_h, int) and screen_w > 0 and screen_h > 0:
+    if (
+        isinstance(screen_w, int)
+        and isinstance(screen_h, int)
+        and screen_w > 0
+        and screen_h > 0
+    ):
         left = max(0, left)
         top = max(0, top)
         right = min(screen_w, right)
         bottom = min(screen_h, bottom)
 
     if right <= left or bottom <= top:
-        raise RuntimeError("Computed capture region is invalid. Tune WIDTH/HEIGHT/OFFSET values.")
+        raise RuntimeError(
+            "Computed capture region is invalid. Tune WIDTH/HEIGHT/OFFSET values."
+        )
 
     region = (left, top, right, bottom)
     try:
