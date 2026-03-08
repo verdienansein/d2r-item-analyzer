@@ -1,5 +1,4 @@
 import bettercam
-import pynput
 
 WIDTH, HEIGHT = 800, 800
 OFFSET_X = 0
@@ -8,9 +7,7 @@ OFFSET_Y = -260
 camera = bettercam.create()
 
 
-def capture_screenshot():
-    mouse = pynput.mouse.Controller()
-    x, y = mouse.position
+def capture_screenshot(x, y):
     center_x = int(x + OFFSET_X)
     center_y = int(y + OFFSET_Y)
 
