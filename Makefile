@@ -1,4 +1,4 @@
-# D2R Item Analyzer build automation (Windows-friendly)
+# D2R Item Analyzer build automation (cross-platform)
 # Usage examples:
 #   make setup
 #   make build
@@ -6,24 +6,43 @@
 #   make run
 #   make clean
 
+# Detect platform and use the appropriate virtualenv Python path.
+ifeq ($(OS),Windows_NT)
+BOOTSTRAP_PYTHON := py -3
 PYTHON := .venv/Scripts/python.exe
+APP_EXT := .exe
+PYINSTALLER_PLATFORM_HIDDEN_IMPORTS := \
+	--hidden-import pynput.keyboard._win32 \
+	--hidden-import pynput.mouse._win32
+else
+BOOTSTRAP_PYTHON := python3
+PYTHON := .venv/bin/python
+APP_EXT :=
+PYINSTALLER_PLATFORM_HIDDEN_IMPORTS :=
+endif
+
 PIP := $(PYTHON) -m pip
 APP_NAME := D2RItemAnalyzer
 ENTRYPOINT := d2r_analyzer/main.py
 
-.PHONY: help setup install-dev build build-exe run clean
+.PHONY: help venv setup install-dev build build-exe run clean
 
 help:
 	@echo "Targets:"
-	@echo "  setup       - Install build dependencies into .venv"
+	@echo "  venv        - Create .venv if missing"
+	@echo "  setup       - Install runtime + build dependencies into .venv"
 	@echo "  install-dev - Install package in editable mode"
 	@echo "  build       - Build sdist and wheel into dist/"
-	@echo "  build-exe   - Build single-file Windows executable with PyInstaller"
+	@echo "  build-exe   - Build single-file executable with PyInstaller"
 	@echo "  run         - Run app entrypoint from .venv"
 	@echo "  clean       - Remove build artifacts"
 
-setup:
+venv:
+	$(BOOTSTRAP_PYTHON) -m venv .venv
+
+setup: venv
 	$(PIP) install --upgrade pip
+	$(PIP) install -e .
 	$(PIP) install build pyinstaller
 
 install-dev:
@@ -38,10 +57,9 @@ build-exe:
 		--clean \
 		--onefile \
 		--name $(APP_NAME) \
-		--hidden-import pynput.keyboard._win32 \
-		--hidden-import pynput.mouse._win32 \
+		$(PYINSTALLER_PLATFORM_HIDDEN_IMPORTS) \
 		$(ENTRYPOINT)
-	@echo "EXE ready at: dist/$(APP_NAME).exe"
+	@echo "Binary ready at: dist/$(APP_NAME)$(APP_EXT)"
 
 run:
 	$(PYTHON) -m d2r_analyzer.main
