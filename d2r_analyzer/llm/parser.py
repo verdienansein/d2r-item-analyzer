@@ -12,6 +12,60 @@ def _strip_fences(text: str) -> str:
     return text.strip()
 
 
+def _extract_first_json_object(text: str) -> str:
+    """Extract the first top-level JSON object from arbitrary model text."""
+    start = text.find("{")
+    if start == -1:
+        raise ValueError("No JSON object found in model response")
+
+    depth = 0
+    in_string = False
+    escape = False
+
+    for idx in range(start, len(text)):
+        ch = text[idx]
+
+        if in_string:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_string = False
+            continue
+
+        if ch == '"':
+            in_string = True
+            continue
+
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start : idx + 1]
+
+    raise ValueError("Unterminated JSON object in model response")
+
+
+def _loads_llm_json(raw_text: str, context: str) -> dict:
+    cleaned = _strip_fences(raw_text)
+    if not cleaned:
+        raise ValueError(f"LLM returned empty response for {context}")
+
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        candidate = _extract_first_json_object(cleaned)
+        try:
+            return json.loads(candidate)
+        except json.JSONDecodeError as exc:
+            preview = cleaned[:180].replace("\n", "\\n")
+            raise ValueError(
+                f"Invalid JSON from LLM for {context}. Response starts with: {preview}"
+            ) from exc
+
+
 class AffixSchema(BaseModel):
     raw_text: str
     stat: str | None = None
@@ -103,14 +157,11 @@ class EvaluationSchema(BaseModel):
 def parse_item(raw: dict | str) -> ItemSchema:
     """Validate LLM output against schema. Raises ValidationError if malformed."""
     if isinstance(raw, str):
-        raw = json.loads(_strip_fences(raw))
+        raw = _loads_llm_json(raw, context="item extraction")
     return ItemSchema(**raw)
 
 
 def parse_evaluation(raw: dict | str) -> EvaluationSchema:
     if isinstance(raw, str):
-        raw = _strip_fences(raw)
-        if not raw:
-            raise ValueError("LLM returned empty response for evaluation")
-        raw = json.loads(raw)
+        raw = _loads_llm_json(raw, context="evaluation")
     return EvaluationSchema(**raw)
