@@ -25,12 +25,18 @@ except ModuleNotFoundError:
     from ui.overlay import ItemOverlay
 
 work_q = queue.Queue()
+ui_q = queue.Queue()
 stop_event = threading.Event()
 
 
 def worker_loop():
     while True:
-        x, y = work_q.get()
+        job = work_q.get()
+        if job is None:
+            work_q.task_done()
+            break
+
+        x, y = job
         try:
             frame = capture_screenshot(x, y)
             screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
@@ -47,8 +53,7 @@ def worker_loop():
             evaluation = evaluator.evaluate_item(item)
             print("Evaluation result:")
             print(evaluation.model_dump_json(indent=2))
-            overlay = ItemOverlay()
-            overlay.show(evaluation, x=x, y=y)
+            ui_q.put((evaluation, x, y))
         except Exception as exc:
             print(f"Error in worker loop: {exc}")
             traceback.print_exc()
@@ -72,6 +77,7 @@ evaluator = Evaluator()
 
 
 def main() -> None:
+    overlay = ItemOverlay(auto_close_ms=10000)
     worker = threading.Thread(target=worker_loop, daemon=True)
     worker.start()
     listener = keyboard.GlobalHotKeys({"<ctrl>+<shift>+a": capture_and_print_base64})
@@ -79,13 +85,24 @@ def main() -> None:
     print("Running. Press Ctrl+Shift+A to capture. Press Ctrl+C to stop.")
     try:
         while not stop_event.is_set():
+            while True:
+                try:
+                    evaluation, x, y = ui_q.get_nowait()
+                except queue.Empty:
+                    break
+                overlay.show(evaluation, x=x, y=y)
+
+            try:
+                overlay.process_events()
+            except Exception:
+                pass
             sleep(0.2)
     except KeyboardInterrupt:
         print("\nStopping...")
     finally:
         stop_event.set()
         listener.stop()
-        work_q.put(None)  # unblock worker if waiting on queue.get
+        work_q.put(None)
         worker.join(timeout=2)
 
 

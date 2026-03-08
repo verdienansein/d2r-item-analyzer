@@ -23,14 +23,21 @@ VERDICT_COLORS = {
 class ItemOverlay:
     def __init__(self, auto_close_ms: int = 8000):
         self.auto_close_ms = auto_close_ms
-        self._window: tk.Tk | None = None
+        self._root = tk.Tk()
+        self._root.withdraw()
+        self._window: tk.Toplevel | None = None
+        self._close_job: str | None = None
+
+    @property
+    def root(self) -> tk.Tk:
+        return self._root
 
     def show(self, evaluation: EvaluationSchema, x: int, y: int) -> None:
-        """Render the overlay near (x, y) — pass mouse position from screenshot."""
+        """Render the overlay near (x, y) without blocking the caller."""
         if self._window:
-            self._window.destroy()
+            self.close()
 
-        win = tk.Tk()
+        win = tk.Toplevel(self._root)
         self._window = win
 
         # ── Window setup ───────────────────────────────────
@@ -58,12 +65,23 @@ class ItemOverlay:
         win.bind("<Button-1>", lambda e: self.close())
         win.focus_force()
 
-        win.mainloop()
+        self._close_job = win.after(self.auto_close_ms, self.close)
 
     def close(self) -> None:
         if self._window:
+            if self._close_job:
+                try:
+                    self._window.after_cancel(self._close_job)
+                except tk.TclError:
+                    pass
+                self._close_job = None
             self._window.destroy()
             self._window = None
+
+    def process_events(self) -> None:
+        """Pump Tk events without entering a blocking mainloop."""
+        self._root.update_idletasks()
+        self._root.update()
 
     def _build_ui(self, win: tk.Tk, ev: EvaluationSchema) -> None:
         FONT_TITLE = ("Palatino Linotype", 13, "bold")
@@ -203,7 +221,7 @@ class ItemOverlay:
 # ── Helpers ────────────────────────────────────────────────
 
 
-def _divider(parent: tk.Tk, color: str) -> None:
+def _divider(parent: tk.Misc, color: str) -> None:
     tk.Frame(parent, bg=color, height=1).pack(fill="x", padx=10, pady=2)
 
 
