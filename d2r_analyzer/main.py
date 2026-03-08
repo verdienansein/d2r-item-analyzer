@@ -53,10 +53,11 @@ def worker_loop():
             evaluation = evaluator.evaluate_item(item)
             print("Evaluation result:")
             print(evaluation.model_dump_json(indent=2))
-            ui_q.put((evaluation, x, y))
+            ui_q.put(("result", evaluation, x, y))
         except Exception as exc:
             print(f"Error in worker loop: {exc}")
             traceback.print_exc()
+            ui_q.put(("error", str(exc), x, y))
         finally:
             work_q.task_done()
 
@@ -65,6 +66,7 @@ def capture_and_print_base64() -> None:
     try:
         mouse = pynput.mouse.Controller()
         mx, my = mouse.position
+        ui_q.put(("analyzing", "Analyzing item...", mx, my))
         work_q.put((mx, my))
     except Exception as exc:
         print(f"Failed to queue work: {exc}")
@@ -87,10 +89,20 @@ def main() -> None:
         while not stop_event.is_set():
             while True:
                 try:
-                    evaluation, x, y = ui_q.get_nowait()
+                    event_type, payload, x, y = ui_q.get_nowait()
                 except queue.Empty:
                     break
-                overlay.show(evaluation, x=x, y=y)
+                if event_type == "analyzing":
+                    overlay.show_status(str(payload), x=x, y=y)
+                elif event_type == "result":
+                    overlay.show(payload, x=x, y=y)
+                elif event_type == "error":
+                    overlay.show_status(
+                        f"Evaluation failed: {payload}",
+                        x=x,
+                        y=y,
+                        auto_close_ms=4500,
+                    )
 
             try:
                 overlay.process_events()

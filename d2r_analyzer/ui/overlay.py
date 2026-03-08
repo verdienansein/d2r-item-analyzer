@@ -34,31 +34,12 @@ class ItemOverlay:
 
     def show(self, evaluation: EvaluationSchema, x: int, y: int) -> None:
         """Render the overlay near (x, y) without blocking the caller."""
-        if self._window:
-            self.close()
-
-        win = tk.Toplevel(self._root)
-        self._window = win
-
-        # ── Window setup ───────────────────────────────────
-        win.overrideredirect(True)  # no title bar / borders
-        win.attributes("-topmost", True)  # always above the game
-        win.attributes("-alpha", 0.93)  # slight transparency
-        win.configure(bg="#1A1008")  # dark D2 parchment tone
+        win = self._create_window()
 
         # ── Build content ──────────────────────────────────
         self._build_ui(win, evaluation)
 
-        # ── Position near cursor, prevent going off-screen ─
-        win.update_idletasks()
-        w = win.winfo_width()
-        h = win.winfo_height()
-        sw = win.winfo_screenwidth()
-        sh = win.winfo_screenheight()
-
-        px = min(x + 20, sw - w - 10)
-        py = min(y + 20, sh - h - 10)
-        win.geometry(f"+{px}+{py}")
+        self._position_window(win, x, y)
 
         # ── Close on Escape or click ──────────────────────
         win.bind("<Escape>", lambda e: self.close())
@@ -66,6 +47,43 @@ class ItemOverlay:
         win.focus_force()
 
         self._close_job = win.after(self.auto_close_ms, self.close)
+
+    def show_status(self, text: str, x: int, y: int, auto_close_ms: int | None = None) -> None:
+        """Render a compact status overlay while background work is running."""
+        win = self._create_window()
+        bg = "#1A1008"
+
+        container = tk.Frame(win, bg=bg)
+        container.pack(fill="both", expand=True, padx=12, pady=10)
+
+        tk.Label(
+            container,
+            text=text,
+            fg="#C8A96E",
+            bg=bg,
+            font=("Palatino Linotype", 11, "bold"),
+            justify="left",
+            anchor="w",
+        ).pack(fill="x")
+
+        tk.Label(
+            container,
+            text="Please wait...",
+            fg="#8E6A3A",
+            bg=bg,
+            font=("Palatino Linotype", 9),
+            justify="left",
+            anchor="w",
+        ).pack(fill="x", pady=(4, 0))
+
+        self._position_window(win, x, y)
+
+        win.bind("<Escape>", lambda e: self.close())
+        win.bind("<Button-1>", lambda e: self.close())
+        win.focus_force()
+
+        if auto_close_ms is not None:
+            self._close_job = win.after(auto_close_ms, self.close)
 
     def close(self) -> None:
         if self._window:
@@ -83,7 +101,32 @@ class ItemOverlay:
         self._root.update_idletasks()
         self._root.update()
 
-    def _build_ui(self, win: tk.Tk, ev: EvaluationSchema) -> None:
+    def _create_window(self) -> tk.Toplevel:
+        if self._window:
+            self.close()
+
+        win = tk.Toplevel(self._root)
+        self._window = win
+
+        # Window setup shared by result and status overlays.
+        win.overrideredirect(True)
+        win.attributes("-topmost", True)
+        win.attributes("-alpha", 0.93)
+        win.configure(bg="#1A1008")
+        return win
+
+    def _position_window(self, win: tk.Toplevel, x: int, y: int) -> None:
+        win.update_idletasks()
+        w = win.winfo_width()
+        h = win.winfo_height()
+        sw = win.winfo_screenwidth()
+        sh = win.winfo_screenheight()
+
+        px = min(x + 20, sw - w - 10)
+        py = min(y + 20, sh - h - 10)
+        win.geometry(f"+{px}+{py}")
+
+    def _build_ui(self, win: tk.Misc, ev: EvaluationSchema) -> None:
         FONT_TITLE = ("Palatino Linotype", 13, "bold")
         FONT_LABEL = ("Palatino Linotype", 10, "bold")
         FONT_BODY = ("Palatino Linotype", 9)
