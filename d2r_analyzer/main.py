@@ -10,8 +10,6 @@ import cv2
 import pynput
 from pynput import keyboard
 
-TIMEOUT = 200000000
-
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -23,6 +21,10 @@ except ModuleNotFoundError:
     from capture import capture_screenshot, frame_to_base64
     from evaluator import Evaluator
     from ui.overlay import ItemOverlay
+
+from config import config
+
+evaluator = Evaluator(config.llm_model_name, config.llm_base_url, config.openapi_key, config.evaluation_mode)
 
 work_q = queue.Queue()
 ui_q = queue.Queue()
@@ -73,18 +75,13 @@ def capture_and_print_base64() -> None:
         traceback.print_exc()
 
 
-hotkeys = {"<ctrl>+<shift>+a": capture_and_print_base64}
-
-evaluator = Evaluator()
-
-
 def main() -> None:
     overlay = ItemOverlay(auto_close_ms=10000)
     worker = threading.Thread(target=worker_loop, daemon=True)
     worker.start()
-    listener = keyboard.GlobalHotKeys({"<ctrl>+<shift>+a": capture_and_print_base64})
+    listener = keyboard.GlobalHotKeys({config.capture_hotkey: capture_and_print_base64})
     listener.start()
-    print("Running. Press Ctrl+Shift+A to capture. Press Ctrl+C to stop.")
+    print(f"Running. Press {config.capture_hotkey} to capture. Press Ctrl+C to stop.")
     try:
         while not stop_event.is_set():
             while True:

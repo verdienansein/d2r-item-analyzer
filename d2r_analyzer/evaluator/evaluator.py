@@ -1,5 +1,3 @@
-import os
-
 try:
     from d2r_analyzer.llm.client import LLMClient
     from d2r_analyzer.llm.parser import (
@@ -12,13 +10,10 @@ except ModuleNotFoundError:
     from llm.client import LLMClient
     from llm.parser import EvaluationSchema, ItemSchema, parse_evaluation, parse_item
 
-llm_model = os.getenv("LLM_MODEL", "meta-llama/llama-4-scout-17b-16e-instruct")
-llm_base_url = os.getenv("LLM_BASE_URL", "https://api.groq.com/openai/v1")
-llm_api_key = os.getenv("GROQ_API_KEY", "")
-
 
 class Evaluator:
-    def __init__(self):
+    def __init__(self, llm_model, llm_base_url, llm_api_key, evaluation_mode):
+        self.evaluation_mode = evaluation_mode
         self.llm = LLMClient(
             model_name=llm_model, base_url=llm_base_url, api_key=llm_api_key
         )
@@ -28,5 +23,20 @@ class Evaluator:
         return parse_item(raw)
 
     def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:
-        raw = self.llm.evaluate_item(item.model_dump_json())
-        return parse_evaluation(raw)
+        if self.evaluation_mode == "manual":
+            print("Manual evaluation mode - skipping LLM evaluation")
+            return EvaluationSchema(
+                grade="",
+                verdict="",
+                best_build="",
+                trade_value="",
+                reasoning="",
+                good_affixes=[],
+                wasted_slots=[],
+                roll_quality="",
+            )
+        elif self.evaluation_mode == "llm":
+            raw = self.llm.evaluate_item(item.model_dump_json())
+            return parse_evaluation(raw)
+        else:
+            raise ValueError(f"Unknown evaluation mode: {self.evaluation_mode}")

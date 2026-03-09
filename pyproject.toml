@@ -19,6 +19,7 @@ dependencies = [
     "pynput",
     "openai",
     "pillow",
+    "pydantic_settings,
 ]
 
 [project.scripts]
