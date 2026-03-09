@@ -1,10 +1,10 @@
 import bettercam
 
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 1000, 1000
 OFFSET_X = 0
 OFFSET_Y = -260
 
-camera = bettercam.create()
+camera = bettercam.create(output_color="BGRA")
 
 
 def capture_screenshot(x, y):

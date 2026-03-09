@@ -4,6 +4,32 @@ You are analyzing a Diablo 2 Resurrected item tooltip screenshot.
 Extract ALL visible item information and return ONLY valid JSON.
 No explanation, no markdown, no code blocks. Raw JSON only.
 
+Be super accurate about the quality can be normal, magic, rare, set, unique, or crafted:
+─── QUALITY DETECTION — USE ALL 3 SIGNALS ───────────────────────────────────
+
+Signal 1 — TEXT COLOR of the item name at the top:
+  White/grey text   → normal
+  Blue text         → magic
+  Yellow text       → rare
+  Green text        → set
+  Gold/brown text   → unique
+  Orange text       → crafted
+
+Signal 2 — NUMBER OF AFFIXES (most reliable signal):
+  1-2 affixes total → almost certainly magic (blue)
+  3-6 affixes total → almost certainly rare (yellow)
+  Fixed known stats → unique or set
+
+Signal 3 — ITEM NAME STRUCTURE:
+  Single generic word ("Ring", "Amulet")              → normal or magic
+  Two random fantasy words ("Cruel Noose")             → rare
+  A known D2 unique name ("Nagelring", "Stone of Jordan") → unique
+  Has a set label below name                           → set
+
+PRIORITY: If signals conflict, trust Signal 2 (affix count) over color.
+A magic item can NEVER have more than 2 affixes.
+A rare item always has between 3 and 6 affixes.
+
 Return this exact structure:
 {
   "name": "item name or null if magic/rare with no name",

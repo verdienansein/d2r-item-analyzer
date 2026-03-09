@@ -1,4 +1,7 @@
+import json
+
 try:
+    from d2r_analyzer.evaluator.manual_evaluation import ManualEvaluator
     from d2r_analyzer.llm.client import LLMClient
     from d2r_analyzer.llm.parser import (
         EvaluationSchema,
@@ -7,8 +10,28 @@ try:
         parse_item,
     )
 except ModuleNotFoundError:
+    from evaluator.manual_evaluation import ManualEvaluator
     from llm.client import LLMClient
     from llm.parser import EvaluationSchema, ItemSchema, parse_evaluation, parse_item
+
+
+def correct_quality(item: dict) -> dict:
+
+    affixes = item.get("affixes", [])
+    name = (item.get("name") or "").lower().strip()
+    affix_count = len(affixes)
+
+    if affix_count <= 2 and item.get("quality") in ("rare", "unique", "set"):
+        item["quality"] = "magic"
+
+    if affix_count >= 3 and item.get("quality") == "magic":
+        item["quality"] = "rare"
+
+    words = name.split()
+    if len(words) == 2 and item.get("quality") == "magic":
+        item["quality"] = "rare"
+
+    return item
 
 
 class Evaluator:
@@ -20,18 +43,20 @@ class Evaluator:
 
     def parse_item(self, image_base64: str) -> ItemSchema:
         raw = self.llm.extract_item_info(image_base64)
+        raw = correct_quality(json.loads(raw))
         return parse_item(raw)
 
     def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:
         if self.evaluation_mode == "manual":
             print("Manual evaluation mode - skipping LLM evaluation")
+            evaluation = ManualEvaluator().evaluate_item(item.model_dump())
             return EvaluationSchema(
-                grade="",
-                verdict="",
+                grade=evaluation.get("grade", "C"),
+                verdict=evaluation.get("verdict", ""),
                 best_build="",
                 trade_value="",
                 reasoning="",
-                good_affixes=[],
+                good_affixes=evaluation.get("good_affixes", []),
                 wasted_slots=[],
                 roll_quality="",
             )

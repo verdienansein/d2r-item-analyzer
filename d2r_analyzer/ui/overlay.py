@@ -48,7 +48,9 @@ class ItemOverlay:
 
         self._close_job = win.after(self.auto_close_ms, self.close)
 
-    def show_status(self, text: str, x: int, y: int, auto_close_ms: int | None = None) -> None:
+    def show_status(
+        self, text: str, x: int, y: int, auto_close_ms: int | None = None
+    ) -> None:
         """Render a compact status overlay while background work is running."""
         win = self._create_window()
         bg = "#1A1008"

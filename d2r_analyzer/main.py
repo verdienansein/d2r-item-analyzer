@@ -24,7 +24,12 @@ except ModuleNotFoundError:
 
 from config import config
 
-evaluator = Evaluator(config.llm_model_name, config.llm_base_url, config.openapi_key, config.evaluation_mode)
+evaluator = Evaluator(
+    config.llm_model_name,
+    config.llm_base_url,
+    config.openai_api_key,
+    config.evaluation_mode,
+)
 
 work_q = queue.Queue()
 ui_q = queue.Queue()
