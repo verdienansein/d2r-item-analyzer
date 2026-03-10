@@ -13,16 +13,11 @@ from pynput import keyboard
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-try:
-    from d2r_analyzer.capture import capture_screenshot, frame_to_base64
-    from d2r_analyzer.evaluator import Evaluator
-    from d2r_analyzer.ui.overlay import ItemOverlay
-except ModuleNotFoundError:
-    from capture import capture_screenshot, frame_to_base64
-    from evaluator import Evaluator
-    from ui.overlay import ItemOverlay
-
 from config import config
+
+from d2r_analyzer.capture import capture_screenshot, frame_to_base64
+from d2r_analyzer.evaluator import Evaluator
+from d2r_analyzer.ui.overlay import ItemOverlay
 
 evaluator = Evaluator(
     config.llm_model_name,

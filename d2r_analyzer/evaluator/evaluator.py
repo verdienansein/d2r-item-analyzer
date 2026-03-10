@@ -1,18 +1,13 @@
 import json
 
-try:
-    from d2r_analyzer.evaluator.manual_evaluation import ManualEvaluator
-    from d2r_analyzer.llm.client import LLMClient
-    from d2r_analyzer.llm.parser import (
-        EvaluationSchema,
-        ItemSchema,
-        parse_evaluation,
-        parse_item,
-    )
-except ModuleNotFoundError:
-    from evaluator.manual_evaluation import ManualEvaluator
-    from llm.client import LLMClient
-    from llm.parser import EvaluationSchema, ItemSchema, parse_evaluation, parse_item
+from d2r_analyzer.evaluator.manual_evaluation import ManualEvaluator
+from d2r_analyzer.llm.client import LLMClient
+from d2r_analyzer.llm.parser import (
+    EvaluationSchema,
+    ItemSchema,
+    parse_evaluation,
+    parse_item,
+)
 
 
 def correct_quality(item: dict) -> dict:

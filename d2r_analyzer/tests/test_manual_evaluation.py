@@ -66,38 +66,34 @@ def test_mf_ring_evaluation():
         "Expected grade 'S' for the item"
     )
 
+
 def test_lightning_skills_and_life_ring():
     item_info = {
-    "name": "Powered Amulet of the Whale",
-    "base_type": "Amulet",
-    "quality": "magic",
-    "item_level": None,
-    "required_level": 45,
-    "affixes": [
-        {
-        "raw_text": "+3 to Lightning Skills (Sorceress Only)",
-        "stat": "lightning_skills",
-        "value": 3,
-        "unit": None
-        },
-        {
-        "raw_text": "+100 to Life",
-        "stat": "life",
-        "value": 100,
-        "unit": None
-        }
-    ],
-    "sockets": 0,
-    "is_ethereal": False,
-    "defense": None,
-    "damage": None
+        "name": "Powered Amulet of the Whale",
+        "base_type": "Amulet",
+        "quality": "magic",
+        "item_level": None,
+        "required_level": 45,
+        "affixes": [
+            {
+                "raw_text": "+3 to Lightning Skills (Sorceress Only)",
+                "stat": "lightning_skills",
+                "value": 3,
+                "unit": None,
+            },
+            {"raw_text": "+100 to Life", "stat": "life", "value": 100, "unit": None},
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
     }
     expected_verdict = "KEEP"
     expected_grade = "S"
     actual_verdict = ManualEvaluator().evaluate_item(item_info).get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
-    )  
-    assert ManualEvaluator().evaluate_item(item_info).get("grade", "") == expected_grade, (
-        f"Expected grade '{expected_grade}' for the item"
     )
+    assert (
+        ManualEvaluator().evaluate_item(item_info).get("grade", "") == expected_grade
+    ), f"Expected grade '{expected_grade}' for the item"

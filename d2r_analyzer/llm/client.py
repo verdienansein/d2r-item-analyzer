@@ -1,9 +1,6 @@
 from openai import OpenAI
 
-try:
-    from d2r_analyzer.llm.prompts import EVALUATION_PROMPT, ITEM_EXTRACTION_PROMPT
-except ModuleNotFoundError:
-    from llm.prompts import EVALUATION_PROMPT, ITEM_EXTRACTION_PROMPT
+from d2r_analyzer.llm.prompts import EVALUATION_PROMPT, ITEM_EXTRACTION_PROMPT
 
 
 class LLMClient:

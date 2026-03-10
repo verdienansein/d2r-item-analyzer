@@ -26,9 +26,10 @@ class ManualEvaluator:
                     score += (affix.get("value") / 40) * 100
                     good_affixes.append(affix.get("raw_text"))
                 if (
-                    (affix.get("stat") == "lightning_skills" or affix.get("stat") == "fire_skills" or affix.get("stat") == "cold_skills")
-                    and affix.get("value") >= 1
-                ):
+                    affix.get("stat") == "lightning_skills"
+                    or affix.get("stat") == "fire_skills"
+                    or affix.get("stat") == "cold_skills"
+                ) and affix.get("value") >= 1:
                     score += (affix.get("value") / 3) * 50
                     good_affixes.append(affix.get("raw_text"))
                 if affix.get("stat") == "life" and affix.get("value") >= 90:
