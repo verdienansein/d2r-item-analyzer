@@ -1,4 +1,5 @@
 import json
+import logging
 
 from d2r_analyzer.evaluator.manual_evaluation import ManualEvaluator
 from d2r_analyzer.llm.client import LLMClient
@@ -8,6 +9,8 @@ from d2r_analyzer.llm.parser import (
     parse_evaluation,
     parse_item,
 )
+
+logger = logging.getLogger(__name__)
 
 
 def correct_quality(item: dict) -> dict:
@@ -56,7 +59,7 @@ class Evaluator:
 
     def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:
         if self.evaluation_mode == "manual":
-            print("Manual evaluation mode - skipping LLM evaluation")
+            logger.debug("Manual evaluation mode — skipping LLM evaluation")
             evaluation = self.manual_evaluator.evaluate_item(item.model_dump())
             return EvaluationSchema(
                 grade=evaluation.get("grade", "C"),

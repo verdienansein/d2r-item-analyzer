@@ -1,7 +1,7 @@
+import logging
 import queue
 import sys
 import threading
-import traceback
 from datetime import datetime
 from pathlib import Path
 from time import sleep
@@ -17,6 +17,8 @@ from d2r_analyzer.capture import capture_screenshot, frame_to_base64
 from d2r_analyzer.config import config
 from d2r_analyzer.evaluator import Evaluator
 from d2r_analyzer.ui.overlay import ItemOverlay
+
+logger = logging.getLogger(__name__)
 
 evaluator = Evaluator(
     config.llm_model_name,
@@ -46,19 +48,16 @@ def worker_loop() -> None:
             filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
             save_path = screenshots_dir / filename
             cv2.imwrite(str(save_path), frame)
-            print(f"Screenshot saved to {save_path}")
+            logger.info("Screenshot saved to %s", save_path)
             encoded = frame_to_base64(frame)
             item = evaluator.parse_item(encoded)
-            print("Extracted item info:")
-            print(item.model_dump_json(indent=2))
-            print("Evaluating item...")
+            logger.debug("Extracted item info:\n%s", item.model_dump_json(indent=2))
+            logger.info("Evaluating item...")
             evaluation = evaluator.evaluate_item(item)
-            print("Evaluation result:")
-            print(evaluation.model_dump_json(indent=2))
+            logger.debug("Evaluation result:\n%s", evaluation.model_dump_json(indent=2))
             ui_q.put(("result", evaluation, x, y))
         except Exception as exc:
-            print(f"Error in worker loop: {exc}")
-            traceback.print_exc()
+            logger.exception("Error in worker loop: %s", exc)
             ui_q.put(("error", str(exc), x, y))
         finally:
             work_q.task_done()
@@ -71,17 +70,21 @@ def capture_and_print_base64() -> None:
         ui_q.put(("analyzing", "Analyzing item...", mx, my))
         work_q.put((mx, my))
     except Exception as exc:
-        print(f"Failed to queue work: {exc}")
-        traceback.print_exc()
+        logger.exception("Failed to queue work: %s", exc)
 
 
 def main() -> None:
+    logging.basicConfig(
+        level=config.log_level.upper(),
+        format="%(asctime)s [%(levelname)-8s] %(name)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
     overlay = ItemOverlay(auto_close_ms=10000)
     worker = threading.Thread(target=worker_loop, daemon=True)
     worker.start()
     listener = keyboard.GlobalHotKeys({config.capture_hotkey: capture_and_print_base64})
     listener.start()
-    print(f"Running. Press {config.capture_hotkey} to capture. Press Ctrl+C to stop.")
+    logger.info("Running. Press %s to capture. Press Ctrl+C to stop.", config.capture_hotkey)
     try:
         while not stop_event.is_set():
             while True:
@@ -107,7 +110,7 @@ def main() -> None:
                 pass
             sleep(0.2)
     except KeyboardInterrupt:
-        print("\nStopping...")
+        logger.info("Stopping...")
     finally:
         stop_event.set()
         listener.stop()
