@@ -170,6 +170,7 @@ def test_mf_ring_fire_resist_evaluation() -> None:
         "Expected grade 'C' for the item"
     )
 
+
 def test_lightning_skills_and_life_amulet() -> None:
     item_info = {
         "name": "Powered Amulet of the Whale",
@@ -200,6 +201,7 @@ def test_lightning_skills_and_life_amulet() -> None:
     assert evaluator.evaluate_item(item_info).get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
+
 
 def test_lightning_skills_and_fcr_amulet() -> None:
     item_info = {
@@ -237,6 +239,7 @@ def test_lightning_skills_and_fcr_amulet() -> None:
         f"Expected grade '{expected_grade}' for the item"
     )
 
+
 def test_grand_charm() -> None:
     item_info = {
         "name": "Giant Grand Charm of Vita",
@@ -245,8 +248,18 @@ def test_grand_charm() -> None:
         "item_level": None,
         "required_level": 39,
         "affixes": [
-            {"raw_text": "+1 to Lightning Skills (Sorceress Only)", "stat": "lightning_skills", "value": 1, "unit": None},
-            {"raw_text": "+12% Faster Hit Recovery", "stat": "faster_hit_recovery", "value": 12, "unit": "%"},
+            {
+                "raw_text": "+1 to Lightning Skills (Sorceress Only)",
+                "stat": "lightning_skills",
+                "value": 1,
+                "unit": None,
+            },
+            {
+                "raw_text": "+12% Faster Hit Recovery",
+                "stat": "faster_hit_recovery",
+                "value": 12,
+                "unit": "%",
+            },
         ],
         "sockets": 0,
         "is_ethereal": False,
@@ -262,3 +275,64 @@ def test_grand_charm() -> None:
     assert evaluator.evaluate_item(item_info).get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
+
+
+def test_rare_ring() -> None:
+    item_info = {
+        "name": "Rare Ring",
+        "base_type": "Ring",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 59,
+        "affixes": [
+            {"stat": "faster_cast_rate", "value": 10, "unit": "%"},
+            {
+                "raw_text": "+40 to Life",
+                "stat": "life",
+                "value": 40,
+                "unit": "",
+            },
+            {
+                "raw_text": "+50 to Fire Resist",
+                "stat": "fire_resist",
+                "value": 50,
+                "unit": "",
+            },
+            {
+                "raw_text": "+50 to Lightning Resist",
+                "stat": "lightning_resist",
+                "value": 50,
+                "unit": "",
+            },
+            {
+                "raw_text": "+50 to Cold Resist",
+                "stat": "cold_resist",
+                "value": 50,
+                "unit": "",
+            },
+            {
+                "raw_text": "25% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 25,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert evaluator.evaluate_item(item_info).get("grade", "") == "S", (
+        "Expected grade 'S' for the item"
+    )
+
+    assert (
+        evaluator.evaluate_item(item_info).get("score", 0) > 90
+        and evaluator.evaluate_item(item_info).get("score", 0) <= 100
+    ), "Expected score above 90 for the item"

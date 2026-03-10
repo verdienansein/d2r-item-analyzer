@@ -7,7 +7,9 @@ class ManualEvaluator:
         good_affixes = []
         score = 0
 
-        for rule in self.evaluation_rules.get(item["base_type"].lower().replace(" ", "_"), []):
+        for rule in self.evaluation_rules.get(
+            item["base_type"].lower().replace(" ", "_"), []
+        ):
             if rule["quality"] == item["quality"]:
                 score += rule.get("base_score", 0)
                 for affix_rule in rule["affixes_scores"]:
@@ -27,6 +29,8 @@ class ManualEvaluator:
                                 )
                                 good_affixes.append(affix)
 
+        score = min(score, 100)
+
         if score >= 90:
             evaluation["verdict"] = "KEEP"
             evaluation["grade"] = "S"
@@ -43,5 +47,6 @@ class ManualEvaluator:
             evaluation["verdict"] = "DISCARD"
             evaluation["grade"] = "D"
 
+        evaluation["score"] = score
         evaluation["good_affixes"] = good_affixes
         return evaluation

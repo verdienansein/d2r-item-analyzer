@@ -83,6 +83,7 @@ Note: executable builds currently require Python 3.13 or 3.14 because `pyinstall
 - `make setup`: install runtime and dev dependencies via Poetry
 - `make install-dev`: alias for `make setup`
 - `make run`: run the app via Poetry
+- `make test`: run unit tests
 - `make build`: build wheel/sdist via Poetry
 - `make build-exe`: build one-file executable with PyInstaller
 - `make clean`: remove build artifacts (`build/`, `dist/`, and `*.spec`)
