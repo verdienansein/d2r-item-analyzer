@@ -4,11 +4,12 @@ test_rules = {
     "ring": [
         {
             "quality": "magic",
+            "base_score": 0,
             "affixes_scores": [
                 {
                     "stat": "faster_cast_rate",
                     "max_value": 10,
-                    "min_value": 10,
+                    "min_value": 1,
                     "score": 50,
                 },
                 {
@@ -20,15 +21,21 @@ test_rules = {
                 {
                     "stat": "better_chance_of_getting_magic_items",
                     "max_value": 40,
-                    "min_value": 27,
+                    "min_value": 20,
                     "score": 100,
                 },
             ],
-        }
+        },
+        {
+            "quality": "unique",
+            "base_score": 100,
+            "affixes_scores": [],
+        },
     ],
     "amulet": [
         {
             "quality": "magic",
+            "base_score": 0,
             "affixes_scores": [
                 {
                     "stat": "lightning_skills",
@@ -48,6 +55,65 @@ test_rules = {
 }
 
 evaluator = ManualEvaluator(test_rules)
+
+
+def test_no_valuable_affixes() -> None:
+    item_info = {
+        "name": "Simple Ring of the Novice",
+        "base_type": "Ring",
+        "quality": "magic",
+        "item_level": None,
+        "required_level": 10,
+        "affixes": [
+            {
+                "raw_text": "+10 to Attack Rating",
+                "stat": "attack_rating",
+                "value": 10,
+                "unit": "",
+            },
+            {
+                "raw_text": "+5 to Strength",
+                "stat": "strength",
+                "value": 5,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "DISCARD"
+    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert evaluator.evaluate_item(item_info).get("grade", "") == "D", (
+        "Expected grade 'D' for the item"
+    )
+
+
+def test_unique_ring() -> None:
+    item_info = {
+        "name": "The Stone of Jordan",
+        "base_type": "Ring",
+        "quality": "unique",
+        "item_level": None,
+        "required_level": 60,
+        "affixes": [],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert evaluator.evaluate_item(item_info).get("grade", "") == "S", (
+        "Expected grade 'S' for the item"
+    )
 
 
 def test_ring_evaluation() -> None:
@@ -97,7 +163,7 @@ def test_mf_ring_evaluation() -> None:
             {
                 "raw_text": "37% Better Chance of Getting Magic Items",
                 "stat": "better_chance_of_getting_magic_items",
-                "value": 37,
+                "value": 36,
                 "unit": "%",
             }
         ],
@@ -111,8 +177,8 @@ def test_mf_ring_evaluation() -> None:
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == "S", (
-        "Expected grade 'S' for the item"
+    assert evaluator.evaluate_item(item_info).get("grade", "") == "A", (
+        "Expected grade 'A' for the item"
     )
 
 

@@ -6,14 +6,10 @@ class ManualEvaluator:
         evaluation = {}
         good_affixes = []
         score = 0
-        if item["quality"] == "unique":
-            evaluation["verdict"] = "KEEP"
-            evaluation["grade"] = "S"
-            evaluation["good_affixes"] = good_affixes
-            return evaluation
 
         for rule in self.evaluation_rules.get(item["base_type"].lower(), []):
             if rule["quality"] == item["quality"]:
+                score += rule.get("base_score", 0)
                 for affix_rule in rule["affixes_scores"]:
                     for affix in item["affixes"]:
                         if affix["stat"] == affix_rule["stat"]:
@@ -23,7 +19,11 @@ class ManualEvaluator:
                                 <= affix_rule["max_value"]
                             ):
                                 score += affix_rule["score"] * (
-                                    affix["value"] / affix_rule["max_value"]
+                                    (affix["value"] - affix_rule["min_value"])
+                                    / (
+                                        affix_rule["max_value"]
+                                        - affix_rule["min_value"]
+                                    )
                                 )
                                 good_affixes.append(affix)
 
