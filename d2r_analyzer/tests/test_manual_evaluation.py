@@ -1,60 +1,13 @@
+import json
+from pathlib import Path
+
 from d2r_analyzer.evaluator import ManualEvaluator
 
-test_rules = {
-    "ring": [
-        {
-            "quality": "magic",
-            "base_score": 0,
-            "affixes_scores": [
-                {
-                    "stat": "faster_cast_rate",
-                    "max_value": 10,
-                    "min_value": 1,
-                    "score": 50,
-                },
-                {
-                    "stat": "all_resistances",
-                    "max_value": 15,
-                    "min_value": 3,
-                    "score": 50,
-                },
-                {
-                    "stat": "better_chance_of_getting_magic_items",
-                    "max_value": 40,
-                    "min_value": 20,
-                    "score": 100,
-                },
-            ],
-        },
-        {
-            "quality": "unique",
-            "base_score": 100,
-            "affixes_scores": [],
-        },
-    ],
-    "amulet": [
-        {
-            "quality": "magic",
-            "base_score": 0,
-            "affixes_scores": [
-                {
-                    "stat": "lightning_skills",
-                    "max_value": 3,
-                    "min_value": 1,
-                    "score": 50,
-                },
-                {
-                    "stat": "life",
-                    "max_value": 100,
-                    "min_value": 20,
-                    "score": 50,
-                },
-            ],
-        }
-    ],
-}
+test_rules_file = Path(__file__).resolve().parent / "config_rules/test_rules.json"
 
-evaluator = ManualEvaluator(test_rules)
+with open(test_rules_file, "r") as f:
+    manual_rules = json.load(f)
+evaluator = ManualEvaluator(manual_rules)
 
 
 def test_no_valuable_affixes() -> None:

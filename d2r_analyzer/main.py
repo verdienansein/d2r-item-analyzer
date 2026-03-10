@@ -23,6 +23,7 @@ evaluator = Evaluator(
     config.llm_base_url,
     config.openai_api_key,
     config.evaluation_mode,
+    config.manual_evaluation_rules_file,
 )
 
 work_q = queue.Queue()

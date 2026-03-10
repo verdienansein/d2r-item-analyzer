@@ -31,12 +31,23 @@ def correct_quality(item: dict) -> dict:
 
 class Evaluator:
     def __init__(
-        self, llm_model: str, llm_base_url: str, llm_api_key: str, evaluation_mode: str
+        self,
+        llm_model: str,
+        llm_base_url: str,
+        llm_api_key: str,
+        evaluation_mode: str,
+        manual_rules_file: str = None,
     ) -> None:
         self.evaluation_mode = evaluation_mode
         self.llm = LLMClient(
             model_name=llm_model, base_url=llm_base_url, api_key=llm_api_key
         )
+        if self.evaluation_mode == "manual":
+            if not manual_rules_file:
+                raise ValueError("Manual evaluation mode requires a rules file")
+            with open(manual_rules_file, "r") as f:
+                manual_rules = json.load(f)
+            self.manual_evaluator = ManualEvaluator(manual_rules)
 
     def parse_item(self, image_base64: str) -> ItemSchema:
         raw = self.llm.extract_item_info(image_base64)
@@ -46,7 +57,7 @@ class Evaluator:
     def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:
         if self.evaluation_mode == "manual":
             print("Manual evaluation mode - skipping LLM evaluation")
-            evaluation = ManualEvaluator().evaluate_item(item.model_dump())
+            evaluation = self.manual_evaluator.evaluate_item(item.model_dump())
             return EvaluationSchema(
                 grade=evaluation.get("grade", "C"),
                 verdict=evaluation.get("verdict", ""),
