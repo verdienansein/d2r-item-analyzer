@@ -1,6 +1,16 @@
 # D2R Item Analyzer
 
-A Python tool for analyzing Diablo 2: Resurrected items.
+> Press a hotkey on any item tooltip — instantly know if it's worth keeping.
+
+D2R Item Analyzer runs silently in the background while you play Diablo 2: Resurrected.
+When you hover over an item and press your configured hotkey, it captures the tooltip,
+evaluates the item, and displays a grading overlay directly on your screen.
+
+## What it does
+- **Captures** the item tooltip under your cursor via a global hotkey
+- **Extracts** all item stats from the screenshot using a vision LLM
+- **Grades** the item (S / A / B / C / D) based on configuration rules
+- **Displays** a overlay showing the verdict and grading
 
 ## Prerequisites
 
@@ -76,8 +86,3 @@ Note: executable builds currently require Python 3.13 or 3.14 because `pyinstall
 - `make build`: build wheel/sdist via Poetry
 - `make build-exe`: build one-file executable with PyInstaller
 - `make clean`: remove build artifacts (`build/`, `dist/`, and `*.spec`)
-
-## Notes
-
-- Dependencies are managed in `pyproject.toml` with Poetry.
-- `requirements.txt` is no longer used.
