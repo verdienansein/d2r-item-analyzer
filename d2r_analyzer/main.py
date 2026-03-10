@@ -13,7 +13,7 @@ from pynput import keyboard
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from config import config
+from d2r_analyzer.config import config
 
 from d2r_analyzer.capture import capture_screenshot, frame_to_base64
 from d2r_analyzer.evaluator import Evaluator
