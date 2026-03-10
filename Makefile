@@ -25,13 +25,14 @@ endif
 APP_NAME := D2RItemAnalyzer
 ENTRYPOINT := d2r_analyzer/main.py
 
-.PHONY: help setup install-dev build build-exe run clean
+.PHONY: help setup install-dev build build-exe run clean lint test sast
 
 help:
 	@echo "Targets:"
 	@echo "  help        - Show this help message"
 	@echo "  lint        - Run ruff for linting and auto-fixing"
 	@echo "  test        - Run pytest"
+	@echo "  sast        - Run semgrep SAST analysis with security audit rules"
 	@echo "  setup       - Install dependencies (including dev tools) with Poetry"
 	@echo "  install-dev - Alias for setup"
 	@echo "  build       - Build sdist and wheel into dist/"
@@ -45,6 +46,11 @@ lint:
 
 test:
 	$(POETRY) run pytest
+
+sast:
+	$(POETRY) run semgrep --config=p/security-audit .
+	$(POETRY) run semgrep --config=p/security-audit --json --output=semgrep-report.json . || true
+	@echo "Semgrep SAST report saved to: semgrep-report.json"
 
 setup:
 	$(POETRY) install --with dev

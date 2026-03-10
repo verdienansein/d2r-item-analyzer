@@ -36,6 +36,7 @@ flake8 = "^6.0"
 mypy = "^1.0"
 pyinstaller = { version = "^6.16.0", python = ">=3.13,<3.15" }
 ruff = "*"
+semgrep = "*"
 
 [tool.black]
 line-length = 88
