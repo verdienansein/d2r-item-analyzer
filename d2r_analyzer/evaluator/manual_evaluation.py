@@ -7,7 +7,7 @@ class ManualEvaluator:
         good_affixes = []
         score = 0
 
-        for rule in self.evaluation_rules.get(item["base_type"].lower(), []):
+        for rule in self.evaluation_rules.get(item["base_type"].lower().replace(" ", "_"), []):
             if rule["quality"] == item["quality"]:
                 score += rule.get("base_score", 0)
                 for affix_rule in rule["affixes_scores"]:

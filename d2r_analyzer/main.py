@@ -84,7 +84,9 @@ def main() -> None:
     worker.start()
     listener = keyboard.GlobalHotKeys({config.capture_hotkey: capture_and_print_base64})
     listener.start()
-    logger.info("Running. Press %s to capture. Press Ctrl+C to stop.", config.capture_hotkey)
+    logger.info(
+        "Running. Press %s to capture. Press Ctrl+C to stop.", config.capture_hotkey
+    )
     try:
         while not stop_event.is_set():
             while True:

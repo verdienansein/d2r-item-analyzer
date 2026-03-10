@@ -19,8 +19,26 @@
                 {
                     "stat": "better_chance_of_getting_magic_items",
                     "max_value": 40,
-                    "min_value": 20,
+                    "min_value": 10,
                     "score": 100
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 50,
+                    "min_value": 5,
+                    "score": 50
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 50,
+                    "min_value": 5,
+                    "score": 50
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 50,
+                    "min_value": 5,
+                    "score": 50
                 }
             ]
         },
@@ -38,7 +56,55 @@
                 {
                     "stat": "lightning_skills",
                     "max_value": 3,
-                    "min_value": 1,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "cold_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "fire_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "warcries",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "combat_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "martial_arts",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "traps",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "elemental_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "summoning_skills",
+                    "max_value": 3,
+                    "min_value": 0,
                     "score": 50
                 },
                 {
@@ -46,7 +112,68 @@
                     "max_value": 100,
                     "min_value": 20,
                     "score": 50
+                },
+                {
+                    "stat": "faster_cast_rate",
+                    "max_value": 10,
+                    "min_value": 1,
+                    "score": 50
+                },
+                {
+                    "stat": "all_resistances",
+                    "max_value": 30,
+                    "min_value": 5,
+                    "score": 50
+                },
+                {
+                    "stat": "better_chance_of_getting_magic_items",
+                    "max_value": 50,
+                    "min_value": 15,
+                    "score": 100
                 }
+            ]
+        },
+        {
+            "quality": "unique",
+            "base_score": 100,
+            "affixes_scores": []
+        }
+    ],
+    "grand_charm": [
+        {
+            "quality": "magic",
+            "base_score": 0,
+            "affixes_scores": [
+               {
+                    "stat": "lightning_skills",
+                    "max_value": 1,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "cold_skills",
+                    "max_value": 1,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "fire_skills",
+                    "max_value": 1,
+                    "min_value": 0,
+                    "score": 50
+               },
+               {
+                    "stat": "life",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 50  
+               },
+               {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 12,
+                    "min_value": 0,
+                    "score": 50  
+               }
             ]
         }
     ]
