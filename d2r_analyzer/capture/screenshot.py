@@ -7,7 +7,7 @@ OFFSET_Y = -260
 camera = bettercam.create(output_color="BGRA")
 
 
-def capture_screenshot(x, y):
+def capture_screenshot(x: int, y: int) -> "bettercam.Frame":
     center_x = int(x + OFFSET_X)
     center_y = int(y + OFFSET_Y)
 

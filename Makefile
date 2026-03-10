@@ -17,7 +17,11 @@ APP_EXT :=
 PYINSTALLER_PLATFORM_HIDDEN_IMPORTS :=
 endif
 
+ifeq ($(OS),Windows_NT)
+POETRY ?= python -m poetry
+else
 POETRY ?= poetry
+endif
 APP_NAME := D2RItemAnalyzer
 ENTRYPOINT := d2r_analyzer/main.py
 
@@ -25,12 +29,22 @@ ENTRYPOINT := d2r_analyzer/main.py
 
 help:
 	@echo "Targets:"
+	@echo "  help        - Show this help message"
+	@echo "  lint        - Run ruff for linting and auto-fixing"
+	@echo "  test        - Run pytest"
 	@echo "  setup       - Install dependencies (including dev tools) with Poetry"
 	@echo "  install-dev - Alias for setup"
 	@echo "  build       - Build sdist and wheel into dist/"
 	@echo "  build-exe   - Build single-file executable via poetry run pyinstaller"
 	@echo "  run         - Run app entrypoint via Poetry"
 	@echo "  clean       - Remove build artifacts"
+
+lint:
+	$(POETRY) run ruff check . --fix
+	$(POETRY) run ruff format .
+
+test:
+	$(POETRY) run pytest
 
 setup:
 	$(POETRY) install --with dev

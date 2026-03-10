@@ -4,7 +4,7 @@ from d2r_analyzer.llm.prompts import EVALUATION_PROMPT, ITEM_EXTRACTION_PROMPT
 
 
 class LLMClient:
-    def __init__(self, model_name: str, base_url: str, api_key: str):
+    def __init__(self, model_name: str, base_url: str, api_key: str) -> None:
         self.model_name = model_name
         self.client = OpenAI(
             api_key=api_key,

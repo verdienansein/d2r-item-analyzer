@@ -30,7 +30,9 @@ def correct_quality(item: dict) -> dict:
 
 
 class Evaluator:
-    def __init__(self, llm_model, llm_base_url, llm_api_key, evaluation_mode):
+    def __init__(
+        self, llm_model: str, llm_base_url: str, llm_api_key: str, evaluation_mode: str
+    ) -> None:
         self.evaluation_mode = evaluation_mode
         self.llm = LLMClient(
             model_name=llm_model, base_url=llm_base_url, api_key=llm_api_key

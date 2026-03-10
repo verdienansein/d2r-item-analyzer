@@ -31,7 +31,7 @@ ui_q = queue.Queue()
 stop_event = threading.Event()
 
 
-def worker_loop():
+def worker_loop() -> None:
     while True:
         job = work_q.get()
         if job is None:

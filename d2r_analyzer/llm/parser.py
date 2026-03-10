@@ -74,7 +74,7 @@ class AffixSchema(BaseModel):
 
     @field_validator("value", mode="before")
     @classmethod
-    def normalize_value(cls, v):
+    def normalize_value(cls, v: str | dict | list | None) -> float | int | None:
         if v in (None, "", "null"):
             return None
 
@@ -123,7 +123,7 @@ class ItemSchema(BaseModel):
 
     @field_validator("sockets", mode="before")
     @classmethod
-    def normalize_sockets(cls, v):
+    def normalize_sockets(cls, v: str | int | None) -> int:
         if v in (None, "", "null"):
             return 0
         if isinstance(v, str):
@@ -133,7 +133,7 @@ class ItemSchema(BaseModel):
 
     @field_validator("damage", mode="before")
     @classmethod
-    def normalize_damage(cls, v):
+    def normalize_damage(cls, v: str | dict | None) -> str | None:
         if isinstance(v, dict):
             min_dmg = v.get("min")
             max_dmg = v.get("max")

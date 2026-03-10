@@ -1,5 +1,5 @@
 class ManualEvaluator:
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     def evaluate_item(self, item: dict) -> dict:

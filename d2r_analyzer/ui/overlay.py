@@ -1,9 +1,13 @@
 import tkinter as tk
+from typing import TypeAlias
 
 from d2r_analyzer.llm.parser import EvaluationSchema
 
+FontSpec: TypeAlias = tuple[str, int] | tuple[str, int, str]
+PadOptions: TypeAlias = dict[str, int | tuple[int, int]]
+
 # ── Grade colors ───────────────────────────────────────────
-GRADE_COLORS = {
+GRADE_COLORS: dict[str, str] = {
     "S": "#FFD700",  # gold
     "A": "#00FF00",  # green
     "B": "#4FC3F7",  # blue
@@ -11,7 +15,7 @@ GRADE_COLORS = {
     "D": "#FF4444",  # red
 }
 
-VERDICT_COLORS = {
+VERDICT_COLORS: dict[str, str] = {
     "KEEP": "#00FF00",
     "KEEP_FOR_ALT": "#4FC3F7",
     "TRASH": "#FF4444",
@@ -21,7 +25,7 @@ VERDICT_COLORS = {
 
 # ── Main overlay class ─────────────────────────────────────
 class ItemOverlay:
-    def __init__(self, auto_close_ms: int = 8000):
+    def __init__(self, auto_close_ms: int = 8000) -> None:
         self.auto_close_ms = auto_close_ms
         self._root = tk.Tk()
         self._root.withdraw()
@@ -129,16 +133,16 @@ class ItemOverlay:
         win.geometry(f"+{px}+{py}")
 
     def _build_ui(self, win: tk.Misc, ev: EvaluationSchema) -> None:
-        FONT_TITLE = ("Palatino Linotype", 13, "bold")
-        FONT_LABEL = ("Palatino Linotype", 10, "bold")
-        FONT_BODY = ("Palatino Linotype", 9)
-        BG = "#1A1008"
-        DIVIDER = "#5C3D11"
+        FONT_TITLE: FontSpec = ("Palatino Linotype", 13, "bold")
+        FONT_LABEL: FontSpec = ("Palatino Linotype", 10, "bold")
+        FONT_BODY: FontSpec = ("Palatino Linotype", 9)
+        BG: str = "#1A1008"
+        DIVIDER: str = "#5C3D11"
 
         grade_color = GRADE_COLORS.get(ev.grade.upper(), "#FFFFFF")
         verdict_color = VERDICT_COLORS.get(ev.verdict.upper(), "#FFFFFF")
 
-        pad = {"padx": 14, "pady": 3}
+        pad: PadOptions = {"padx": 14, "pady": 3}
 
         # ── Grade + Verdict header ──────────────────────────
         header = tk.Frame(win, bg=BG)
@@ -270,7 +274,16 @@ def _divider(parent: tk.Misc, color: str) -> None:
     tk.Frame(parent, bg=color, height=1).pack(fill="x", padx=10, pady=2)
 
 
-def row(parent, label, value, label_color, bg, label_font, val_font, pad) -> None:
+def row(
+    parent: tk.Misc,
+    label: str,
+    value: str,
+    label_color: str,
+    bg: str,
+    label_font: FontSpec,
+    val_font: FontSpec,
+    pad: PadOptions,
+) -> None:
     f = tk.Frame(parent, bg=bg)
     f.pack(fill="x", **pad)
     tk.Label(f, text=label, fg=label_color, bg=bg, font=label_font).pack(side="left")

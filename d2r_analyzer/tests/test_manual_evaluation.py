@@ -1,7 +1,7 @@
 from d2r_analyzer.evaluator import ManualEvaluator
 
 
-def test_ring_evaluation():
+def test_ring_evaluation() -> None:
     item_info = {
         "name": "Scintillating Ring of the Apprentice",
         "base_type": "Ring",
@@ -37,7 +37,7 @@ def test_ring_evaluation():
     )
 
 
-def test_mf_ring_evaluation():
+def test_mf_ring_evaluation() -> None:
     item_info = {
         "name": "Fortuitous Ring of Fortune",
         "base_type": "Ring",
@@ -67,7 +67,7 @@ def test_mf_ring_evaluation():
     )
 
 
-def test_lightning_skills_and_life_ring():
+def test_lightning_skills_and_life_ring() -> None:
     item_info = {
         "name": "Powered Amulet of the Whale",
         "base_type": "Amulet",
