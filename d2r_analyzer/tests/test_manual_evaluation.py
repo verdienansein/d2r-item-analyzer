@@ -64,7 +64,28 @@ def test_unique_magefist() -> None:
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert actual_evaluation.get("grade", "") == "B", "Expected grade 'B' for the item"
+    assert actual_evaluation.get("grade", "") == "A", "Expected grade 'A' for the item"
+
+def test_unique_harlequin_crest() -> None:
+    item_info = {
+        "name": "Harlequin Crest",
+        "base_type": "Shako",
+        "quality": "unique",
+        "item_level": None,
+        "required_level": 62,
+        "affixes": [],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
 
 
 def test_ring_evaluation() -> None:

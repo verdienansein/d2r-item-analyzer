@@ -308,8 +308,506 @@
         }
     ],
     "uniques": {
+        "annihilus": {
+            "score": 100
+        },
+        "arachnid mesh": {
+            "score": 100
+        },
+        "bul-kathos' wedding band": {
+            "score": 100
+        },
+        "cold rupture": {
+            "score": 100
+        },
+        "crack of the heavens": {
+            "score": 100
+        },
+        "crown of ages": {
+            "score": 100
+        },
+        "death's fathom": {
+            "score": 100
+        },
+        "death's web": {
+            "score": 100
+        },
+        "griffon's eye": {
+            "score": 100
+        },
+        "harlequin crest": {
+            "score": 100
+        },
+        "hellfire torch": {
+            "score": 100
+        },
+        "herald of zakarum": {
+            "score": 100
+        },
+        "highlord's wrath": {
+            "score": 100
+        },
+        "mara's kaleidoscope": {
+            "score": 100
+        },
+        "rainbow facet": {
+            "score": 100
+        },
+        "skin of the vipermagi": {
+            "score": 100
+        },
+        "tal rasha's adjudication": {
+            "score": 100
+        },
+        "tal rasha's guardianship": {
+            "score": 100
+        },
+        "the oculus": {
+            "score": 100
+        },
+        "the stone of jordan": {
+            "score": 100
+        },
+        "tyrael's might": {
+            "score": 100
+        },
+        "war traveler": {
+            "score": 100
+        },
+        "wisp projector": {
+            "score": 100
+        },
+        "andariel's visage": {
+            "score": 89
+        },
+        "arkaine's valor": {
+            "score": 89
+        },
+        "arreat's face": {
+            "score": 89
+        },
+        "azurewrath": {
+            "score": 89
+        },
+        "bone break": {
+            "score": 89
+        },
+        "chance guards": {
+            "score": 89
+        },
+        "dracul's grasp": {
+            "score": 89
+        },
+        "eschuta's temper": {
+            "score": 89
+        },
+        "flame rift": {
+            "score": 89
+        },
+        "gheed's fortune": {
+            "score": 89
+        },
+        "gore rider": {
+            "score": 89
+        },
+        "griswold's honor": {
+            "score": 89
+        },
+        "griswold's redemption": {
+            "score": 89
+        },
+        "guillaume's face": {
+            "score": 89
+        },
+        "hand of blessed light": {
+            "score": 89
+        },
+        "homunculus": {
+            "score": 89
+        },
+        "immortal king's soul cage": {
+            "score": 89
+        },
+        "lacerator": {
+            "score": 89
+        },
+        "m'avina's true sight": {
+            "score": 89
+        },
+        "metalgrid": {
+            "score": 89
+        },
+        "nightwing's veil": {
+            "score": 89
+        },
+        "ondal's wisdom": {
+            "score": 89
+        },
+        "ormus' robes": {
+            "score": 89
+        },
+        "raven frost": {
+            "score": 89
+        },
+        "ravenlore": {
+            "score": 89
+        },
+        "shadow dancer": {
+            "score": 89
+        },
+        "skullder's ire": {
+            "score": 89
+        },
+        "stormlash": {
+            "score": 89
+        },
+        "tal rasha's fine-spun cloth": {
+            "score": 89
+        },
+        "tal rasha's horadric crest": {
+            "score": 89
+        },
+        "tal rasha's lidless eye": {
+            "score": 89
+        },
+        "the reaper's toll": {
+            "score": 89
+        },
+        "thundergod's vigor": {
+            "score": 89
+        },
+        "thunderstroke": {
+            "score": 89
+        },
+        "titan's revenge": {
+            "score": 89
+        },
+        "trang-oul's claws": {
+            "score": 89
+        },
+        "trang-oul's girth": {
+            "score": 89
+        },
+        "vampire gaze": {
+            "score": 89
+        },
+        "verdungo's hearty cord": {
+            "score": 89
+        },
+        "warshrike": {
+            "score": 89
+        },
+        "waterwalk": {
+            "score": 89
+        },
+        "windforce": {
+            "score": 89
+        },
+        "wizardspike": {
+            "score": 89
+        },
+        "aldur's advance": {
+            "score": 85
+        },
+        "arm of king leoric": {
+            "score": 85
+        },
+        "astreon's iron ward": {
+            "score": 85
+        },
+        "atma's scarab": {
+            "score": 85
+        },
+        "bartuc's cut-throat": {
+            "score": 85
+        },
+        "black cleft": {
+            "score": 85
+        },
+        "blade of ali baba": {
+            "score": 85
+        },
+        "bloodfist": {
+            "score": 85
+        },
+        "boneflame": {
+            "score": 85
+        },
+        "bonehew": {
+            "score": 85
+        },
+        "boneshade": {
+            "score": 85
+        },
+        "buriza-do kyanon": {
+            "score": 85
+        },
+        "butcher's pupil": {
+            "score": 85
+        },
+        "cerebus' bite": {
+            "score": 85
+        },
+        "cow king's hide": {
+            "score": 85
+        },
+        "cow king's horns": {
+            "score": 85
+        },
+        "cow king's hooves": {
+            "score": 85
+        },
+        "crown of thieves": {
+            "score": 85
+        },
+        "darkforce spawn": {
+            "score": 85
+        },
+        "death cleaver": {
+            "score": 85
+        },
+        "death's hand": {
+            "score": 85
+        },
+        "death's guard": {
+            "score": 85
+        },
+        "demon limb": {
+            "score": 85
+        },
+        "demon machine": {
+            "score": 85
+        },
+        "duriel's shell": {
+            "score": 85
+        },
+        "dwarf star": {
+            "score": 85
+        },
+        "earth shifter": {
+            "score": 85
+        },
+        "fleshripper": {
+            "score": 85
+        },
+        "frostburn": {
+            "score": 85
+        },
+        "gargoyle's bite": {
+            "score": 85
+        },
+        "gerke's sanctuary": {
+            "score": 85
+        },
+        "giant skull": {
+            "score": 85
+        },
+        "goblin toe": {
+            "score": 85
+        },
+        "goldstrike arch": {
+            "score": 85
+        },
+        "goldwrap": {
+            "score": 85
+        },
+        "griswold's valor": {
+            "score": 85
+        },
+        "guardian angel": {
+            "score": 85
+        },
+        "gull": {
+            "score": 85
+        },
+        "head hunter's glory": {
+            "score": 85
+        },
+        "heaven's light": {
+            "score": 85
+        },
+        "hotspur": {
+            "score": 85
+        },
+        "immortal king's detail": {
+            "score": 85
+        },
+        "immortal king's forge": {
+            "score": 85
+        },
+        "immortal king's pillar": {
+            "score": 85
+        },
+        "immortal king's stone crusher": {
+            "score": 85
+        },
+        "immortal king's will": {
+            "score": 85
+        },
+        "infernostride": {
+            "score": 85
+        },
+        "jalal's mane": {
+            "score": 85
+        },
+        "kira's guardian": {
+            "score": 85
+        },
+        "laying of hands": {
+            "score": 85
+        },
+        "leviathan": {
+            "score": 85
+        },
+        "lidless wall": {
+            "score": 85
+        },
+        "lightsabre": {
+            "score": 85
+        },
+        "m'avina's caster": {
+            "score": 85
+        },
+        "m'avina's embrace": {
+            "score": 85
+        },
         "magefist": {
-            "score": 75
+            "score": 85
+        },
+        "marrowwalk": {
+            "score": 85
+        },
+        "moser's blessed circle": {
+            "score": 85
+        },
+        "nagelring": {
+            "score": 85
+        },
+        "naj's puzzler": {
+            "score": 85
+        },
+        "natalya's mark": {
+            "score": 85
+        },
+        "natalya's soul": {
+            "score": 85
+        },
+        "nature's peace": {
+            "score": 85
+        },
+        "nosferatu's coil": {
+            "score": 85
+        },
+        "peasant crown": {
+            "score": 85
+        },
+        "que-hegan's wisdom": {
+            "score": 85
+        },
+        "raven claw": {
+            "score": 85
+        },
+        "razortail": {
+            "score": 85
+        },
+        "ribcracker": {
+            "score": 85
+        },
+        "rockstopper": {
+            "score": 85
+        },
+        "rotting fissure": {
+            "score": 85
+        },
+        "sandstorm trek": {
+            "score": 85
+        },
+        "schaefer's hammer": {
+            "score": 85
+        },
+        "seraph's hymn": {
+            "score": 85
+        },
+        "shaftstop": {
+            "score": 85
+        },
+        "sigon's gage": {
+            "score": 85
+        },
+        "sigon's guard": {
+            "score": 85
+        },
+        "sigon's sabot": {
+            "score": 85
+        },
+        "sigon's shelter": {
+            "score": 85
+        },
+        "sigon's visor": {
+            "score": 85
+        },
+        "sigon's wrap": {
+            "score": 85
+        },
+        "silkweave": {
+            "score": 85
+        },
+        "snowclash": {
+            "score": 85
+        },
+        "stealskull": {
+            "score": 85
+        },
+        "steelrend": {
+            "score": 85
+        },
+        "stormshield": {
+            "score": 85
+        },
+        "string of ears": {
+            "score": 85
+        },
+        "suicide branch": {
+            "score": 85
+        },
+        "tarnhelm": {
+            "score": 85
+        },
+        "the cat's eye": {
+            "score": 85
+        },
+        "the cranium basher": {
+            "score": 85
+        },
+        "the grandfather": {
+            "score": 85
+        },
+        "the redeemer": {
+            "score": 85
+        },
+        "tomb reaver": {
+            "score": 85
+        },
+        "trang-oul's guise": {
+            "score": 85
+        },
+        "trang-oul's scales": {
+            "score": 85
+        },
+        "trang-oul's wing": {
+            "score": 85
+        },
+        "valkyrie wing": {
+            "score": 85
+        },
+        "witchwild string": {
+            "score": 85
+        },
+        "wolfhowl": {
+            "score": 85
+        },
+        "wraith flight": {
+            "score": 85
         }
     }
 }

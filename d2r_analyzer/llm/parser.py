@@ -30,6 +30,9 @@ known_stats: set[str] = {
     "enhanced_defense",
     "defense",
     "regenerate_mana",
+    "all_skills",
+    "all_attributes",
+    "physical_damage_received_reduction",
 }
 
 known_base_types: set[str] = {

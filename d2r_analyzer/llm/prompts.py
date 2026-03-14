@@ -38,7 +38,20 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   life, mana, strength, lightning_skills, fire_skills, cold_skills, martial_arts, 
   warcries, traps, elemental_skills, summoning_skills, javelin_and_spear_skills, 
   faster_hit_recovery, attack_rating, better_chance_of_getting_magic_items, faster_cast_rate, 
-  faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana
+  faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
+  physical_damage_received_reduction
+
+Stat mapping examples (use these exact keys):
+  "+X to All Skills"               → all_skills
+  "+X to All Attributes"           → all_attributes
+  "+X% to All Resistances"         → all_resistances
+  "+X% Faster Cast Rate"           → faster_cast_rate
+  "+X% Faster Hit Recovery"        → faster_hit_recovery
+  "+X% Faster Run/Walk"            → faster_run_walk
+  "+X% Better Chance of Magic"     → better_chance_of_getting_magic_items
+  "+X to Lightning Skills"         → lightning_skills
+  "+X to Fire Skills"              → fire_skills
+  "+X to Cold Skills"              → cold_skills
 If the item's base type is not in this list, pick the closest match.
 
 Return this exact structure:

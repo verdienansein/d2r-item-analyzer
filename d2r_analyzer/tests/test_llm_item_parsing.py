@@ -25,6 +25,7 @@ class ExpectedItem(NamedTuple):
     base_type: str
     quality: str
     affix_stats: list[str]
+    name: str | None = None
 
 
 EXPECTED_ITEMS: dict[str, ExpectedItem] = {
@@ -60,6 +61,19 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "regenerate_mana",
         ],
     ),
+    "unique_2.png": ExpectedItem(
+        name="Harlequin Crest",
+        base_type="helmet",
+        quality="unique",
+        affix_stats=[
+            "all_skills",
+            "all_attributes",
+            "life",
+            "mana",
+            "physical_damage_received_reduction",
+            "better_chance_of_getting_magic_items",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))
@@ -82,6 +96,12 @@ def test_parse_item_from_image(image_path: Path) -> None:
     item: ItemSchema = evaluator.parse_item(image_b64)
 
     assert isinstance(item, ItemSchema)
+
+    if expected.name is not None:
+        assert item.name is not None, "name must not be None"
+        assert item.name.lower().strip() == expected.name.lower().strip(), (
+            f"[{filename}] name: expected '{expected.name}', got '{item.name}'"
+        )
 
     assert item.base_type is not None, "base_type must not be None"
     assert item.base_type.lower() == expected.base_type.lower(), (
