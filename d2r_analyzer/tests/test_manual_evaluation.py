@@ -89,6 +89,28 @@ def test_unique_harlequin_crest() -> None:
     assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
 
 
+def test_unique_stone_of_jordan() -> None:
+    item_info = {
+        "name": "The Stone of Jordan",
+        "base_type": "Ring",
+        "quality": "unique",
+        "item_level": None,
+        "required_level": 60,
+        "affixes": [],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
+
+
 def test_ring_evaluation() -> None:
     item_info = {
         "name": "Scintillating Ring of the Apprentice",

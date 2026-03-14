@@ -74,6 +74,12 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "better_chance_of_getting_magic_items",
         ],
     ),
+    "unique_3.png": ExpectedItem(
+        name="The Stone of Jordan",
+        base_type="ring",
+        quality="unique",
+        affix_stats=["all_skills", "lightning_damage", "mana", "increase_maximum_mana"],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))

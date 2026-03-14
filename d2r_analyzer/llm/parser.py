@@ -33,6 +33,8 @@ known_stats: set[str] = {
     "all_skills",
     "all_attributes",
     "physical_damage_received_reduction",
+    "increase_maximum_mana",
+    "lightning_damage",
 }
 
 known_base_types: set[str] = {

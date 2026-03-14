@@ -39,7 +39,7 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   warcries, traps, elemental_skills, summoning_skills, javelin_and_spear_skills, 
   faster_hit_recovery, attack_rating, better_chance_of_getting_magic_items, faster_cast_rate, 
   faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
-  physical_damage_received_reduction
+  physical_damage_received_reduction, increase_maximum_mana, lightning_damage
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"               → all_skills
