@@ -30,10 +30,15 @@ PRIORITY: If signals conflict, trust Signal 2 (affix count) over color.
 A magic item can NEVER have more than 2 affixes.
 A rare item always has between 3 and 6 affixes.
 
+The "base_type" field MUST be one of these exact values (lowercase):
+  grand charm, small charm, large charm, amulet, ring, helmet, armor,
+  shield, weapon, gloves, boots, belt
+If the item's base type is not in this list, pick the closest match.
+
 Return this exact structure:
 {
   "name": "item name or null if magic/rare with no name",
-  "base_type": "e.g. Amulet, Ring, Monarch, Archon Plate",
+  "base_type": "must be one of the allowed values listed above",
   "quality": "normal | magic | rare | set | unique | crafted",
   "item_level": 85,
   "required_level": 60,
@@ -58,7 +63,7 @@ Rules:
 """
 
 EVALUATION_PROMPT = """
-You are an 2026 expert Diablo 2 Resurrected player with deep knowledge 
+You are an expert Diablo 2 Resurrected player with deep knowledge 
 of itemization, meta builds, and trading. Your job is to be HARSH and REALISTIC. In a real D2R session, 95% of magic 
 and rare items are instant trash. Grade accordingly.
 

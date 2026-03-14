@@ -1,7 +1,47 @@
 import json
 import re
 
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, ValidationInfo, field_validator
+
+known_stats: set[str] = {
+    "all_resistances",
+    "fire_resist",
+    "cold_resist",
+    "lightning_resist",
+    "poison_resist",
+    "life",
+    "mana",
+    "strength",
+    "lightning_skills",
+    "fire_skills",
+    "cold_skills",
+    "martial_arts",
+    "warcries",
+    "traps",
+    "elemental_skills",
+    "summoning_skills",
+    "javelin_and_spear_skills",
+    "faster_hit_recovery",
+    "attack_rating",
+    "better_chance_of_getting_magic_items",
+    "faster_cast_rate",
+    "faster_run_walk",
+}
+
+known_base_types: set[str] = {
+    "grand charm",
+    "small charm",
+    "large charm",
+    "amulet",
+    "ring",
+    "helmet",
+    "armor",
+    "shield",
+    "weapon",
+    "gloves",
+    "boots",
+    "belt",
+}
 
 
 def _strip_fences(text: str) -> str:
@@ -72,6 +112,16 @@ class AffixSchema(BaseModel):
     value: float | int | None = None
     unit: str | None = None
 
+    @field_validator("stat", mode="before")
+    @classmethod
+    def validate_stat(cls, v: str | None, info: ValidationInfo) -> str | None:
+        if v is None:
+            return None
+        known: set[str] | None = (info.context or {}).get("known_stats")
+        if known is not None and v not in known:
+            return None
+        return v
+
     @field_validator("value", mode="before")
     @classmethod
     def normalize_value(cls, v: str | dict | list | None) -> float | int | None:
@@ -90,7 +140,6 @@ class AffixSchema(BaseModel):
                 return (min_v + max_v) / 2
 
         if isinstance(v, str):
-            # Accept many real-world patterns: "12-45", "12 to 45", "43 of 55".
             nums = re.findall(r"-?\d+(?:\.\d+)?", v)
             if len(nums) >= 2:
                 a = float(nums[0])
@@ -113,6 +162,17 @@ class ItemSchema(BaseModel):
     is_ethereal: bool = False
     defense: int | None = None
     damage: str | None = None
+
+    @field_validator("base_type", mode="before")
+    @classmethod
+    def validate_base_type(cls, v: str | None, info: ValidationInfo) -> str | None:
+        if v is None:
+            return None
+        normalized = v.lower().strip()
+        known: set[str] | None = (info.context or {}).get("known_base_types")
+        if known is not None and normalized not in known:
+            return None
+        return normalized
 
     @field_validator("quality", mode="before")
     @classmethod
@@ -155,10 +215,10 @@ class EvaluationSchema(BaseModel):
 
 
 def parse_item(raw: dict | str) -> ItemSchema:
-    """Validate LLM output against schema. Raises ValidationError if malformed."""
     if isinstance(raw, str):
         raw = _loads_llm_json(raw, context="item extraction")
-    return ItemSchema(**raw)
+    context = {"known_stats": known_stats, "known_base_types": known_base_types}
+    return ItemSchema.model_validate(raw, context=context)
 
 
 def parse_evaluation(raw: dict | str) -> EvaluationSchema:

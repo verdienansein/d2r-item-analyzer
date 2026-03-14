@@ -54,8 +54,9 @@ class Evaluator:
 
     def parse_item(self, image_base64: str) -> ItemSchema:
         raw = self.llm.extract_item_info(image_base64)
-        raw = correct_quality(json.loads(raw))
-        return parse_item(raw)
+        parsed = parse_item(raw)
+        corrected = correct_quality(parsed.model_dump())
+        return parse_item(corrected)
 
     def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:
         if self.evaluation_mode == "manual":
