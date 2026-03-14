@@ -191,6 +191,20 @@ class ItemSchema(BaseModel):
             return int(digits) if digits else 0
         return v
 
+    @field_validator("defense", mode="before")
+    @classmethod
+    def normalize_defense(cls, v: str | int | None) -> int | None:
+        if v in (None, "", "null"):
+            return None
+        if isinstance(v, str):
+            nums = re.findall(r"\d+", v)
+            if len(nums) >= 2:
+                return (int(nums[0]) + int(nums[1])) // 2
+            if len(nums) == 1:
+                return int(nums[0])
+            return None
+        return v
+
     @field_validator("damage", mode="before")
     @classmethod
     def normalize_damage(cls, v: str | dict | None) -> str | None:
