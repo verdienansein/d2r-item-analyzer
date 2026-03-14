@@ -83,11 +83,6 @@
                     "score": 16.67
                 }
             ]
-        },
-        {
-            "quality": "unique",
-            "base_score": 100,
-            "affixes_scores": []
         }
     ],
     "amulet": [
@@ -174,11 +169,6 @@
                     "score": 100
                 }
             ]
-        },
-        {
-            "quality": "unique",
-            "base_score": 100,
-            "affixes_scores": []
         }
     ],
     "grand_charm": [
@@ -316,5 +306,10 @@
                 }
             ]
         }
-    ]
+    ],
+    "uniques": {
+        "magefist": {
+            "score": 75
+        }
+    }
 }

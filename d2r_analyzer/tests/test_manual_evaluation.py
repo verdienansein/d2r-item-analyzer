@@ -45,10 +45,10 @@ def test_no_valuable_affixes() -> None:
     assert actual_evaluation.get("grade", "") == "D", "Expected grade 'D' for the item"
 
 
-def test_unique_ring() -> None:
+def test_unique_magefist() -> None:
     item_info = {
-        "name": "The Stone of Jordan",
-        "base_type": "Ring",
+        "name": "Magefist",
+        "base_type": "Gloves",
         "quality": "unique",
         "item_level": None,
         "required_level": 60,
@@ -64,7 +64,7 @@ def test_unique_ring() -> None:
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
+    assert actual_evaluation.get("grade", "") == "B", "Expected grade 'B' for the item"
 
 
 def test_ring_evaluation() -> None:
