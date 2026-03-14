@@ -37,13 +37,12 @@ def test_no_valuable_affixes() -> None:
         "damage": None,
     }
     expected_verdict = "DISCARD"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == "D", (
-        "Expected grade 'D' for the item"
-    )
+    assert actual_evaluation.get("grade", "") == "D", "Expected grade 'D' for the item"
 
 
 def test_unique_ring() -> None:
@@ -60,13 +59,12 @@ def test_unique_ring() -> None:
         "damage": None,
     }
     expected_verdict = "KEEP"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == "S", (
-        "Expected grade 'S' for the item"
-    )
+    assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
 
 
 def test_ring_evaluation() -> None:
@@ -96,13 +94,12 @@ def test_ring_evaluation() -> None:
         "damage": None,
     }
     expected_verdict = "KEEP"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == "S", (
-        "Expected grade 'S' for the item"
-    )
+    assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
 
 
 def test_mf_ring_evaluation() -> None:
@@ -162,13 +159,12 @@ def test_mf_ring_fire_resist_evaluation() -> None:
         "damage": None,
     }
     expected_verdict = "KEEP"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == "C", (
-        "Expected grade 'C' for the item"
-    )
+    assert actual_evaluation.get("grade", "") == "C", "Expected grade 'C' for the item"
 
 
 def test_lightning_skills_and_life_amulet() -> None:
@@ -194,11 +190,12 @@ def test_lightning_skills_and_life_amulet() -> None:
     }
     expected_verdict = "KEEP"
     expected_grade = "S"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == expected_grade, (
+    assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
 
@@ -231,11 +228,12 @@ def test_lightning_skills_and_fcr_amulet() -> None:
     }
     expected_verdict = "KEEP"
     expected_grade = "S"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == expected_grade, (
+    assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
 
@@ -268,11 +266,12 @@ def test_grand_charm() -> None:
     }
     expected_verdict = "KEEP"
     expected_grade = "S"
-    actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == expected_grade, (
+    assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
 
@@ -336,3 +335,41 @@ def test_rare_ring() -> None:
         evaluator.evaluate_item(item_info).get("score", 0) > 90
         and evaluator.evaluate_item(item_info).get("score", 0) <= 100
     ), "Expected score above 90 for the item"
+
+
+def test_small_charm() -> None:
+    item_info = {
+        "name": "Small Charm of the Apprentice",
+        "base_type": "Small Charm",
+        "quality": "magic",
+        "item_level": None,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "7% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 7,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+15 to Mana",
+                "stat": "mana",
+                "value": 15,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    expected_grade = "S"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == expected_grade, (
+        f"Expected grade '{expected_grade}' for the item"
+    )

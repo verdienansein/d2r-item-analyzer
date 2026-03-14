@@ -48,5 +48,6 @@ class ManualEvaluator:
             evaluation["grade"] = "D"
 
         evaluation["score"] = score
+        evaluation["reasoning"] = f"Item evaluated with a score of {score}"
         evaluation["good_affixes"] = good_affixes
         return evaluation
