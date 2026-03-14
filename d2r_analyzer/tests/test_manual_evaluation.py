@@ -66,6 +66,7 @@ def test_unique_magefist() -> None:
     )
     assert actual_evaluation.get("grade", "") == "A", "Expected grade 'A' for the item"
 
+
 def test_unique_harlequin_crest() -> None:
     item_info = {
         "name": "Harlequin Crest",
