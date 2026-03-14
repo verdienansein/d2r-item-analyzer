@@ -33,6 +33,12 @@ A rare item always has between 3 and 6 affixes.
 The "base_type" field MUST be one of these exact values (lowercase):
   grand charm, small charm, large charm, amulet, ring, helmet, armor,
   shield, weapon, gloves, boots, belt
+The "affixes/stat" field MUST be one of these exact values (lowercase):
+  all_resistances, fire_resist, cold_resist, lightning_resist, poison_resist,
+  life, mana, strength, lightning_skills, fire_skills, cold_skills, martial_arts, 
+  warcries, traps, elemental_skills, summoning_skills, javelin_and_spear_skills, 
+  faster_hit_recovery, attack_rating, better_chance_of_getting_magic_items, faster_cast_rate, 
+  faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana
 If the item's base type is not in this list, pick the closest match.
 
 Return this exact structure:

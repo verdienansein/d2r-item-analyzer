@@ -51,7 +51,14 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
     "unique_1.png": ExpectedItem(
         base_type="gloves",
         quality="unique",
-        affix_stats=["fire_skills", "faster_cast_rate", "fire_damage", "enhanced_defense", "defense", "regenerate_mana"],
+        affix_stats=[
+            "fire_skills",
+            "faster_cast_rate",
+            "fire_damage",
+            "enhanced_defense",
+            "defense",
+            "regenerate_mana",
+        ],
     ),
 }
 

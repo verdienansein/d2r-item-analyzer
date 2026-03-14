@@ -26,6 +26,10 @@ known_stats: set[str] = {
     "better_chance_of_getting_magic_items",
     "faster_cast_rate",
     "faster_run_walk",
+    "fire_damage",
+    "enhanced_defense",
+    "defense",
+    "regenerate_mana",
 }
 
 known_base_types: set[str] = {
@@ -193,8 +197,13 @@ class ItemSchema(BaseModel):
 
     @field_validator("defense", mode="before")
     @classmethod
-    def normalize_defense(cls, v: str | int | None) -> int | None:
+    def normalize_defense(cls, v: str | int | dict | None) -> int | None:
         if v in (None, "", "null"):
+            return None
+        if isinstance(v, dict):
+            min_v, max_v = v.get("min"), v.get("max")
+            if isinstance(min_v, (int, float)) and isinstance(max_v, (int, float)):
+                return (int(min_v) + int(max_v)) // 2
             return None
         if isinstance(v, str):
             nums = re.findall(r"\d+", v)
