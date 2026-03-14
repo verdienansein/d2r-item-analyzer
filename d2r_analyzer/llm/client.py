@@ -15,6 +15,7 @@ class LLMClient:
         response = self.client.chat.completions.create(
             model=self.model_name,
             max_tokens=1000,
+            temperature=0.2,
             messages=[
                 {
                     "role": "user",
@@ -37,6 +38,7 @@ class LLMClient:
         response = self.client.chat.completions.create(
             model=self.model_name,
             max_tokens=1000,
+            temperature=0.0,
             messages=[
                 {
                     "role": "user",
