@@ -1123,3 +1123,34 @@ def test_rare_belt() -> None:
     assert actual_evaluation.get("grade", "") == "S", (
         f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
+
+def test_set_item() -> None:
+    item_info = {
+        "name": "Tal Rasha's Horadric Crest",
+        "base_type": "Mail",
+        "quality": "set",
+        "item_level": None,
+        "required_level": 45,
+        "affixes": [],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert (
+        actual_evaluation.get("score", 0) >= 80
+        and actual_evaluation.get("score", 0) < 90
+    ), (
+        f"Expected score between 80 and 90 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "A", (
+        f"Expected grade 'A' for the item, got '{actual_evaluation.get('grade', '')}'"
+    )

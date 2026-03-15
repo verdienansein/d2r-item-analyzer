@@ -7,7 +7,7 @@ class ManualEvaluator:
         good_affixes = []
         score = 0
 
-        if item["quality"] == "unique":
+        if item["quality"] == "unique" or item["quality"] == "set":
             unique_rules = self.evaluation_rules.get("uniques", {})
             unique_info = unique_rules.get(item["name"].lower())
             if unique_info:
