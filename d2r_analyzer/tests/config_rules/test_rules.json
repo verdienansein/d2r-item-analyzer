@@ -826,7 +826,7 @@
                     "min_value": 0,
                     "score": 10
                 },
-                {                    
+                {
                     "stat": "cold_resist",
                     "max_value": 40,
                     "min_value": 0,
@@ -1009,6 +1009,98 @@
                     "max_value": 20,
                     "min_value": 10,
                     "score": 15
+                }
+            ]
+        }
+    ],
+    "shield": [
+        {
+            "quality": "rare",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "faster_block_rate",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 16
+                },
+                {
+                    "stat": "increased_chance_of_block",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 16
+                },
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 16
+                },
+                {
+                    "stat": "life",
+                    "max_value": 60,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "paladin_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "all_resistances",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 10
+                }
+            ]
+        },
+        {
+            "quality": "magic",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "faster_block_rate",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "increased_chance_of_block",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "life",
+                    "max_value": 60,
+                    "min_value": 0,
+                    "score": 50
                 }
             ]
         }
