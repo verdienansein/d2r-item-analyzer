@@ -405,6 +405,62 @@
             ]
         }
     ],
+    "gloves": [
+        {
+            "quality": "rare",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "faster_cast_rate",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "increased_attack_speed",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 20
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 20
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 20
+                },
+                {
+                    "stat": "javelin_and_spear_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "martial_arts",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "better_chance_of_getting_magic_items",
+                    "max_value": 35,
+                    "min_value": 15,
+                    "score": 30
+                }
+            ]
+        }
+    ],
     "uniques": {
         "annihilus": {
             "score": 100

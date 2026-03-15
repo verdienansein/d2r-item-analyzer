@@ -680,3 +680,60 @@ def test_grade_C_caster_rare_weapon() -> None:
     assert actual_evaluation.get("grade", "") == "C", (
         f"Expected grade 'C' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
+def test_rare_gloves() -> None:
+    item_info = {
+        "name": "Vampire Hand of the Leech",
+        "name_color": "yellow",
+        "base_type": "Gloves",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+20% Increased Attack Speed",
+                "stat": "increased_attack_speed",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+2 to Javelin and Spear Skills (Amazon Only)",
+                "stat": "javelin_and_spear_skills",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "raw_text": "+20% Fire Resist",
+                "stat": "fire_resist",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 18,
+                "unit": "%"
+            }
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 80
+        and actual_evaluation.get("score", 0) <= 90
+    ), (
+        f"Expected score between 80 and 90 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "A", (
+        f"Expected grade 'A' for the item, got '{actual_evaluation.get('grade', '')}'"
+    )
