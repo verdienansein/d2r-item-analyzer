@@ -48,7 +48,7 @@ known_stats: set[str] = {
     "cold_damage",
     "life_stolen_per_hit",
     "repair_durability",
-    "attack_rating_against_demons"
+    "attack_rating_against_demons",
 }
 
 known_base_types: set[str] = {

@@ -307,6 +307,56 @@
             ]
         }
     ],
+    "weapon": [
+        {
+            "quality": "rare",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "increased_attack_speed",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "attack_rating",
+                    "max_value": 450,
+                    "min_value": 0,
+                    "score": 17
+                },
+                {
+                    "stat": "life_stolen_per_hit",
+                    "max_value": 10,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "combat_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "life",
+                    "max_value": 40,
+                    "min_value": 10,
+                    "score": 17
+                },
+                {
+                    "stat": "maximum_damage",
+                    "max_value": 63,
+                    "min_value": 10,
+                    "score": 17
+                },
+                {
+                    "stat": "enhanced_damage",
+                    "max_value": 400,
+                    "min_value": 100,
+                    "score": 40
+                }
+            ]
+        }
+    ],
     "uniques": {
         "annihilus": {
             "score": 100

@@ -367,17 +367,16 @@ def test_rare_ring() -> None:
     }
     expected_verdict = "KEEP"
     actual_verdict = evaluator.evaluate_item(item_info).get("verdict", "")
+    actual_evaluation = evaluator.evaluate_item(item_info)
 
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
-    assert evaluator.evaluate_item(item_info).get("grade", "") == "S", (
-        "Expected grade 'S' for the item"
-    )
+    assert actual_evaluation.get("grade", "") == "S", "Expected grade 'S' for the item"
 
     assert (
-        evaluator.evaluate_item(item_info).get("score", 0) > 90
-        and evaluator.evaluate_item(item_info).get("score", 0) <= 100
+        actual_evaluation.get("score", 0) > 90
+        and actual_evaluation.get("score", 0) <= 100
     ), "Expected score above 90 for the item"
 
 
@@ -416,4 +415,209 @@ def test_small_charm() -> None:
     )
     assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
+    )
+
+
+def test_rare_sword() -> None:
+    item_info = {
+        "name": "Corpse Hew",
+        "name_color": "yellow",
+        "base_type": "weapon",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 44,
+        "affixes": [
+            {
+                "raw_text": "+20% Increased Attack Speed",
+                "stat": "increased_attack_speed",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+142 to Attack Rating",
+                "stat": "attack_rating",
+                "value": 142,
+                "unit": None,
+            },
+            {
+                "raw_text": "+150% Damage to Demons",
+                "stat": "damage_to_demons",
+                "value": 150,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+157 to Attack Rating Against Demons",
+                "stat": "attack_rating_against_demons",
+                "value": 157,
+                "unit": None,
+            },
+            {
+                "raw_text": "Adds 41-66 Fire Damage",
+                "stat": "fire_damage",
+                "value": 53.5,
+                "unit": None,
+            },
+            {
+                "raw_text": "4% Life Stolen per Hit",
+                "stat": "life_stolen_per_hit",
+                "value": 4,
+                "unit": "%",
+            },
+            {
+                "raw_text": "Repairs 1 Durability in 33 Seconds",
+                "stat": "repair_durability",
+                "value": 1,
+                "unit": None,
+            },
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": {"min": 50, "max": 94},
+    }
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) > 40
+        and actual_evaluation.get("score", 0) <= 60
+    ), "Expected score between 40 and 60 for the item"
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "C", "Expected grade 'C' for the item"
+
+
+def test_rare_weapon_discard() -> None:
+    item_info = {
+        "name": "Eagle Spawn Maul",
+        "name_color": "brown",
+        "base_type": "weapon",
+        "quality": "unique",
+        "item_level": 85,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+2 to Combat Skills (Barbarian Only)",
+                "stat": "combat_skills",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "raw_text": "+69% Enhanced Damage",
+                "stat": "enhanced_damage",
+                "value": 69,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+12 to Maximum Damage",
+                "stat": "maximum_damage",
+                "value": 12,
+                "unit": "",
+            },
+            {
+                "raw_text": "+127 to Attack Rating",
+                "stat": "attack_rating",
+                "value": 127,
+                "unit": "",
+            },
+            {
+                "raw_text": "Adds 4-14 Cold Damage",
+                "stat": "cold_damage",
+                "value": 9,
+                "unit": "",
+            },
+            {"raw_text": "+10 to Life", "stat": "life", "value": 10, "unit": ""},
+            {
+                "raw_text": "+50% Damage to Undead",
+                "stat": "damage_to_undead",
+                "value": 50,
+                "unit": "%",
+            },
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": {"min": 50, "max": 84},
+    }
+
+    expected_verdict = "DISCARD"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 0
+        and actual_evaluation.get("score", 0) < 40
+    ), "Expected score below 40 for the item"
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "D", "Expected grade 'D' for the item"
+
+
+def test_grade_s_rare_weapon() -> None:
+    item_info = {
+        "name": "Brimstone Maul",
+        "name_color": "yellow",
+        "base_type": "weapon",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+40% Increased Attack Speed",
+                "stat": "increased_attack_speed",
+                "value": 40,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+350% Enhanced Damage",
+                "stat": "enhanced_damage",
+                "value": 350,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+40 to Maximum Damage",
+                "stat": "maximum_damage",
+                "value": 40,
+                "unit": "",
+            },
+            {
+                "raw_text": "+450 to Attack Rating",
+                "stat": "attack_rating",
+                "value": 450,
+                "unit": "",
+            },
+            {
+                "raw_text": "Repairs 1 Durability in 33 Seconds",
+                "stat": "repairs_durability",
+                "value": 33,
+                "unit": "sec",
+            },
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": {"min": 50, "max": 84},
+    }
+
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 90
+        and actual_evaluation.get("score", 0) <= 100
+    ), (
+        f"Expected score between 90 and 100 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "S", (
+        f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
