@@ -100,7 +100,7 @@ class Evaluator:
                     a.get("raw_text", str(a)) if isinstance(a, dict) else str(a)
                     for a in evaluation.get("wasted_slots", [])
                 ],
-                roll_quality=evaluation.get("score", ""),
+                roll_quality=str(evaluation.get("score", "")),
             )
         elif self.evaluation_mode == "llm":
             raw = self.llm.evaluate_item(item.model_dump_json())
