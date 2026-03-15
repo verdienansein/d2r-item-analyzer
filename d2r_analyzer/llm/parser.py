@@ -250,8 +250,6 @@ class ItemSchema(BaseModel):
 class EvaluationSchema(BaseModel):
     grade: str
     verdict: str
-    best_build: str | None
-    trade_value: str
     reasoning: str
     good_affixes: list[str]
     wasted_slots: list[str]

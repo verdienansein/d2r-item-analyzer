@@ -91,8 +91,6 @@ class Evaluator:
             return EvaluationSchema(
                 grade=evaluation.get("grade", "C"),
                 verdict=evaluation.get("verdict", ""),
-                best_build=evaluation.get("best_build", None),
-                trade_value=evaluation.get("trade_value", "worthless"),
                 reasoning=evaluation.get("reasoning", ""),
                 good_affixes=[
                     a.get("raw_text", str(a)) if isinstance(a, dict) else str(a)
@@ -102,7 +100,7 @@ class Evaluator:
                     a.get("raw_text", str(a)) if isinstance(a, dict) else str(a)
                     for a in evaluation.get("wasted_slots", [])
                 ],
-                roll_quality=evaluation.get("roll_quality", ""),
+                roll_quality=evaluation.get("score", ""),
             )
         elif self.evaluation_mode == "llm":
             raw = self.llm.evaluate_item(item.model_dump_json())

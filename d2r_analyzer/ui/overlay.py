@@ -167,31 +167,7 @@ class ItemOverlay:
 
         _divider(win, DIVIDER)
 
-        # ── Best build ─────────────────────────────────────
-        if ev.best_build:
-            row(
-                win,
-                "Best for:",
-                ev.best_build,
-                "#C8A96E",
-                BG,
-                FONT_LABEL,
-                FONT_BODY,
-                pad,
-            )
-            _divider(win, DIVIDER)
-
-        # ── Trade value + roll quality ──────────────────────
-        row(
-            win,
-            "Trade value:",
-            ev.trade_value.capitalize(),
-            "#C8A96E",
-            BG,
-            FONT_LABEL,
-            FONT_BODY,
-            pad,
-        )
+        # ── Roll quality ────────────────────────────────────
         row(
             win,
             "Roll quality:",
