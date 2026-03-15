@@ -417,6 +417,43 @@ def test_small_charm() -> None:
         f"Expected grade '{expected_grade}' for the item"
     )
 
+def test_large_charm() -> None:
+    item_info = {
+        "name": "Shimmering Large Charm of Vita",
+        "base_type": "Large Charm",
+        "quality": "magic",
+        "item_level": None,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+35 to Life",
+                "stat": "life",
+                "value": 35,
+                "unit": "",
+            },
+            {
+                "raw_text": "All Resistances +8",
+                "stat": "all_resistances",
+                "value": 8,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    expected_grade = "S"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == expected_grade, (
+        f"Expected grade '{expected_grade}' for the item"
+    )
+
 def test_magic_jewel() -> None:
     item_info = {
         "name": "Shimmering Jewel of Fervor",

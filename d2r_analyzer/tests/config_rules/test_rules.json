@@ -171,6 +171,62 @@
             ]
         }
     ],
+    "large_charm": [
+        {
+            "quality": "magic",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "all_resistances",
+                    "max_value": 8,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "life",
+                    "max_value": 35,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "mana",
+                    "max_value": 34,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "maximum_damage",
+                    "max_value": 6,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 8,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 30
+                }
+            ]
+        }
+    ],
     "grand_charm": [
         {
             "quality": "magic",
