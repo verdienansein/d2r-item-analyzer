@@ -131,6 +131,16 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "repair_durability",
         ],
     ),
+    "rare_5.png": ExpectedItem(
+        base_type="boots",
+        quality="rare",
+        affix_stats=[
+            "faster_run_walk",
+            "enhanced_defense",
+            "cold_resist",
+            "lightning_resist",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))

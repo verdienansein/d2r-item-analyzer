@@ -417,6 +417,7 @@ def test_small_charm() -> None:
         f"Expected grade '{expected_grade}' for the item"
     )
 
+
 def test_large_charm() -> None:
     item_info = {
         "name": "Shimmering Large Charm of Vita",
@@ -453,6 +454,7 @@ def test_large_charm() -> None:
     assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
+
 
 def test_magic_jewel() -> None:
     item_info = {
@@ -496,7 +498,8 @@ def test_magic_jewel() -> None:
     assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
-    
+
+
 def test_magic_jewel_ed() -> None:
     item_info = {
         "name": "Ruby Jewel of Fervor",
@@ -539,6 +542,7 @@ def test_magic_jewel_ed() -> None:
     assert actual_evaluation.get("grade", "") == expected_grade, (
         f"Expected grade '{expected_grade}' for the item"
     )
+
 
 def test_rare_sword() -> None:
     item_info = {
@@ -744,6 +748,7 @@ def test_grade_s_rare_weapon() -> None:
         f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
 
+
 def test_grade_C_caster_rare_weapon() -> None:
     item_info = {
         "name": "Brimstone staff",
@@ -777,7 +782,6 @@ def test_grade_C_caster_rare_weapon() -> None:
                 "value": 20,
                 "unit": "",
             },
-          
         ],
         "sockets": None,
         "is_ethereal": False,
@@ -802,6 +806,7 @@ def test_grade_C_caster_rare_weapon() -> None:
     assert actual_evaluation.get("grade", "") == "C", (
         f"Expected grade 'C' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
 
 def test_rare_gloves() -> None:
     item_info = {
@@ -830,11 +835,7 @@ def test_rare_gloves() -> None:
                 "value": 20,
                 "unit": "%",
             },
-            {
-                "stat": "better_chance_of_getting_magic_items",
-                "value": 18,
-                "unit": "%"
-            }
+            {"stat": "better_chance_of_getting_magic_items", "value": 18, "unit": "%"},
         ],
         "sockets": None,
         "is_ethereal": False,
@@ -859,6 +860,7 @@ def test_rare_gloves() -> None:
     assert actual_evaluation.get("grade", "") == "A", (
         f"Expected grade 'A' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
 
 def test_rare_boots() -> None:
     item_info = {
@@ -899,7 +901,6 @@ def test_rare_boots() -> None:
                 "value": 70,
                 "unit": "%",
             },
-          
         ],
         "sockets": None,
         "is_ethereal": False,
