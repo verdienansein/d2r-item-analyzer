@@ -539,6 +539,66 @@
                     "score": 50
                 }
             ]
+        },
+        {
+            "quality": "rare",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "all_resistances",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "better_chance_of_getting_magic_items",
+                    "max_value": 12,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "mana",
+                    "max_value": 59,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "life",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 12,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "faster_run_walk",
+                    "max_value": 7,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 15
+                }
+            ]
         }
     ],
     "small_charm": [

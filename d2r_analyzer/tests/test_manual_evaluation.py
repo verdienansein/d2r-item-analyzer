@@ -1655,3 +1655,53 @@ def test_boots_low_frw_only_discarded() -> None:
     assert actual_evaluation.get("score", 0) < 40
     assert actual_evaluation.get("verdict", "") == "DISCARD"
     assert actual_evaluation.get("grade", "") == "D"
+
+def test_grand_charm_rare() -> None:
+    item_info = {
+        "name": "Grand Charm of the Bear",
+        "base_type": "grand charm",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "life",
+                "value": 40,
+                "unit": "%",
+            },
+            {
+                "stat": "all_resistances",
+                "value": 15,
+                "unit": "",
+            },
+            {
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 12,
+                "unit": "",
+            },
+            {
+                "stat": "mana",
+                "value": 59,
+                "unit": "",
+            },
+            {
+                "stat": "faster_hit_recovery",
+                "value": 12,
+                "unit": "",
+            },
+            {
+                "stat": "faster_run_walk",
+                "value": 3,
+                "unit": "",
+            }
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) == 100, "Score must be capped at 100"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
