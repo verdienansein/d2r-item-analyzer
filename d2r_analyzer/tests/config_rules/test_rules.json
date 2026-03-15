@@ -759,7 +759,7 @@
                 {
                     "stat": "enhanced_defense",
                     "max_value": 200,
-                    "min_value": 0,
+                    "min_value": 50,
                     "score": 20
                 },
                 {
@@ -782,8 +782,14 @@
                 },
                 {
                     "stat": "life",
-                    "max_value": 40,
-                    "min_value": 0,
+                    "max_value": 130,
+                    "min_value": 60,
+                    "score": 10
+                },
+                {
+                    "stat": "strength",
+                    "max_value": 20,
+                    "min_value": 10,
                     "score": 10
                 }
             ]
@@ -829,6 +835,12 @@
                     "max_value": 140,
                     "min_value": 70,
                     "score": 25
+                },
+                {
+                    "stat": "strength",
+                    "max_value": 20,
+                    "min_value": 10,
+                    "score": 15
                 }
             ]
         }

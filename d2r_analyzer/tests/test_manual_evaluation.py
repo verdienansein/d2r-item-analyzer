@@ -1060,6 +1060,7 @@ def test_rare_armor() -> None:
         f"Expected grade 'B' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
 
+
 def test_rare_belt() -> None:
     item_info = {
         "name": "String of Ears",
@@ -1097,7 +1098,7 @@ def test_rare_belt() -> None:
                 "stat": "life",
                 "value": 140,
                 "unit": "",
-            }
+            },
         ],
         "sockets": None,
         "is_ethereal": False,
