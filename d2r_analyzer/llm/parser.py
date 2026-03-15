@@ -20,6 +20,7 @@ known_stats: set[str] = {
     "traps",
     "elemental_skills",
     "summoning_skills",
+    "combat_skills",
     "javelin_and_spear_skills",
     "faster_hit_recovery",
     "attack_rating",
@@ -39,6 +40,10 @@ known_stats: set[str] = {
     "poison_nova",
     "blood_golem",
     "damage_reduced",
+    "maximum_damage",
+    "damage_to_undead",
+    "enhanced_damage",
+    "cold_damage"
 }
 
 known_base_types: set[str] = {
@@ -166,6 +171,7 @@ class AffixSchema(BaseModel):
 
 class ItemSchema(BaseModel):
     name: str | None = None
+    name_color: str | None = None
     base_type: str | None = None
     quality: str | None = "unknown"
     item_level: int | None = None

@@ -12,23 +12,44 @@ from d2r_analyzer.llm.parser import (
 
 logger = logging.getLogger(__name__)
 
+_COLOR_TO_QUALITY: dict[str, str] = {
+    "white": "normal",
+    "grey": "normal",
+    "gray": "normal",
+    "blue": "magic",
+    "yellow": "rare",
+    "green": "set",
+    "gold": "unique",
+    "brown": "unique",
+    "orange": "crafted",
+}
 
-def correct_quality(item: dict) -> dict:
 
+def correct_quality(item: dict, known_unique_names: set[str] | None = None) -> dict:
+    quality = item.get("quality", "")
     affixes = item.get("affixes", [])
     name = (item.get("name") or "").lower().strip()
+    name_color = (item.get("name_color") or "").lower().strip()
     affix_count = len(affixes)
 
-    if affix_count <= 2 and item.get("quality") in ("rare", "unique", "set"):
+    color_quality = _COLOR_TO_QUALITY.get(name_color)
+
+    if known_unique_names and name and name in known_unique_names:
+        item["quality"] = "unique"
+        return item
+
+    if affix_count >= 3:
+        item["quality"] = "rare"
+        return item
+
+    if affix_count >= 1:
         item["quality"] = "magic"
+        return item
 
-    if affix_count >= 3 and item.get("quality") == "magic":
-        item["quality"] = "rare"
-
-    words = name.split()
-    if len(words) == 2 and item.get("quality") == "magic":
-        item["quality"] = "rare"
-
+    if quality in ("unique", "set"):
+        return item
+    if color_quality in ("unique", "set"):
+        item["quality"] = color_quality
     return item
 
 
@@ -55,7 +76,12 @@ class Evaluator:
     def parse_item(self, image_base64: str) -> ItemSchema:
         raw = self.llm.extract_item_info(image_base64)
         parsed = parse_item(raw)
-        corrected = correct_quality(parsed.model_dump())
+        known_uniques: set[str] | None = None
+        if self.evaluation_mode == "manual" and hasattr(self, "manual_evaluator"):
+            known_uniques = set(
+                self.manual_evaluator.evaluation_rules.get("uniques", {}).keys()
+            )
+        corrected = correct_quality(parsed.model_dump(), known_uniques)
         return parse_item(corrected)
 
     def evaluate_item(self, item: ItemSchema) -> EvaluationSchema:

@@ -12,7 +12,7 @@ Signal 1 — TEXT COLOR of the item name at the top:
   Blue text         → magic
   Yellow text       → rare
   Green text        → set
-  Gold/brown text   → unique
+  Brown text   → unique
   Orange text       → crafted
 
 Signal 2 — NUMBER OF AFFIXES (most reliable signal):
@@ -41,7 +41,8 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   faster_hit_recovery, attack_rating, better_chance_of_getting_magic_items, faster_cast_rate, 
   faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
   physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
-  blood_golem, damage_reduced,
+  blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
+  cold_damage
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"               → all_skills
@@ -62,6 +63,7 @@ If the item's base type is not in this list, pick the closest match.
 Return this exact structure:
 {
   "name": "item name or null if magic/rare with no name",
+  "name_color": "white | grey | blue | yellow | green | brown | orange",
   "base_type": "must be one of the allowed values listed above",
   "quality": "normal | magic | rare | set | unique | crafted",
   "item_level": 85,
@@ -79,6 +81,14 @@ Return this exact structure:
   "defense": null,
   "damage": null
 }
+
+name_color mapping:
+  white or grey → normal
+  blue          → magic
+  yellow        → rare
+  green         → set
+  brown         → unique
+  orange        → crafted
 
 Rules:
 - Extract EVERY stat line visible, even if you don't recognize it

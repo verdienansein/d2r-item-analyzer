@@ -94,7 +94,20 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "poison_resist",
             "damage_reduced",
         ],
-    )
+    ),
+    "rare_2.png": ExpectedItem(
+        base_type="weapon",
+        quality="rare",
+        affix_stats=[
+            "combat_skills",
+            "enhanced_damage",
+            "maximum_damage",
+            "attack_rating",
+            "cold_damage",
+            "life",
+            "damage_to_undead",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))
