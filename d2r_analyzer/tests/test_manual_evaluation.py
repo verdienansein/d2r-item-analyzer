@@ -1755,3 +1755,117 @@ def test_rare_weapon_no_useful_stats_discarded() -> None:
     assert actual_evaluation.get("score", -1) == 0
     assert actual_evaluation.get("verdict", "") == "DISCARD"
     assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_rare_jewel_A_stats() -> None:
+    item_info = {
+        "name": "Smasher Flange Jewel",
+        "base_type": "Jewel",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": None,
+        "affixes": [
+            {
+                "raw_text": "All Resistances +15",
+                "stat": "all_resistances",
+                "value": 15,
+                "unit": "",
+            },
+            {
+                "raw_text": "7% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 7,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+20 To Mana",
+                "stat": "mana",
+                "value": 20,
+                "unit": "",
+            },
+            {
+                "raw_text": "7% Faster Hit Recovery",
+                "stat": "faster_hit_recovery",
+                "value": 7,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+20 To Life",
+                "stat": "life",
+                "value": 20,
+                "unit": "",
+            },
+            {
+                "raw_text": "+9 To Strength",
+                "stat": "strength",
+                "value": 9,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 80 <= actual_score < 90, f"Expected score 80–90, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "A"
+
+
+def test_rare_jewel_S_stats() -> None:
+    item_info = {
+        "name": "Crazy Flange Jewel",
+        "base_type": "Jewel",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": None,
+        "affixes": [
+            {
+                "raw_text": "All Resistances +15",
+                "stat": "all_resistances",
+                "value": 15,
+                "unit": "",
+            },
+            {
+                "raw_text": "Increased Attack Speed +15%",
+                "stat": "increased_attack_speed",
+                "value": 15,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+40% To Enhanced Damage",
+                "stat": "enhanced_damage",
+                "value": 40,
+                "unit": "%",
+            },
+            {
+                "raw_text": "7% Faster Hit Recovery",
+                "stat": "faster_hit_recovery",
+                "value": 7,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+20 To Life",
+                "stat": "life",
+                "value": 20,
+                "unit": "",
+            },
+            {
+                "raw_text": "+9 To Maximum Damage",
+                "stat": "maximum_damage",
+                "value": 9,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 90 <= actual_score <= 100, f"Expected score 90-100, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"

@@ -6,6 +6,7 @@ class ManualEvaluator:
         evaluation = {}
         good_affixes = []
         score = 0
+        evaluation["reasoning"] = ""
 
         if item["quality"] == "unique" or item["quality"] == "set":
             unique_rules = self.evaluation_rules.get("uniques", {})
@@ -16,6 +17,9 @@ class ManualEvaluator:
             else:
                 evaluation["verdict"] = "DISCARD"
                 evaluation["wasted_slots"] = item.get("affixes", [])
+                evaluation["reasoning"] += (
+                    "Unique item not in evaluation rules, probably not valuable. "
+                )
         else:
             for rule in self.evaluation_rules.get(
                 (item["base_type"] or "").lower().replace(" ", "_"), []
@@ -64,6 +68,6 @@ class ManualEvaluator:
             evaluation["grade"] = "D"
 
         evaluation["score"] = score
-        evaluation["reasoning"] = f"Item evaluated with a score of {score}."
+        evaluation["reasoning"] += f"Item evaluated with a score of {score}."
         evaluation["good_affixes"] = good_affixes
         return evaluation

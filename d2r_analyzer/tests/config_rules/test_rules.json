@@ -735,6 +735,84 @@
                     "score": 100
                 }
             ]
+        },
+        {
+            "quality": "rare",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "increased_attack_speed",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 25
+                },
+                {
+                    "stat": "enhanced_damage",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "all_resistances",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 25
+                },
+                {
+                    "stat": "maximum_damage",
+                    "max_value": 9,
+                    "min_value": 0,
+                    "score": 17
+                },
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 7,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "better_chance_of_getting_magic_items",
+                    "max_value": 17,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "mana",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "life",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 16
+                },
+                {
+                    "stat": "strength",
+                    "max_value": 9,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 15
+                }
+             ]
         }
     ],
     "weapon": [
