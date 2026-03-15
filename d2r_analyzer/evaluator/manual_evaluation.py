@@ -18,7 +18,7 @@ class ManualEvaluator:
                 evaluation["wasted_slots"] = item.get("affixes", [])
         else:
             for rule in self.evaluation_rules.get(
-                item["base_type"].lower().replace(" ", "_"), []
+                (item["base_type"] or "").lower().replace(" ", "_"), []
             ):
                 if rule["quality"] == item["quality"]:
                     score += rule.get("base_score", 0)
