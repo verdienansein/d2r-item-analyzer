@@ -43,7 +43,7 @@ def worker_loop() -> None:
         x, y = job
         try:
             frame = capture_screenshot(x, y)
-            if config.save_captured_images:
+            if config.save_captured_screenshots:
                 screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
                 screenshots_dir.mkdir(exist_ok=True)
                 filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
