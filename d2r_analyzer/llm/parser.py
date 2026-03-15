@@ -21,6 +21,7 @@ known_stats: set[str] = {
     "elemental_skills",
     "summoning_skills",
     "combat_skills",
+    "warlock_skills",
     "javelin_and_spear_skills",
     "faster_hit_recovery",
     "attack_rating",

@@ -925,3 +925,67 @@ def test_rare_boots() -> None:
     assert actual_evaluation.get("grade", "") == "A", (
         f"Expected grade 'A' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
+def test_rare_helmet() -> None:
+    item_info = {
+        "name": "Arreat Helm",
+        "name_color": "yellow",
+        "base_type": "Helmet",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+1 to Sorceress Skill Levels",
+                "stat": "sorceress_skills",
+                "value": 1,
+                "unit": "",
+            },
+            {
+                "raw_text": "+20% Faster Cast Rate",
+                "stat": "faster_cast_rate",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "raw_text": "Faster run/walk +30%",
+                "stat": "faster_run_walk",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+30 to all resistances",
+                "stat": "all_resistances",
+                "value": 30,
+                "unit": "",
+            },
+            {
+                "raw_text": "better chance of getting magic items +35",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 35,
+                "unit": "%",
+            },
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 80
+        and actual_evaluation.get("score", 0) < 90
+    ), (
+        f"Expected score between 80 and 90 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "A", (
+        f"Expected grade 'A' for the item, got '{actual_evaluation.get('grade', '')}'"
+    )

@@ -12,7 +12,7 @@ Signal 1 — TEXT COLOR of the item name at the top:
   Blue text         → magic
   Yellow text       → rare
   Green text        → set
-  Brown text   → unique
+  Brown text        → unique
   Orange text       → crafted
 
 Signal 2 — NUMBER OF AFFIXES (most reliable signal):
@@ -21,10 +21,10 @@ Signal 2 — NUMBER OF AFFIXES (most reliable signal):
   Fixed known stats → unique or set
 
 Signal 3 — ITEM NAME STRUCTURE:
-  Single generic word ("Ring", "Amulet")              → normal or magic
-  Two random fantasy words ("Cruel Noose")             → rare
-  A known D2 unique name ("Nagelring", "Stone of Jordan") → unique
-  Has a set label below name                           → set
+  Single generic word ("Ring", "Amulet")                   → normal or magic
+  Two random fantasy words ("Cruel Noose")                 → rare
+  A known D2 unique name ("Nagelring", "Stone of Jordan")  → unique
+  Has a set label below name                               → set
 
 PRIORITY: If signals conflict, trust Signal 2 (affix count) over color.
 A magic item can NEVER have more than 2 affixes.
@@ -42,7 +42,8 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
   physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
   blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
-  cold_damage, life_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons
+  cold_damage, life_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons,
+  warlock_skills
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"               → all_skills
