@@ -1154,3 +1154,72 @@ def test_set_item() -> None:
     assert actual_evaluation.get("grade", "") == "A", (
         f"Expected grade 'A' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
+
+def test_very_rare_amulet() -> None:
+    item_info = {
+        "name": "Dire Hood Amulet",
+        "base_type": "Amulet",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": None,
+        "affixes": [
+            {
+                "raw_text": "15% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 15,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+1 To Necromancer Skill Levels",
+                "stat": "necromancer_skills",
+                "value": 1,
+                "unit": "",
+            },
+            {
+                "raw_text": "All Resistances +20",
+                "stat": "all_resistances",
+                "value": 20,
+                "unit": "",
+            },
+            {
+                "raw_text": "10% Faster Cast Rate",
+                "stat": "faster_cast_rate",
+                "value": 10,
+                "unit": "%",
+            },
+            {
+                "raw_text": "35% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 35,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+100 To Life",
+                "stat": "life",
+                "value": 100,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+    }
+
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 90
+        and actual_evaluation.get("score", 0) <= 100
+    ), (
+        f"Expected score between 90 and 100 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "S", (
+        f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
+    )
