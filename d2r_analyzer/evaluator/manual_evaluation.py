@@ -50,7 +50,7 @@ class ManualEvaluator:
         elif score >= 70:
             evaluation["verdict"] = "KEEP"
             evaluation["grade"] = "B"
-        elif score >= 60:
+        elif score >= 40:
             evaluation["verdict"] = "KEEP"
             evaluation["grade"] = "C"
         else:

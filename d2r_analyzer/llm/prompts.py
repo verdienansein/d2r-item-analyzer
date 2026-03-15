@@ -33,13 +33,15 @@ A rare item always has between 3 and 6 affixes.
 The "base_type" field MUST be one of these exact values (lowercase):
   grand charm, small charm, large charm, amulet, ring, helmet, armor,
   shield, weapon, gloves, boots, belt
+
 The "affixes/stat" field MUST be one of these exact values (lowercase):
   all_resistances, fire_resist, cold_resist, lightning_resist, poison_resist,
   life, mana, strength, lightning_skills, fire_skills, cold_skills, martial_arts, 
   warcries, traps, elemental_skills, summoning_skills, javelin_and_spear_skills, 
   faster_hit_recovery, attack_rating, better_chance_of_getting_magic_items, faster_cast_rate, 
   faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
-  physical_damage_received_reduction, increase_maximum_mana, lightning_damage
+  physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
+  blood_golem, damage_reduced,
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"               → all_skills
@@ -52,6 +54,9 @@ Stat mapping examples (use these exact keys):
   "+X to Lightning Skills"         → lightning_skills
   "+X to Fire Skills"              → fire_skills
   "+X to Cold Skills"              → cold_skills
+  "+X to Martial Arts"             → martial_arts
+  "+X to Warcries"                → warcries
+  "Adds X-Y Poison Damage"            → poison_damage (use average of range for value)
 If the item's base type is not in this list, pick the closest match.
 
 Return this exact structure:

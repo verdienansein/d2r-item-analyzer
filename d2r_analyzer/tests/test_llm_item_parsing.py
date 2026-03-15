@@ -80,6 +80,21 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
         quality="unique",
         affix_stats=["all_skills", "lightning_damage", "mana", "increase_maximum_mana"],
     ),
+    "rare_1.png": ExpectedItem(
+        base_type="shield",
+        quality="rare",
+        affix_stats=[
+            "poison_damage",
+            "poison_nova",
+            "blood_golem",
+            "enhanced_defense",
+            "cold_resist",
+            "fire_resist",
+            "lightning_resist",
+            "poison_resist",
+            "damage_reduced",
+        ],
+    )
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))

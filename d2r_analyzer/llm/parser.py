@@ -35,6 +35,10 @@ known_stats: set[str] = {
     "physical_damage_received_reduction",
     "increase_maximum_mana",
     "lightning_damage",
+    "poison_damage",
+    "poison_nova",
+    "blood_golem",
+    "damage_reduced",
 }
 
 known_base_types: set[str] = {
