@@ -1193,7 +1193,7 @@
                     "score": 16
                 },
                 {
-                    "stat": "increased_chance_of_block",
+                    "stat": "increased_chance_of_blocking",
                     "max_value": 20,
                     "min_value": 0,
                     "score": 16
@@ -1253,7 +1253,7 @@
                     "score": 50
                 },
                 {
-                    "stat": "increased_chance_of_block",
+                    "stat": "increased_chance_of_blocking",
                     "max_value": 20,
                     "min_value": 0,
                     "score": 50

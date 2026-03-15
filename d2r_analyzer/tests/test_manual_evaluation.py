@@ -1345,7 +1345,7 @@ def test_rare_shield_paladin_focused() -> None:
             },
             {
                 "raw_text": "20% Increased Chance of Blocking",
-                "stat": "increased_chance_of_block",
+                "stat": "increased_chance_of_blocking",
                 "value": 20,
                 "unit": "%",
             },
@@ -1656,6 +1656,7 @@ def test_boots_low_frw_only_discarded() -> None:
     assert actual_evaluation.get("verdict", "") == "DISCARD"
     assert actual_evaluation.get("grade", "") == "D"
 
+
 def test_grand_charm_rare() -> None:
     item_info = {
         "name": "Grand Charm of the Bear",
@@ -1693,7 +1694,7 @@ def test_grand_charm_rare() -> None:
                 "stat": "faster_run_walk",
                 "value": 3,
                 "unit": "",
-            }
+            },
         ],
         "sockets": 0,
         "is_ethereal": False,
@@ -1705,3 +1706,51 @@ def test_grand_charm_rare() -> None:
     assert actual_evaluation.get("score", 0) == 100, "Score must be capped at 100"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "S"
+
+def test_rare_weapon_no_useful_stats_discarded() -> None:
+    item_info = {
+        "name": "Fiend Barb",
+        "base_type": "Bardiche",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 16,
+        "affixes": [
+            {
+                "raw_text": "+1 to Combat Skills (Barbarian Only)",
+                "stat": "combat_skills",
+                "value": 1,
+                "unit": "",
+            },
+            {
+                "raw_text": "+63% Enhanced Damage",
+                "stat": "enhanced_damage",
+                "value": 63,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+1 to Maximum Damage",
+                "stat": "maximum_damage",
+                "value": 1,
+                "unit": "",
+            },
+            {
+                "raw_text": "+46 to Attack Rating",
+                "stat": "attack_rating",
+                "value": 46,
+                "unit": "",
+            },
+            {
+                "raw_text": "7% Mana stolen per hit",
+                "stat": "mana_stolen_per_hit",
+                "value": 7,
+                "unit": "%",
+            }
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"

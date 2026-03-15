@@ -48,8 +48,11 @@ known_stats: set[str] = {
     "enhanced_damage",
     "cold_damage",
     "life_stolen_per_hit",
+    "mana_stolen_per_hit",
     "repair_durability",
     "attack_rating_against_demons",
+    "faster_block_rate",
+    "increased_chance_of_blocking",
 }
 
 known_base_types: set[str] = {

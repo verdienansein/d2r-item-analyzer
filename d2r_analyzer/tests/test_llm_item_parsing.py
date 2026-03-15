@@ -141,6 +141,67 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "lightning_resist",
         ],
     ),
+    "rare_6.png": ExpectedItem(
+        base_type="weapon",
+        quality="rare",
+        affix_stats=[
+            "combat_skills",
+            "increased_attack_speed",
+            "attack_rating",
+            "poison_damage",
+        ],
+    ),
+    "rare_7.png": ExpectedItem(
+        base_type="boots",
+        quality="rare",
+        affix_stats=[
+            "faster_run_walk",
+            "better_chance_of_getting_magic_items",
+        ],
+    ),
+    "rare_8.png": ExpectedItem(
+        base_type="shield",
+        quality="rare",
+        affix_stats=[
+            "poison_damage",
+            "enhanced_defense",
+            "fire_resist",
+            "lightning_resist",
+            "cold_resist",
+            "damage_reduced",
+        ],
+    ),
+    "rare_9.png": ExpectedItem(
+        base_type="shield",
+        quality="rare",
+        affix_stats=[
+            "faster_block_rate",
+            "increased_chance_of_blocking",
+            "enhanced_defense",
+            "fire_resist",
+        ],
+    ),
+    "rare_10.png": ExpectedItem(
+        base_type="weapon",
+        quality="rare",
+        affix_stats=[
+            "combat_skills",
+            "enhanced_damage",
+            "maximum_damage",
+            "attack_rating",
+            "mana_stolen_per_hit",
+        ],
+    ),
+    "rare_11.png": ExpectedItem(
+        base_type="weapon",
+        quality="rare",
+        affix_stats=[
+            "amazon_skills",
+            "cold_damage",
+            "mana_stolen_per_hit",
+            "strength",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))
