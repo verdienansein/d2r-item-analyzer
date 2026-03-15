@@ -621,3 +621,62 @@ def test_grade_s_rare_weapon() -> None:
     assert actual_evaluation.get("grade", "") == "S", (
         f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
+def test_grade_C_caster_rare_weapon() -> None:
+    item_info = {
+        "name": "Brimstone staff",
+        "name_color": "yellow",
+        "base_type": "weapon",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+20% Faster Cast Rate",
+                "stat": "faster_cast_rate",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+3 to Cold Skills (Sorceress Only)",
+                "stat": "cold_skills",
+                "value": 3,
+                "unit": "",
+            },
+            {
+                "raw_text": "+30% Fire Resist",
+                "stat": "fire_resist",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+20 to Life",
+                "stat": "life",
+                "value": 20,
+                "unit": "",
+            },
+          
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": {"min": 50, "max": 84},
+    }
+
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 40
+        and actual_evaluation.get("score", 0) <= 60
+    ), (
+        f"Expected score between 40 and 60 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "C", (
+        f"Expected grade 'C' for the item, got '{actual_evaluation.get('grade', '')}'"
+    )

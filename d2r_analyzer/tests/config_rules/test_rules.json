@@ -337,10 +337,34 @@
                     "score": 40
                 },
                 {
+                    "stat": "sorceress_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "fire_skills",
+                    "max_value": 3,
+                    "min_value": 1,
+                    "score": 16
+                },
+                {
+                    "stat": "cold_skills",
+                    "max_value": 3,
+                    "min_value": 1,
+                    "score": 16
+                },
+                {
+                    "stat": "lightning_skills",
+                    "max_value": 3,
+                    "min_value": 1,
+                    "score": 16
+                },
+                {
                     "stat": "life",
                     "max_value": 40,
                     "min_value": 10,
-                    "score": 17
+                    "score": 10
                 },
                 {
                     "stat": "maximum_damage",
@@ -353,6 +377,30 @@
                     "max_value": 400,
                     "min_value": 100,
                     "score": 40
+                },
+                {
+                    "stat": "faster_cast_rate",
+                    "max_value": 20,
+                    "min_value": 15,
+                    "score": 30
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 15,
+                    "score": 10
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 30,
+                    "min_value": 15,
+                    "score": 10
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 30,
+                    "min_value": 15,
+                    "score": 10
                 }
             ]
         }
