@@ -19,6 +19,7 @@ VERDICT_COLORS: dict[str, str] = {
     "KEEP": "#00FF00",
     "KEEP_FOR_ALT": "#4FC3F7",
     "TRASH": "#FF4444",
+    "DISCARD": "#FF4444",
     "UNSURE": "#FFA500",
 }
 

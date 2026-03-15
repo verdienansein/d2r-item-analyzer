@@ -9,7 +9,7 @@ class ManualEvaluator:
 
         if item["quality"] == "unique" or item["quality"] == "set":
             unique_rules = self.evaluation_rules.get("uniques", {})
-            unique_info = unique_rules.get(item["name"].lower())
+            unique_info = unique_rules.get((item["name"] or "").lower())
             if unique_info:
                 score = unique_info.get("score", 0)
                 good_affixes = item.get("affixes", [])
@@ -30,13 +30,19 @@ class ManualEvaluator:
                                     <= affix["value"]
                                     <= affix_rule["max_value"]
                                 ):
-                                    score += affix_rule["score"] * (
-                                        (affix["value"] - affix_rule["min_value"])
-                                        / (
-                                            affix_rule["max_value"]
-                                            - affix_rule["min_value"]
+                                    if (
+                                        affix_rule["max_value"]
+                                        == affix_rule["min_value"]
+                                    ):
+                                        score += affix_rule["score"]
+                                    else:
+                                        score += affix_rule["score"] * (
+                                            (affix["value"] - affix_rule["min_value"])
+                                            / (
+                                                affix_rule["max_value"]
+                                                - affix_rule["min_value"]
+                                            )
                                         )
-                                    )
                                     good_affixes.append(affix)
 
         score = min(score, 100)
