@@ -555,6 +555,56 @@
             ]
         }
     ],
+    "boots": [
+        {
+            "quality": "rare",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "faster_run_walk",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "enhanced_defense",
+                    "max_value": 200,
+                    "min_value": 0,
+                    "score": 10
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 16
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 16
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 16
+                },
+                {
+                    "stat": "better_chance_of_getting_magic_items",
+                    "max_value": 70,
+                    "min_value": 15,
+                    "score": 30
+                },
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 30
+                }
+            ]
+        }
+    ],
     "uniques": {
         "annihilus": {
             "score": 100
