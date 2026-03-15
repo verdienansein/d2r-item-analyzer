@@ -978,43 +978,49 @@
                     "stat": "faster_run_walk",
                     "max_value": 40,
                     "min_value": 0,
-                    "score": 40
+                    "score": 50
                 },
                 {
                     "stat": "enhanced_defense",
                     "max_value": 200,
                     "min_value": 0,
-                    "score": 10
+                    "score": 15
                 },
                 {
                     "stat": "fire_resist",
                     "max_value": 30,
                     "min_value": 10,
-                    "score": 16
+                    "score": 20
                 },
                 {
                     "stat": "cold_resist",
                     "max_value": 30,
                     "min_value": 10,
-                    "score": 16
+                    "score": 20
                 },
                 {
                     "stat": "lightning_resist",
                     "max_value": 30,
                     "min_value": 10,
-                    "score": 16
+                    "score": 20
                 },
                 {
                     "stat": "better_chance_of_getting_magic_items",
                     "max_value": 70,
                     "min_value": 15,
-                    "score": 30
+                    "score": 20
                 },
                 {
                     "stat": "faster_hit_recovery",
                     "max_value": 20,
                     "min_value": 0,
                     "score": 30
+                },
+                {
+                    "stat": "dexterity",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 25
                 }
             ]
         }

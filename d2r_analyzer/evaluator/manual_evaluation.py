@@ -67,7 +67,7 @@ class ManualEvaluator:
             evaluation["verdict"] = "DISCARD"
             evaluation["grade"] = "D"
 
-        evaluation["score"] = score
-        evaluation["reasoning"] += f"Item evaluated with a score of {score}."
+        evaluation["score"] = round(score)
+        evaluation["reasoning"] += f"Item evaluated with a score of {round(score)}."
         evaluation["good_affixes"] = good_affixes
         return evaluation

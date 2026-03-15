@@ -1869,3 +1869,60 @@ def test_rare_jewel_S_stats() -> None:
     assert 90 <= actual_score <= 100, f"Expected score 90-100, got {actual_score}"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_rare_greaves() -> None:
+    item_info = {
+        "name": "Greaves",
+        "base_type": "boots",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 38,
+        "affixes": [
+            {
+                "raw_text": "+30% Faster Run/Walk",
+                "stat": "faster_run_walk",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+10% Faster Hit Recovery",
+                "stat": "faster_hit_recovery",
+                "value": 10,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+46% Enhanced Defense",
+                "stat": "enhanced_defense",
+                "value": 46,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+9 To Dexterity",
+                "stat": "dexterity",
+                "value": 9,
+                "unit": "",
+            },
+            {
+                "raw_text": "Lightning Resist +38%",
+                "stat": "lightning_resist",
+                "value": 38,
+                "unit": "%",
+            },
+            {
+                "raw_text": "Poison Resist +39%",
+                "stat": "poison_resist",
+                "value": 39,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 70 <= actual_score < 80, f"Expected score 70–80, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "B"
