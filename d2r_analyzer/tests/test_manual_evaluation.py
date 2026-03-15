@@ -1223,3 +1223,435 @@ def test_very_rare_amulet() -> None:
     assert actual_evaluation.get("grade", "") == "S", (
         f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
+
+
+def test_unknown_unique_discarded() -> None:
+    item_info = {
+        "name": "Doom Shard",
+        "base_type": "ring",
+        "quality": "unique",
+        "item_level": 40,
+        "required_level": 20,
+        "affixes": [],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_magic_amulet_life_below_min_discarded() -> None:
+    item_info = {
+        "name": "Coral Amulet of the Jackal",
+        "base_type": "amulet",
+        "quality": "magic",
+        "item_level": 30,
+        "required_level": 10,
+        "affixes": [
+            {"raw_text": "+10 to Life", "stat": "life", "value": 10, "unit": ""},
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_magic_ring_max_mf() -> None:
+    item_info = {
+        "name": "Fortuitous Ring of Fortune",
+        "base_type": "ring",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 55,
+        "affixes": [
+            {
+                "raw_text": "40% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 40,
+                "unit": "%",
+            }
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) == 100
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_magic_ring_min_mf_discarded() -> None:
+    item_info = {
+        "name": "Plodding Ring of Fortune",
+        "base_type": "ring",
+        "quality": "magic",
+        "item_level": 30,
+        "required_level": 10,
+        "affixes": [
+            {
+                "raw_text": "10% Better Chance of Getting Magic Items",
+                "stat": "better_chance_of_getting_magic_items",
+                "value": 10,
+                "unit": "%",
+            }
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_rare_shield_paladin_focused() -> None:
+    item_info = {
+        "name": "Hallowed Aegis",
+        "base_type": "shield",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 62,
+        "affixes": [
+            {
+                "raw_text": "+2 to Paladin Skills",
+                "stat": "paladin_skills",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "raw_text": "25 All Resistances",
+                "stat": "all_resistances",
+                "value": 25,
+                "unit": "",
+            },
+            {
+                "raw_text": "25% Faster Block Rate",
+                "stat": "faster_block_rate",
+                "value": 25,
+                "unit": "%",
+            },
+            {
+                "raw_text": "20% Increased Chance of Blocking",
+                "stat": "increased_chance_of_block",
+                "value": 20,
+                "unit": "%",
+            },
+            {"raw_text": "+50 to Life", "stat": "life", "value": 50, "unit": ""},
+            {
+                "raw_text": "+30% Fire Resist",
+                "stat": "fire_resist",
+                "value": 30,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": 200,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 80 <= actual_score < 90, f"Expected score 80–90, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "A"
+
+
+def test_rare_shield_resists_only_discarded() -> None:
+    item_info = {
+        "name": "Ember Rampart",
+        "base_type": "shield",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 40,
+        "affixes": [
+            {
+                "raw_text": "+35% Fire Resist",
+                "stat": "fire_resist",
+                "value": 35,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+35% Lightning Resist",
+                "stat": "lightning_resist",
+                "value": 35,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+10% Cold Resist",
+                "stat": "cold_resist",
+                "value": 10,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": 120,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) < 40
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_grand_charm_life_only() -> None:
+    item_info = {
+        "name": "Mammoth Grand Charm of Vita",
+        "base_type": "grand charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {"raw_text": "+40 to Life", "stat": "life", "value": 40, "unit": ""},
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) == 50
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "C"
+
+
+def test_grand_charm_attack_rating_below_min_discarded() -> None:
+    item_info = {
+        "name": "Grand Charm of Dexterity",
+        "base_type": "grand charm",
+        "quality": "magic",
+        "item_level": 50,
+        "required_level": 25,
+        "affixes": [
+            {
+                "raw_text": "+15 to Attack Rating",
+                "stat": "attack_rating",
+                "value": 15,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_belt_useless_stat_discarded() -> None:
+    item_info = {
+        "name": "Mana Cord",
+        "base_type": "belt",
+        "quality": "rare",
+        "item_level": 60,
+        "required_level": 30,
+        "affixes": [
+            {"raw_text": "+100 to Mana", "stat": "mana", "value": 100, "unit": ""},
+            {"raw_text": "+80 to Mana", "stat": "mana", "value": 80, "unit": ""},
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_armor_resists_only_discarded() -> None:
+    item_info = {
+        "name": "Shadow Robe",
+        "base_type": "armor",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "raw_text": "+25% Cold Resist",
+                "stat": "cold_resist",
+                "value": 25,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+20% Fire Resist",
+                "stat": "fire_resist",
+                "value": 20,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": 300,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) < 40
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_large_charm_single_weak_resist_discarded() -> None:
+    item_info = {
+        "name": "Large Charm of Flame",
+        "base_type": "large charm",
+        "quality": "magic",
+        "item_level": 40,
+        "required_level": 20,
+        "affixes": [
+            {
+                "raw_text": "+8% Fire Resist",
+                "stat": "fire_resist",
+                "value": 8,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) < 40
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_jewel_only_life_discarded() -> None:
+    item_info = {
+        "name": "Jewel of the Leech",
+        "base_type": "jewel",
+        "quality": "magic",
+        "item_level": 60,
+        "required_level": 30,
+        "affixes": [
+            {"raw_text": "+20 to Life", "stat": "life", "value": 20, "unit": ""},
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) < 40
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_jewel_score_capped_at_100() -> None:
+    item_info = {
+        "name": "Ruby Jewel of Fervor",
+        "base_type": "jewel",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 49,
+        "affixes": [
+            {
+                "raw_text": "+15% Increased Attack Speed",
+                "stat": "increased_attack_speed",
+                "value": 15,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+15 All Resistances",
+                "stat": "all_resistances",
+                "value": 15,
+                "unit": "",
+            },
+            {
+                "raw_text": "+40% Enhanced Damage",
+                "stat": "enhanced_damage",
+                "value": 40,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) == 100, "Score must be capped at 100"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_gloves_no_useful_stats_discarded() -> None:
+    item_info = {
+        "name": "Bramble Mitts",
+        "base_type": "gloves",
+        "quality": "rare",
+        "item_level": 50,
+        "required_level": 20,
+        "affixes": [
+            {
+                "raw_text": "+5% Fire Resist",
+                "stat": "fire_resist",
+                "value": 5,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+5% Cold Resist",
+                "stat": "cold_resist",
+                "value": 5,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", -1) == 0
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+
+
+def test_boots_low_frw_only_discarded() -> None:
+    item_info = {
+        "name": "Slow Greaves",
+        "base_type": "boots",
+        "quality": "rare",
+        "item_level": 60,
+        "required_level": 25,
+        "affixes": [
+            {
+                "raw_text": "10% Faster Run/Walk",
+                "stat": "faster_run_walk",
+                "value": 10,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+5% Fire Resist",
+                "stat": "fire_resist",
+                "value": 5,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    assert actual_evaluation.get("score", 0) < 40
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
