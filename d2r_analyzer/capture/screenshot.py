@@ -1,6 +1,6 @@
 import bettercam
 
-WIDTH, HEIGHT = 1000, 1000
+WIDTH, HEIGHT = 1000, 1800
 OFFSET_X = 0
 OFFSET_Y = -260
 
