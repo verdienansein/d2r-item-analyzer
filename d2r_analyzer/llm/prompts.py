@@ -42,13 +42,14 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
   physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
   blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
-  cold_damage
+  cold_damage, life_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"               → all_skills
   "+X to All Attributes"           → all_attributes
   "+X% to All Resistances"         → all_resistances
   "+X% Faster Cast Rate"           → faster_cast_rate
+  "+X% Increased Attack Speed"     → increased_attack_speed
   "+X% Faster Hit Recovery"        → faster_hit_recovery
   "+X% Faster Run/Walk"            → faster_run_walk
   "+X% Better Chance of Magic"     → better_chance_of_getting_magic_items
@@ -56,8 +57,10 @@ Stat mapping examples (use these exact keys):
   "+X to Fire Skills"              → fire_skills
   "+X to Cold Skills"              → cold_skills
   "+X to Martial Arts"             → martial_arts
-  "+X to Warcries"                → warcries
-  "Adds X-Y Poison Damage"            → poison_damage (use average of range for value)
+  "+X to Warcries"                 → warcries
+  "Adds X-Y Poison Damage"         → poison_damage (use average of range for value)
+  "+X% Life Stolen Per Hit"        → life_stolen_per_hit
+  "Repairs X Durability"           → repair_durability
 If the item's base type is not in this list, pick the closest match.
 
 Return this exact structure:

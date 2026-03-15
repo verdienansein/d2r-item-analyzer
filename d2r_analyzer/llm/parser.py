@@ -26,6 +26,7 @@ known_stats: set[str] = {
     "attack_rating",
     "better_chance_of_getting_magic_items",
     "faster_cast_rate",
+    "increased_attack_speed",
     "faster_run_walk",
     "fire_damage",
     "enhanced_defense",
@@ -42,8 +43,12 @@ known_stats: set[str] = {
     "damage_reduced",
     "maximum_damage",
     "damage_to_undead",
+    "damage_to_demons",
     "enhanced_damage",
-    "cold_damage"
+    "cold_damage",
+    "life_stolen_per_hit",
+    "repair_durability",
+    "attack_rating_against_demons"
 }
 
 known_base_types: set[str] = {

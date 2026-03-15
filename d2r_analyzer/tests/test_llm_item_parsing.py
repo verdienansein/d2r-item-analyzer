@@ -108,6 +108,29 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "damage_to_undead",
         ],
     ),
+    "rare_3.png": ExpectedItem(
+        base_type="gloves",
+        quality="rare",
+        affix_stats=[
+            "martial_arts",
+            "life_stolen_per_hit",
+            "enhanced_defense",
+            "fire_resist",
+        ],
+    ),
+    "rare_4.png": ExpectedItem(
+        base_type="weapon",
+        quality="rare",
+        affix_stats=[
+            "increased_attack_speed",
+            "attack_rating",
+            "damage_to_demons",
+            "attack_rating_against_demons",
+            "fire_damage",
+            "life_stolen_per_hit",
+            "repair_durability",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))
