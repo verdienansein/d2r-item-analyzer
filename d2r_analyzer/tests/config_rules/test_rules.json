@@ -307,6 +307,44 @@
             ]
         }
     ],
+    "jewel": [
+        {
+            "quality": "magic",
+            "base_score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "increased_attack_speed",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "all_resistances",
+                    "max_value": 15,
+                    "min_value": 0,
+                    "score": 100
+                },
+                {
+                    "stat": "life",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 0,
+                    "score": 60
+                },
+                {
+                    "stat": "enhanced_damage",
+                    "max_value": 40,
+                    "min_value": 0,
+                    "score": 100
+                }
+            ]
+        }
+    ],
     "weapon": [
         {
             "quality": "rare",

@@ -417,6 +417,91 @@ def test_small_charm() -> None:
         f"Expected grade '{expected_grade}' for the item"
     )
 
+def test_magic_jewel() -> None:
+    item_info = {
+        "name": "Shimmering Jewel of Fervor",
+        "base_type": "Jewel",
+        "quality": "magic",
+        "item_level": None,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+15% Increased Attack Speed",
+                "stat": "increased_attack_speed",
+                "value": 15,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+15 to All Resistances",
+                "stat": "all_resistances",
+                "value": 7,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    expected_grade = "A"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert (
+        actual_evaluation.get("score", 0) >= 80
+        and actual_evaluation.get("score", 0) <= 90
+    ), (
+        f"Expected score between 80 and 90 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == expected_grade, (
+        f"Expected grade '{expected_grade}' for the item"
+    )
+    
+def test_magic_jewel_ed() -> None:
+    item_info = {
+        "name": "Ruby Jewel of Fervor",
+        "base_type": "Jewel",
+        "quality": "magic",
+        "item_level": None,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+15% Increased Attack Speed",
+                "stat": "increased_attack_speed",
+                "value": 15,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+40% Enhanced Damage",
+                "stat": "enhanced_damage",
+                "value": 40,
+                "unit": "%",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+    expected_verdict = "KEEP"
+    expected_grade = "S"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+    assert (
+        actual_evaluation.get("score", 0) >= 90
+        and actual_evaluation.get("score", 0) <= 100
+    ), (
+        f"Expected score between 90 and 100 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == expected_grade, (
+        f"Expected grade '{expected_grade}' for the item"
+    )
 
 def test_rare_sword() -> None:
     item_info = {
