@@ -766,25 +766,69 @@
                     "stat": "fire_resist",
                     "max_value": 30,
                     "min_value": 0,
-                    "score": 16
+                    "score": 14
                 },
                 {
                     "stat": "cold_resist",
                     "max_value": 30,
                     "min_value": 0,
-                    "score": 16
+                    "score": 14
                 },
                 {
                     "stat": "lightning_resist",
                     "max_value": 30,
                     "min_value": 0,
-                    "score": 16
+                    "score": 14
                 },
                 {
                     "stat": "life",
                     "max_value": 40,
                     "min_value": 0,
                     "score": 10
+                }
+            ]
+        }
+    ],
+    "belt": [
+        {
+            "quality": "rare",
+            "score": 0,
+            "affixes_scores": [
+                {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 24,
+                    "min_value": 0,
+                    "score": 25
+                },
+                {
+                    "stat": "enhanced_defense",
+                    "max_value": 200,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "fire_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 20
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 20
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 30,
+                    "min_value": 10,
+                    "score": 20
+                },
+                {
+                    "stat": "life",
+                    "max_value": 140,
+                    "min_value": 70,
+                    "score": 25
                 }
             ]
         }

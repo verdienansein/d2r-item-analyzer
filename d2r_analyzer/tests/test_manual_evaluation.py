@@ -1010,13 +1010,13 @@ def test_rare_armor() -> None:
             {
                 "raw_text": "+30% Cold Resist",
                 "stat": "cold_resist",
-                "value": 20,
+                "value": 30,
                 "unit": "%",
             },
             {
                 "raw_text": "+30% Fire Resist",
                 "stat": "fire_resist",
-                "value": 20,
+                "value": 30,
                 "unit": "%",
             },
             {
@@ -1058,4 +1058,67 @@ def test_rare_armor() -> None:
     )
     assert actual_evaluation.get("grade", "") == "B", (
         f"Expected grade 'B' for the item, got '{actual_evaluation.get('grade', '')}'"
+    )
+
+def test_rare_belt() -> None:
+    item_info = {
+        "name": "String of Ears",
+        "name_color": "yellow",
+        "base_type": "Belt",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 39,
+        "affixes": [
+            {
+                "raw_text": "+30% Light Resist",
+                "stat": "light_resist",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+30% Cold Resist",
+                "stat": "cold_resist",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+30% Fire Resist",
+                "stat": "fire_resist",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+24% Faster Hit Recovery",
+                "stat": "faster_hit_recovery",
+                "value": 24,
+                "unit": "%",
+            },
+            {
+                "stat": "life",
+                "value": 140,
+                "unit": "",
+            }
+        ],
+        "sockets": None,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+
+    expected_verdict = "KEEP"
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_verdict = actual_evaluation.get("verdict", "")
+
+    assert (
+        actual_evaluation.get("score", 0) >= 90
+        and actual_evaluation.get("score", 0) <= 100
+    ), (
+        f"Expected score between 90 and 100 for the item, got {actual_evaluation.get('score', 0)}"
+    )
+
+    assert actual_verdict == expected_verdict, (
+        f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
+    )
+    assert actual_evaluation.get("grade", "") == "S", (
+        f"Expected grade 'S' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
