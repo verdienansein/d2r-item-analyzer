@@ -15,6 +15,7 @@ class AppConfig(BaseSettings):
     capture_height: int = 1600
     capture_offset_x: int = 0
     capture_offset_y: int = -260
+    save_captured_images: bool = False
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

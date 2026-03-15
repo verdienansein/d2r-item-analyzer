@@ -43,12 +43,13 @@ def worker_loop() -> None:
         x, y = job
         try:
             frame = capture_screenshot(x, y)
-            screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
-            screenshots_dir.mkdir(exist_ok=True)
-            filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
-            save_path = screenshots_dir / filename
-            cv2.imwrite(str(save_path), frame)
-            logger.info("Screenshot saved to %s", save_path)
+            if config.save_captured_images:
+                screenshots_dir = Path(__file__).resolve().parent.parent / "screenshots"
+                screenshots_dir.mkdir(exist_ok=True)
+                filename = f"capture_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+                save_path = screenshots_dir / filename
+                cv2.imwrite(str(save_path), frame)
+                logger.info("Screenshot saved to %s", save_path)
             encoded = frame_to_base64(frame)
             item = evaluator.parse_item(encoded)
             logger.debug("Extracted item info:\n%s", item.model_dump_json(indent=2))

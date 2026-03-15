@@ -1707,6 +1707,7 @@ def test_grand_charm_rare() -> None:
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "S"
 
+
 def test_rare_weapon_no_useful_stats_discarded() -> None:
     item_info = {
         "name": "Fiend Barb",
@@ -1744,7 +1745,7 @@ def test_rare_weapon_no_useful_stats_discarded() -> None:
                 "stat": "mana_stolen_per_hit",
                 "value": 7,
                 "unit": "%",
-            }
+            },
         ],
         "sockets": 0,
         "is_ethereal": False,
