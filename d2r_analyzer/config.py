@@ -11,6 +11,10 @@ class AppConfig(BaseSettings):
         "d2r_analyzer/tests/config_rules/test_rules.json"
     )
     log_level: str = "INFO"
+    capture_width: int = 1000
+    capture_height: int = 1600
+    capture_offset_x: int = 0
+    capture_offset_y: int = -260
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 

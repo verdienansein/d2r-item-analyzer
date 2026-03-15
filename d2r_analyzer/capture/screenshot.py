@@ -1,8 +1,13 @@
 import bettercam
 
-WIDTH, HEIGHT = 1000, 1800
-OFFSET_X = 0
-OFFSET_Y = -260
+from d2r_analyzer.config import config
+
+WIDTH, HEIGHT, OFFSET_X, OFFSET_Y = (
+    config.capture_width,
+    config.capture_height,
+    config.capture_offset_x,
+    config.capture_offset_y,
+)
 
 camera = bettercam.create(output_color="BGRA")
 
