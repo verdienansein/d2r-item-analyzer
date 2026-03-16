@@ -289,6 +289,24 @@
                     "score": 30
                 },
                 {
+                    "stat": "fire_resist",
+                    "max_value": 50,
+                    "min_value": 0,
+                    "score": 18
+                },
+                {
+                    "stat": "cold_resist",
+                    "max_value": 50,
+                    "min_value": 0,
+                    "score": 18
+                },
+                {
+                    "stat": "lightning_resist",
+                    "max_value": 50,
+                    "min_value": 0,
+                    "score": 18
+                },
+                {
                     "stat": "better_chance_of_getting_magic_items",
                     "max_value": 50,
                     "min_value": 15,
