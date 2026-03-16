@@ -170,43 +170,43 @@
                 },
                 {
                     "stat": "sorceress_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 },
                 {
                     "stat": "necromancer_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 },
                 {
                     "stat": "warlock_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 },
                 {
                     "stat": "assassin_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 },
                 {
                     "stat": "barbarian_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 },
                 {
                     "stat": "paladin_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 },
                 {
                     "stat": "amazon_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 50
                 }
@@ -296,43 +296,43 @@
                 },
                 {
                     "stat": "sorceress_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 },
                 {
                     "stat": "necromancer_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 },
                 {
                     "stat": "warlock_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 },
                 {
                     "stat": "assassin_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 },
                 {
                     "stat": "barbarian_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 },
                 {
                     "stat": "paladin_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 },
                 {
                     "stat": "amazon_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
                     "score": 25
                 }
@@ -839,6 +839,12 @@
                     "score": 30
                 },
                 {
+                    "stat": "mana_stolen_per_hit",
+                    "max_value": 10,
+                    "min_value": 0,
+                    "score": 17
+                },
+                {
                     "stat": "combat_skills",
                     "max_value": 3,
                     "min_value": 0,
@@ -846,6 +852,42 @@
                 },
                 {
                     "stat": "sorceress_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "necromancer_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "warlock_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "assassin_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "barbarian_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "paladin_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "amazon_skills",
                     "max_value": 2,
                     "min_value": 0,
                     "score": 40
@@ -1034,13 +1076,13 @@
                     "stat": "faster_cast_rate",
                     "max_value": 20,
                     "min_value": 0,
-                    "score": 20
+                    "score": 30
                 },
                 {
                     "stat": "faster_run_walk",
                     "max_value": 30,
                     "min_value": 0,
-                    "score": 16
+                    "score": 10
                 },
                 {
                     "stat": "faster_hit_recovery",
@@ -1098,68 +1140,86 @@
                 },
                 {
                     "stat": "sorceress_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "necromancer_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "warlock_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "assassin_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "barbarian_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "paladin_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "amazon_skills",
-                    "max_value": 1,
+                    "max_value": 2,
                     "min_value": 0,
-                    "score": 20
+                    "score": 35
                 },
                 {
                     "stat": "combat_skills",
                     "max_value": 3,
                     "min_value": 0,
-                    "score": 20
+                    "score": 15
                 },
                 {
                     "stat": "martial_arts",
                     "max_value": 3,
                     "min_value": 0,
-                    "score": 10
+                    "score": 15
                 },
                 {
                     "stat": "traps",
                     "max_value": 3,
                     "min_value": 0,
-                    "score": 10
+                    "score": 15
                 },
                 {
                     "stat": "summoning_skills",
                     "max_value": 3,
                     "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "elemental_skills",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "enhanced_defense",
+                    "max_value": 200,
+                    "min_value": 50,
+                    "score": 10
+                },
+                {
+                    "stat": "strength",
+                    "max_value": 20,
+                    "min_value": 10,
                     "score": 10
                 }
             ]

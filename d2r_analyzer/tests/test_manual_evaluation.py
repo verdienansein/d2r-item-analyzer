@@ -1926,3 +1926,51 @@ def test_rare_greaves() -> None:
     assert 70 <= actual_score < 80, f"Expected score 70–80, got {actual_score}"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "B"
+
+
+def test_rare_circlet_grade_A() -> None:
+    item_info = {
+        "name": "Circlet",
+        "base_type": "helmet",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 38,
+        "affixes": [
+            {
+                "raw_text": "+2 To Warlock Skills",
+                "stat": "warlock_skills",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "raw_text": "+20% Faster Cast Rate",
+                "stat": "faster_cast_rate",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+91% Enhanced Defense",
+                "stat": "enhanced_defense",
+                "value": 91,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+19 To Strength",
+                "stat": "strength",
+                "value": 19,
+                "unit": "",
+            },
+            {
+                "raw_text": "+15 All Resistances",
+                "stat": "all_resistances",
+                "value": 15,
+                "unit": "",
+            },
+        ],
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 80 <= actual_score < 90, f"Expected score 80–90, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "A"

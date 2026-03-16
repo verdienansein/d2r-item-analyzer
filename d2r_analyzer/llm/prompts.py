@@ -30,12 +30,26 @@ PRIORITY: If signals conflict, trust Signal 2 (affix count) over color.
 A magic item can NEVER have more than 2 affixes.
 A rare item always has between 3 and 6 affixes.
 
-Base Type mapping examples:
-  If the items has "one-hand damage" or "two-hand damage" → weapon
-
 The "base_type" field MUST be one of these exact values (lowercase):
   grand charm, small charm, large charm, amulet, ring, helmet, armor,
   shield, weapon, gloves, boots, belt
+
+Base Type mapping — MANDATORY, base_type must NEVER be null:
+  → "weapon"  if ANY of these are true:
+      • item contains: sword, axe, mace, maul, club, hammer, flail, scepter, wand, staff, dagger, 
+      knife, blade, polearm, spear, javelin, pike, lance, bec-de-corbin, ranseur, voulge, bardiche, 
+      glaive, scythe, trident, bow, crossbow, orb, claw, talon, fist, katar, cestus, scimitar, sabre, 
+      falchion, claymore, flamberge, zweihander, nodachi, tulwar, shamshir, gladius, halberd, poleaxe, 
+      partizan, thresher, spetum, yari, brandistock, mancatcher, pilum, harpoon, dart, dirk, kris, poignard, 
+      rondel, cinquedeas, stiletto, knout, scourge, cudgel, truncheon, pick, cleaver, tomahawk, tabar, crowbill, 
+      naga, arbalest, ballista, cho-ko-nu, chu-ko-nu, fascia, quhab, suwayyah, globe, swirl, grimoire, codex, 
+      compendium, dark tome, occult tome, old book, burnt text
+      • tooltip shows "One-Hand Damage" or "Two-Hand Damage" or "Throw Damage"
+  → "shield"  if ANY of these are true:
+      • item contains: shield, buckler, aegis, ward, tower, targe, kite, auric, head
+      • tooltip shows "Chance to Block"
+
+If still uncertain, pick the closest match from the allowed list — never return null.
 
 The "affixes/stat" field MUST be one of these exact values (lowercase):
   all_resistances, fire_resist, cold_resist, lightning_resist, poison_resist,
@@ -46,26 +60,33 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
   blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
   cold_damage, life_stolen_per_hit, mana_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons,
-  warlock_skills, faster_block_rate, increased_chance_of_blocking
+  warlock_skills, faster_block_rate, increased_chance_of_blocking, sorceress_skills, necromancer_skills, paladin_skills, barbarian_skills, amazon_skills, assassin_skills
 
 Stat mapping examples (use these exact keys):
-  "+X to All Skills"               → all_skills
-  "+X to All Attributes"           → all_attributes
-  "+X% to All Resistances"         → all_resistances
-  "+X% Faster Cast Rate"           → faster_cast_rate
-  "+X% Increased Attack Speed"     → increased_attack_speed
-  "+X% Faster Hit Recovery"        → faster_hit_recovery
-  "+X% Faster Run/Walk"            → faster_run_walk
-  "+X% Better Chance of Magic"     → better_chance_of_getting_magic_items
-  "+X to Lightning Skills"         → lightning_skills
-  "+X to Fire Skills"              → fire_skills
-  "+X to Cold Skills"              → cold_skills
-  "+X to Martial Arts"             → martial_arts
-  "+X to Warcries"                 → warcries
-  "Adds X-Y Poison Damage"         → poison_damage (use average of range for value)
-  "+X% Life Stolen Per Hit"        → life_stolen_per_hit
-  "Repairs X Durability"           → repair_durability
-If the item's base type is not in this list, pick the closest match.
+  "+X to All Skills"                 → all_skills
+  "+X to All Attributes"             → all_attributes
+  "+X% to All Resistances"           → all_resistances
+  "+X% Faster Cast Rate"             → faster_cast_rate
+  "+X% Increased Attack Speed"       → increased_attack_speed
+  "+X% Faster Hit Recovery"          → faster_hit_recovery
+  "+X% Faster Run/Walk"              → faster_run_walk
+  "+X% Better Chance of Magic"       → better_chance_of_getting_magic_items
+  "+X to Lightning Skills"           → lightning_skills
+  "+X to Fire Skills"                → fire_skills
+  "+X to Cold Skills"                → cold_skills
+  "+X to Martial Arts"               → martial_arts
+  "+X to Warcries"                   → warcries
+  "Adds X-Y Poison Damage"           → poison_damage (use average of range for value)
+  "+X% Life Stolen Per Hit"          → life_stolen_per_hit
+  "Repairs X Durability"             → repair_durability
+  "+X% Increased Chance of Blocking" → increased_chance_of_blocking
+  "+X to Amazon Skill Levels"         → amazon_skills
+  "+X to Assassin Skill Levels"       → assassin_skills
+  "+X to Barbarian Skill Levels"      → barbarian_skills
+  "+X to Paladin Skill Levels"        → paladin_skills
+  "+X to Necromancer Skill Levels"    → necromancer_skills
+  "+X to Druid Skill Levels"          → druid_skills
+  "+X to Sorceress Skill Levels"      → sorceress_skills
 
 Return this exact structure:
 {

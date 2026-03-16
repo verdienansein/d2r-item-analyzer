@@ -22,6 +22,12 @@ known_stats: set[str] = {
     "summoning_skills",
     "combat_skills",
     "warlock_skills",
+    "sorceress_skills",
+    "necromancer_skills",
+    "paladin_skills",
+    "barbarian_skills",
+    "amazon_skills",
+    "assassin_skills",
     "javelin_and_spear_skills",
     "faster_hit_recovery",
     "attack_rating",
@@ -198,9 +204,173 @@ class ItemSchema(BaseModel):
             return None
         normalized = v.lower().strip()
         known: set[str] | None = (info.context or {}).get("known_base_types")
-        if known is not None and normalized not in known:
-            return None
-        return normalized
+        if known is None or normalized in known:
+            return normalized
+
+        _WEAPON_KEYWORDS = {
+            "arbalest",
+            "axe",
+            "ballista",
+            "bardiche",
+            "bec-de-corbin",
+            "blade",
+            "bow",
+            "brandistock",
+            "burnt text",
+            "cestus",
+            "cho-ko-nu",
+            "chu-ko-nu",
+            "cinquedeas",
+            "claw",
+            "claymore",
+            "cleaver",
+            "club",
+            "codex",
+            "compendium",
+            "crossbow",
+            "crowbill",
+            "cudgel",
+            "dagger",
+            "dark tome",
+            "dart",
+            "dirk",
+            "falchion",
+            "fascia",
+            "fist",
+            "flail",
+            "flamberge",
+            "gladius",
+            "glaive",
+            "globe",
+            "grimoire",
+            "halberd",
+            "hammer",
+            "harpoon",
+            "javelin",
+            "katar",
+            "knife",
+            "knout",
+            "kris",
+            "lance",
+            "mace",
+            "mancatcher",
+            "maul",
+            "naga",
+            "nodachi",
+            "occult tome",
+            "old book",
+            "orb",
+            "partizan",
+            "pick",
+            "pike",
+            "pilum",
+            "poignard",
+            "polearm",
+            "poleaxe",
+            "quhab",
+            "ranseur",
+            "rondel",
+            "sabre",
+            "scepter",
+            "scimitar",
+            "scourge",
+            "scythe",
+            "shamshir",
+            "spear",
+            "spetum",
+            "staff",
+            "stiletto",
+            "suwayyah",
+            "swirl",
+            "sword",
+            "tabar",
+            "talon",
+            "thresher",
+            "tomahawk",
+            "trident",
+            "truncheon",
+            "tulwar",
+            "voulge",
+            "wand",
+            "weapon",
+            "yari",
+            "zweihander",
+        }
+        _SHIELD_KEYWORDS = {
+            "shield",
+            "buckler",
+            "aegis",
+            "ward",
+            "targe",
+            "kite",
+            "auric",
+            "tower",
+            "head",
+        }
+        _HELMET_KEYWORDS = {
+            "helm",
+            "helmet",
+            "skull cap",
+            "crown",
+            "diadem",
+            "shako",
+            "armet",
+            "casque",
+            "coif",
+            "mask",
+            "hat",
+            "tiara",
+            "circlet",
+            "cap",
+        }
+        _ARMOR_KEYWORDS = {
+            "armor",
+            "plate",
+            "mail",
+            "coat",
+            "robe",
+            "cloak",
+            "mantle",
+            "cuirass",
+            "lorica",
+            "tunic",
+            "hauberk",
+            "breastplate",
+        }
+        _GLOVES_KEYWORDS = {"gloves", "gauntlets", "vambraces", "bracers", "mitts"}
+        _BOOTS_KEYWORDS = {"boots", "greaves", "sandals", "shoes", "slippers", "treads"}
+        _BELT_KEYWORDS = {"belt", "sash", "girdle", "cord"}
+        _CHARM_KEYWORDS = {"grand charm", "large charm", "small charm", "charm"}
+
+        for keyword in _CHARM_KEYWORDS:
+            if keyword in normalized:
+                if "grand" in normalized:
+                    return "grand charm"
+                if "large" in normalized:
+                    return "large charm"
+                return "small charm"
+        for keyword in _WEAPON_KEYWORDS:
+            if keyword in normalized:
+                return "weapon"
+        for keyword in _SHIELD_KEYWORDS:
+            if keyword in normalized:
+                return "shield"
+        for keyword in _HELMET_KEYWORDS:
+            if keyword in normalized:
+                return "helmet"
+        for keyword in _ARMOR_KEYWORDS:
+            if keyword in normalized:
+                return "armor"
+        for keyword in _GLOVES_KEYWORDS:
+            if keyword in normalized:
+                return "gloves"
+        for keyword in _BOOTS_KEYWORDS:
+            if keyword in normalized:
+                return "boots"
+        for keyword in _BELT_KEYWORDS:
+            if keyword in normalized:
+                return "belt"
+        return None
 
     @field_validator("quality", mode="before")
     @classmethod
