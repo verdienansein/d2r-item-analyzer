@@ -31,7 +31,7 @@ A magic item can NEVER have more than 2 affixes.
 A rare item always has between 3 and 6 affixes.
 
 The "base_type" field MUST be one of these exact values (lowercase):
-  grand charm, small charm, large charm, amulet, ring, helmet, armor,
+  grand charm, small charm, large charm, jewel, amulet, ring, helmet, armor,
   shield, weapon, gloves, boots, belt
 
 Base Type mapping — MANDATORY, base_type must NEVER be null:

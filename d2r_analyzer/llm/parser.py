@@ -66,6 +66,7 @@ known_base_types: set[str] = {
     "grand charm",
     "small charm",
     "large charm",
+    "jewel",
     "amulet",
     "ring",
     "helmet",
