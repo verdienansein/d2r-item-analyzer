@@ -2024,3 +2024,68 @@ def test_ring_good_affixes_and_score() -> None:
     assert set(actual_good_affix_stats) == set(expected_good_affixes), (
         f"Expected good affixes {expected_good_affixes}, got {actual_good_affix_stats}"
     )
+
+def test_rare_ring_grade_B() -> None:
+    item_info = {
+    "name": "Raven Whorl",
+    "name_color": "yellow",
+    "base_type": "ring",
+    "quality": "rare",
+    "item_level": 85,
+    "required_level": 66,
+    "affixes": [
+        {
+        "raw_text": "+10% Faster Cast Rate",
+        "stat": "faster_cast_rate",
+        "value": 10,
+        "unit": "%"
+        },
+        {
+        "raw_text": "+5% Bonus to Attack Rating",
+        "stat": "attack_rating",
+        "value": 5,
+        "unit": "%"
+        },
+        {
+        "raw_text": "+26 to Attack Rating",
+        "stat": "attack_rating",
+        "value": 26,
+        "unit": ""
+        },
+        {
+        "raw_text": "+16 to Strength",
+        "stat": "strength",
+        "value": 16,
+        "unit": ""
+        },
+        {
+        "raw_text": "Cold Resist +24%",
+        "stat": "cold_resist",
+        "value": 24,
+        "unit": "%"
+        },
+        {
+        "raw_text": "Lightning Resist +6%",
+        "stat": "lightning_resist",
+        "value": 6,
+        "unit": "%"
+        },
+        {
+        "raw_text": "+5 to Light Radius",
+        "stat": None,
+        "value": 5,
+        "unit": ""
+        }
+    ],
+    "sockets": 0,
+    "is_ethereal": False,
+    "defense": None,
+    "damage": None
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 50 <= actual_score < 70, f"Expected score between 50 and 70, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "C"
+    

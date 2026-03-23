@@ -62,7 +62,13 @@
                     "stat": "mana",
                     "max_value": 150,
                     "min_value": 0,
-                    "score": 15
+                    "score": 16.67
+                },
+                {
+                    "stat": "strength",
+                    "max_value": 35,
+                    "min_value": 0,
+                    "score": 20
                 },
                 {
                     "stat": "all_resistances",
@@ -74,19 +80,19 @@
                     "stat": "fire_resist",
                     "max_value": 50,
                     "min_value": 0,
-                    "score": 16.67
+                    "score": 20
                 },
                 {
                     "stat": "cold_resist",
                     "max_value": 50,
                     "min_value": 0,
-                    "score": 16.67
+                    "score": 20
                 },
                 {
                     "stat": "lightning_resist",
                     "max_value": 50,
                     "min_value": 0,
-                    "score": 16.67
+                    "score": 20
                 },
                 {
                     "stat": "better_chance_of_getting_magic_items",
