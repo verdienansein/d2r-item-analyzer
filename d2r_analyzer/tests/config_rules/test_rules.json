@@ -56,19 +56,25 @@
                     "stat": "life",
                     "max_value": 40,
                     "min_value": 0,
-                    "score": 16.67
+                    "score": 17
                 },
                 {
                     "stat": "mana",
                     "max_value": 150,
                     "min_value": 0,
-                    "score": 16.67
+                    "score": 16
                 },
                 {
                     "stat": "strength",
                     "max_value": 35,
                     "min_value": 0,
                     "score": 20
+                },
+                {
+                    "stat": "attack_rating",
+                    "max_value": 250,
+                    "min_value": 0,
+                    "score": 28
                 },
                 {
                     "stat": "all_resistances",
@@ -98,13 +104,19 @@
                     "stat": "better_chance_of_getting_magic_items",
                     "max_value": 25,
                     "min_value": 0,
-                    "score": 16.67
+                    "score": 18
                 },
                 {
                     "stat": "life_stolen_per_hit",
                     "max_value": 8,
                     "min_value": 0,
-                    "score": 15
+                    "score": 30
+                },
+                {
+                    "stat": "mana_stolen_per_hit",
+                    "max_value": 5,
+                    "min_value": 0,
+                    "score": 25
                 }
             ]
         }

@@ -2116,3 +2116,33 @@ def test_rare_ring_grade_B() -> None:
     )
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "B"
+
+
+def test_rare_ring_grade_A() -> None:
+    item_info = {
+        "name": "Raven Whorl",
+        "name_color": "yellow",
+        "base_type": "ring",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 66,
+        "affixes": [
+            {
+                "raw_text": "+10% Faster Cast Rate",
+                "stat": "faster_cast_rate",
+                "value": 10,
+                "unit": "%",
+            },
+            {"stat": "attack_rating", "value": 114, "unit": ""},
+            {"stat": "life_stolen_per_hit", "value": 6, "unit": ""},
+            {"stat": "mana_stolen_per_hit", "value": 3, "unit": ""},
+        ],
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 80 <= actual_score < 90, (
+        f"Expected score between 80 and 90, got {actual_score}"
+    )
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "A"
