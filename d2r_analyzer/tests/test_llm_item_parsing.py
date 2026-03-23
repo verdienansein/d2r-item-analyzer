@@ -202,6 +202,15 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "strength",
         ],
     ),
+    "rare_12.png": ExpectedItem(
+        base_type="ring",
+        quality="rare",
+        affix_stats=[
+            "mana",
+            "all_resistances",
+            "replenish_life",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))

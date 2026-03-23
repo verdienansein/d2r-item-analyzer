@@ -59,6 +59,7 @@ known_stats: set[str] = {
     "attack_rating_against_demons",
     "faster_block_rate",
     "increased_chance_of_blocking",
+    "replenish_life",
 }
 
 known_base_types: set[str] = {

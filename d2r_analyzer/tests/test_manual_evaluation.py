@@ -1974,3 +1974,53 @@ def test_rare_circlet_grade_A() -> None:
     assert 80 <= actual_score < 90, f"Expected score 80–90, got {actual_score}"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "A"
+
+
+def test_ring_good_affixes_and_score() -> None:
+    item_info = {
+        "name": "Beast Touch",
+        "name_color": "yellow",
+        "base_type": "ring",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 41,
+        "affixes": [
+            {
+                "raw_text": "Replenish Life +8",
+                "stat": "replenish_life",
+                "value": 8,
+                "unit": None,
+            },
+            {"raw_text": "+66 to Mana", "stat": "mana", "value": 66, "unit": None},
+            {
+                "raw_text": "All Resistances +3",
+                "stat": "all_resistances",
+                "value": 3,
+                "unit": None,
+            },
+            {
+                "raw_text": "Level 4 Poison Dagger (6/30 Charges)",
+                "stat": None,
+                "value": None,
+                "unit": None,
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    actual_good_affixes = actual_evaluation.get("good_affixes", [])
+    expected_good_affixes = ["mana", "all_resistances"]
+    assert actual_score < 40, f"Expected score < 40, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "DISCARD"
+    assert actual_evaluation.get("grade", "") == "D"
+    actual_good_affix_stats = [
+        a.get("stat") if isinstance(a, dict) else a for a in actual_good_affixes
+    ]
+    assert set(actual_good_affix_stats) == set(expected_good_affixes), (
+        f"Expected good affixes {expected_good_affixes}, got {actual_good_affix_stats}"
+    )
