@@ -1415,7 +1415,7 @@ def test_grand_charm_life_only() -> None:
         "item_level": 85,
         "required_level": 50,
         "affixes": [
-            {"raw_text": "+40 to Life", "stat": "life", "value": 40, "unit": ""},
+            {"raw_text": "+45 to Life", "stat": "life", "value": 45, "unit": ""},
         ],
         "sockets": 0,
         "is_ethereal": False,
@@ -2144,5 +2144,269 @@ def test_rare_ring_grade_A() -> None:
     assert 80 <= actual_score < 90, (
         f"Expected score between 80 and 90, got {actual_score}"
     )
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "A"
+
+
+def test_rare_amulet_grade_S() -> None:
+    item_info = {
+        "name": "Amulet",
+        "base_type": "amulet",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 38,
+        "affixes": [
+            {
+                "raw_text": "+2 To Warlock Skills",
+                "stat": "warlock_skills",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "raw_text": "+10% Faster Cast Rate",
+                "stat": "faster_cast_rate",
+                "value": 10,
+                "unit": "%",
+            },
+            {
+                "stat": "mana_stolen_per_hit",
+                "value": 5,
+                "unit": "",
+            },
+            {
+                "stat": "all_resistances",
+                "value": 20,
+                "unit": "",
+            },
+        ],
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 90 <= actual_score <= 100, f"Expected score 90–100, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_magic_grand_charm_grade_C() -> None:
+    item_info = {
+        "name": "Grand Charm of the Bear",
+        "base_type": "grand charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "life",
+                "value": 16,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 99,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+        "damage": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 40 <= actual_score < 70, (
+        f"Expected score between 40 and 70, got {actual_score}"
+    )
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "C"
+
+
+def test_magic_large_charm_grade_C() -> None:
+    item_info = {
+        "name": "Sharp Large Charm",
+        "base_type": "large charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "maximum_damage",
+                "value": 6,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 48,
+                "unit": "",
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 40 <= actual_score < 70, (
+        f"Expected score between 40 and 70, got {actual_score}"
+    )
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "C"
+
+
+def test_magic_large_charm_grade_B() -> None:
+    item_info = {
+        "name": "Sharp Large Charm of Quality",
+        "base_type": "large charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "maximum_damage",
+                "value": 8,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 48,
+                "unit": "",
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 70 <= actual_score < 80, (
+        f"Expected score between 70 and 80, got {actual_score}"
+    )
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "B"
+
+
+def test_rare_large_charm_grade_S() -> None:
+    item_info = {
+        "name": "Sharp Large Charm of Quality",
+        "base_type": "large charm",
+        "quality": "rare",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "maximum_damage",
+                "value": 6,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 48,
+                "unit": "",
+            },
+            {
+                "stat": "life",
+                "value": 35,
+                "unit": "",
+            },
+            {
+                "stat": "strength",
+                "value": 5,
+                "unit": "",
+            },
+            {
+                "stat": "faster_run_walk",
+                "value": 5,
+                "unit": "",
+            },
+            {
+                "stat": "all_resistances",
+                "value": 8,
+                "unit": "",
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 90 <= actual_score <= 100, f"Expected score 90–100, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_magic_small_charm_grade_S() -> None:
+    item_info = {
+        "name": "Small Charm of Vita",
+        "base_type": "small charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "maximum_damage",
+                "value": 3,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 14,
+                "unit": "",
+            },
+            {
+                "stat": "life",
+                "value": 18,
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 90 <= actual_score <= 100, f"Expected score 90–100, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_magic_small_charm_grade_B() -> None:
+    item_info = {
+        "name": "Small Charm of Vita",
+        "base_type": "small charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "maximum_damage",
+                "value": 3,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 20,
+                "unit": "",
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 70 <= actual_score < 80, f"Expected score 70–80, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "B"
+
+
+def test_magic_small_charm_elemental_damage() -> None:
+    item_info = {
+        "name": "Small Charm of Vita",
+        "base_type": "small charm",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "life",
+                "value": 20,
+                "unit": "",
+            },
+            {
+                "stat": "fire_damage",
+                "value": 50,
+                "unit": "",
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 80 <= actual_score < 90, f"Expected score 80–90, got {actual_score}"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "A"

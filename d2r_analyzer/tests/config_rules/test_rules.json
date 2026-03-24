@@ -352,43 +352,43 @@
                     "stat": "sorceress_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 },
                 {
                     "stat": "necromancer_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 },
                 {
                     "stat": "warlock_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 },
                 {
                     "stat": "assassin_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 },
                 {
                     "stat": "barbarian_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 },
                 {
                     "stat": "paladin_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 },
                 {
                     "stat": "amazon_skills",
                     "max_value": 2,
                     "min_value": 0,
-                    "score": 25
+                    "score": 35
                 }
             ]
         }
@@ -418,7 +418,7 @@
                 },
                 {
                     "stat": "maximum_damage",
-                    "max_value": 6,
+                    "max_value": 8,
                     "min_value": 0,
                     "score": 50
                 },
@@ -427,6 +427,18 @@
                     "max_value": 8,
                     "min_value": 0,
                     "score": 30
+                },
+                {
+                    "stat": "faster_run_walk",
+                    "max_value": 5,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "attack_rating",
+                    "max_value": 48,
+                    "min_value": 15,
+                    "score": 20
                 },
                 {
                     "stat": "lightning_resist",
@@ -505,6 +517,24 @@
                     "max_value": 15,
                     "min_value": 0,
                     "score": 15
+                },
+                {
+                    "stat": "attack_rating",
+                    "max_value": 48,
+                    "min_value": 15,
+                    "score": 15
+                },
+                {
+                    "stat": "maximum_damage",
+                    "max_value": 8,
+                    "min_value": 0,
+                    "score": 15
+                },
+                {
+                    "stat": "strength",
+                    "max_value": 5,
+                    "min_value": 0,
+                    "score": 10
                 }
             ]
         }
@@ -570,8 +600,14 @@
                 },
                 {
                     "stat": "life",
-                    "max_value": 40,
-                    "min_value": 0,
+                    "max_value": 45,
+                    "min_value": 5,
+                    "score": 50
+                },
+                {
+                    "stat": "mana",
+                    "max_value": 59,
+                    "min_value": 5,
                     "score": 50
                 },
                 {
@@ -582,8 +618,8 @@
                 },
                 {
                     "stat": "attack_rating",
-                    "max_value": 76,
-                    "min_value": 20,
+                    "max_value": 132,
+                    "min_value": 60,
                     "score": 50
                 },
                 {
@@ -685,6 +721,12 @@
                     "score": 50
                 },
                 {
+                    "stat": "faster_hit_recovery",
+                    "max_value": 5,
+                    "min_value": 1,
+                    "score": 50
+                },
+                {
                     "stat": "fire_resist",
                     "max_value": 12,
                     "min_value": 0,
@@ -700,6 +742,42 @@
                     "stat": "lightning_resist",
                     "max_value": 12,
                     "min_value": 0,
+                    "score": 50
+                },
+                {
+                    "stat": "maximum_damage",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
+                    "stat": "attack_rating",
+                    "max_value": 20,
+                    "min_value": 0,
+                    "score": 30
+                },
+                {
+                    "stat": "fire_damage",
+                    "max_value": 71,
+                    "min_value": 10,
+                    "score": 50
+                },
+                {
+                    "stat": "lightning_damage",
+                    "max_value": 71,
+                    "min_value": 10,
+                    "score": 50
+                },
+                {
+                    "stat": "cold_damage",
+                    "max_value": 71,
+                    "min_value": 10,
+                    "score": 50
+                },
+                {
+                    "stat": "poison_damage",
+                    "max_value": 400,
+                    "min_value": 200,
                     "score": 50
                 }
             ]
