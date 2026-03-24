@@ -217,6 +217,12 @@
                     "score": 50
                 },
                 {
+                    "stat": "druid_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 50
+                },
+                {
                     "stat": "warlock_skills",
                     "max_value": 2,
                     "min_value": 0,
@@ -356,6 +362,12 @@
                 },
                 {
                     "stat": "necromancer_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 35
+                },
+                {
+                    "stat": "druid_skills",
                     "max_value": 2,
                     "min_value": 0,
                     "score": 35
@@ -944,7 +956,7 @@
                     "min_value": 0,
                     "score": 15
                 }
-             ]
+            ]
         }
     ],
     "weapon": [
@@ -995,6 +1007,12 @@
                     "score": 40
                 },
                 {
+                    "stat": "druid_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 40
+                },
+                {
                     "stat": "warlock_skills",
                     "max_value": 2,
                     "min_value": 0,
@@ -1027,24 +1045,30 @@
                 {
                     "stat": "fire_skills",
                     "max_value": 3,
-                    "min_value": 1,
-                    "score": 16
+                    "min_value": 0,
+                    "score": 20
                 },
                 {
                     "stat": "cold_skills",
                     "max_value": 3,
-                    "min_value": 1,
-                    "score": 16
+                    "min_value": 0,
+                    "score": 20
                 },
                 {
                     "stat": "lightning_skills",
                     "max_value": 3,
-                    "min_value": 1,
-                    "score": 16
+                    "min_value": 0,
+                    "score": 20
                 },
                 {
                     "stat": "life",
                     "max_value": 40,
+                    "min_value": 10,
+                    "score": 10
+                },
+                {
+                    "stat": "mana",
+                    "max_value": 90,
                     "min_value": 10,
                     "score": 10
                 },
@@ -1064,7 +1088,7 @@
                     "stat": "faster_cast_rate",
                     "max_value": 20,
                     "min_value": 15,
-                    "score": 30
+                    "score": 35 
                 },
                 {
                     "stat": "fire_resist",
@@ -1083,6 +1107,48 @@
                     "max_value": 30,
                     "min_value": 15,
                     "score": 10
+                },
+                {
+                    "stat": "cold_damage",
+                    "max_value": 140,
+                    "min_value": 20,
+                    "score": 25
+                },
+                {
+                    "stat": "fire_damage",
+                    "max_value": 240,
+                    "min_value": 40,
+                    "score": 25
+                },
+                {
+                    "stat": "lightning_damage",
+                    "max_value": 480,
+                    "min_value": 80,
+                    "score": 25
+                },
+                {
+                    "stat": "poison_damage",
+                    "max_value": 275,
+                    "min_value": 80,
+                    "score": 25
+                },
+                {
+                    "stat": "blizzard",
+                    "max_value": 5,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "glacial_spike",
+                    "max_value": 5,
+                    "min_value": 0,
+                    "score": 20
+                },
+                {
+                    "stat": "ice_blast",
+                    "max_value": 8,
+                    "min_value": 0,
+                    "score": 20
                 }
             ]
         }
@@ -1139,6 +1205,12 @@
                     "max_value": 35,
                     "min_value": 15,
                     "score": 30
+                },
+                {
+                    "stat": "life_stolen_per_hit",
+                    "max_value": 3,
+                    "min_value": 0,
+                    "score": 20
                 }
             ]
         }
@@ -1278,6 +1350,12 @@
                 },
                 {
                     "stat": "necromancer_skills",
+                    "max_value": 2,
+                    "min_value": 0,
+                    "score": 35
+                },
+                {
+                    "stat": "druid_skills",
                     "max_value": 2,
                     "min_value": 0,
                     "score": 35

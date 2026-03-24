@@ -28,6 +28,7 @@ _COLOR_TO_QUALITY: dict[str, str] = {
 def correct_quality(item: dict, known_unique_names: set[str] | None = None) -> dict:
     quality = item.get("quality", "")
     affixes = item.get("affixes", [])
+    base_type = item.get("base_type", "")
     name = (item.get("name") or "").lower().strip()
     name_color = (item.get("name_color") or "").lower().strip()
     affix_count = len(affixes)
@@ -38,7 +39,11 @@ def correct_quality(item: dict, known_unique_names: set[str] | None = None) -> d
         item["quality"] = "unique"
         return item
 
-    if affix_count >= 3:
+    if affix_count >= 3 and base_type not in (
+        "small charm",
+        "grand charm",
+        "large charm",
+    ):
         item["quality"] = "rare"
         return item
 

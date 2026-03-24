@@ -60,7 +60,7 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
   blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
   cold_damage, life_stolen_per_hit, mana_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons, replenish_life,
-  warlock_skills, faster_block_rate, increased_chance_of_blocking, sorceress_skills, necromancer_skills, paladin_skills, barbarian_skills, amazon_skills, assassin_skills
+  warlock_skills, faster_block_rate, increased_chance_of_blocking, sorceress_skills, necromancer_skills, druid_skills, paladin_skills, barbarian_skills, amazon_skills, assassin_skills
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"                 → all_skills
@@ -76,7 +76,7 @@ Stat mapping examples (use these exact keys):
   "+X to Cold Skills"                → cold_skills
   "+X to Martial Arts"               → martial_arts
   "+X to Warcries"                   → warcries
-  "Adds X-Y Poison Damage"           → poison_damage (use average of range for value)
+  "Adds X-Y Poison Damage"           → poison_damage (use maximum of range for values)
   "+X% Life Stolen Per Hit"          → life_stolen_per_hit
   "Repairs X Durability"             → repair_durability
   "+X% Increased Chance of Blocking" → increased_chance_of_blocking
@@ -87,6 +87,7 @@ Stat mapping examples (use these exact keys):
   "+X to Necromancer Skill Levels"    → necromancer_skills
   "+X to Druid Skill Levels"          → druid_skills
   "+X to Sorceress Skill Levels"      → sorceress_skills
+  "Adds X-Y Lightning Damage"        → lightning_damage (use maximum of range for values)
 
 Return this exact structure:
 {

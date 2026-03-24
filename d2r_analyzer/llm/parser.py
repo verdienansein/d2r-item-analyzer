@@ -24,6 +24,7 @@ known_stats: set[str] = {
     "warlock_skills",
     "sorceress_skills",
     "necromancer_skills",
+    "druid_skills",
     "paladin_skills",
     "barbarian_skills",
     "amazon_skills",
@@ -198,6 +199,15 @@ class ItemSchema(BaseModel):
     is_ethereal: bool = False
     defense: int | None = None
     damage: str | None = None
+
+    @field_validator("item_level", "required_level", "defense", mode="before")
+    @classmethod
+    def convert_float_to_int(cls, v: int | float | None) -> int | None:
+        if v is None:
+            return None
+        if isinstance(v, float):
+            return int(round(v))
+        return v
 
     @field_validator("base_type", mode="before")
     @classmethod

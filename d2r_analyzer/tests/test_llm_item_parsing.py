@@ -49,6 +49,16 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
         quality="magic",
         affix_stats=["fire_resist", "better_chance_of_getting_magic_items"],
     ),
+    "small_charm_3.png": ExpectedItem(
+        base_type="small charm",
+        quality="magic",
+        affix_stats=["life", "maximum_damage", "attack_rating"],
+    ),
+    "small_charm_4.png": ExpectedItem(
+        base_type="small charm",
+        quality="magic",
+        affix_stats=["life", "lightning_damage"],
+    ),
     "unique_1.png": ExpectedItem(
         base_type="gloves",
         quality="unique",
@@ -279,4 +289,19 @@ def test_parse_item_from_image(image_path: Path) -> None:
         assert stat in actual_stats, (
             f"[{filename}] missing expected affix stat '{stat}'. "
             f"Parsed stats: {sorted(actual_stats)}"
+        )
+
+    if filename == "small_charm_4.png":
+        lightning_damage_affix = next(
+            (affix for affix in item.affixes if affix.stat == "lightning_damage"),
+            None,
+        )
+        assert lightning_damage_affix is not None, (
+            f"[{filename}] lightning_damage affix not found"
+        )
+        assert lightning_damage_affix.value is not None, (
+            f"[{filename}] lightning_damage value must not be None"
+        )
+        assert lightning_damage_affix.value == 71, (
+            f"[{filename}] lightning_damage value must be 71, got {lightning_damage_affix.value}"
         )

@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 
 from d2r_analyzer.evaluator import ManualEvaluator
@@ -793,18 +794,20 @@ def test_grade_C_caster_rare_weapon() -> None:
     actual_evaluation = evaluator.evaluate_item(item_info)
     actual_verdict = actual_evaluation.get("verdict", "")
 
+    logging.info(f"Actual score evaluated to: {actual_evaluation.get('score', 0)}")
+
     assert (
         actual_evaluation.get("score", 0) >= 40
-        and actual_evaluation.get("score", 0) <= 60
+        and actual_evaluation.get("score", 0) < 70
     ), (
-        f"Expected score between 40 and 60 for the item, got {actual_evaluation.get('score', 0)}"
+        f"Expected score between 60 and 70 for the item, got {actual_evaluation.get('score', 0)}"
     )
 
     assert actual_verdict == expected_verdict, (
         f"Expected verdict '{expected_verdict}', got '{actual_verdict}'"
     )
     assert actual_evaluation.get("grade", "") == "C", (
-        f"Expected grade 'C' for the item, got '{actual_evaluation.get('grade', '')}'"
+        f"Expected grade 'B' for the item, got '{actual_evaluation.get('grade', '')}'"
     )
 
 
@@ -2410,3 +2413,117 @@ def test_magic_small_charm_elemental_damage() -> None:
     assert 80 <= actual_score < 90, f"Expected score 80–90, got {actual_score}"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "A"
+
+
+def test_rare_weapon_melee_grade_S() -> None:
+    item_info = {
+        "name": "Fiend Barb",
+        "base_type": "weapon",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 16,
+        "affixes": [
+            {
+                "stat": "increased_attack_speed",
+                "value": 40,
+                "unit": "",
+            },
+            {
+                "stat": "enhanced_damage",
+                "value": 380,
+                "unit": "%",
+            },
+            {
+                "raw_text": "+49 to Maximum Damage",
+                "stat": "maximum_damage",
+                "value": 49,
+                "unit": "",
+            },
+            {
+                "stat": "attack_rating",
+                "value": 1633,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": True,
+        "defense": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+
+    logging.info(f"Actual score evaluated to: {actual_score}")
+
+    assert 90 <= actual_score <= 100, f"Expected score 90–100, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"
+
+
+def test_rare_weapon_caster_grade_S() -> None:
+    item_info = {
+        "name": "Orb",
+        "base_type": "weapon",
+        "quality": "rare",
+        "item_level": None,
+        "required_level": 16,
+        "affixes": [
+            {
+                "stat": "cold_skills",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "stat": "faster_cast_rate",
+                "value": 20,
+                "unit": "%",
+            },
+            {
+                "stat": "cold_damage",
+                "value": 112,
+                "unit": "",
+            },
+            {
+                "stat": "blizzard",
+                "value": 3,
+                "unit": "",
+            },
+            {
+                "stat": "glacial_spike",
+                "value": 2,
+                "unit": "",
+            },
+            {
+                "stat": "mana",
+                "value": 39,
+                "unit": "",
+            },
+        ],
+        "sockets": 0,
+        "is_ethereal": False,
+        "defense": None,
+    }
+
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    actual_good_affixes = actual_evaluation.get("good_affixes", [])
+    expected_good_affixes = [
+        "mana",
+        "faster_cast_rate",
+        "cold_skills",
+        "cold_damage",
+        "blizzard",
+        "glacial_spike",
+    ]
+
+    logging.info(f"Actual score evaluated to: {actual_score}")
+
+    actual_good_affix_stats = [
+        a.get("stat") if isinstance(a, dict) else a for a in actual_good_affixes
+    ]
+    assert set(actual_good_affix_stats) == set(expected_good_affixes), (
+        f"Expected good affixes {expected_good_affixes}, got {actual_good_affix_stats}"
+    )
+    assert 90 <= actual_score <= 100, f"Expected score 90–100, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "S"

@@ -64,6 +64,12 @@ Run tests:
 poetry run pytest
 ```
 
+Run tests only for a specific llm item evaluation:
+
+```bash
+poetry run pytest 'd2r_analyzer/tests/test_llm_item_parsing.py::test_parse_item_from_image' -k 'small_charm' -xvs
+```
+
 Build source and wheel distributions:
 
 ```bash
