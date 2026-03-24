@@ -2530,6 +2530,7 @@ def test_rare_weapon_caster_grade_S() -> None:
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "S"
 
+
 def test_magic_boots() -> None:
     item_info = {
         "name": "Magic Boots",

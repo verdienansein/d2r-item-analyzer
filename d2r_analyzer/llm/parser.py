@@ -61,6 +61,9 @@ known_stats: set[str] = {
     "faster_block_rate",
     "increased_chance_of_blocking",
     "replenish_life",
+    "bone_spirit",
+    "blizzard",
+    "glacial_spike",
 }
 
 known_base_types: set[str] = {

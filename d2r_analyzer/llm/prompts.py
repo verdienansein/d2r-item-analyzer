@@ -60,7 +60,8 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   physical_damage_received_reduction, increase_maximum_mana, lightning_damage, poison_damage, poison_nova,
   blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
   cold_damage, life_stolen_per_hit, mana_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons, replenish_life,
-  warlock_skills, faster_block_rate, increased_chance_of_blocking, sorceress_skills, necromancer_skills, druid_skills, paladin_skills, barbarian_skills, amazon_skills, assassin_skills
+  warlock_skills, faster_block_rate, increased_chance_of_blocking, sorceress_skills, necromancer_skills, druid_skills, paladin_skills, barbarian_skills, amazon_skills, assassin_skills,
+  bone_spirit, blizzard, glacial_spike
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"                 → all_skills
