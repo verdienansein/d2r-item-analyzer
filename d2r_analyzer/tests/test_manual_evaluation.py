@@ -915,9 +915,11 @@ def test_rare_boots() -> None:
     actual_evaluation = evaluator.evaluate_item(item_info)
     actual_verdict = actual_evaluation.get("verdict", "")
 
+    logging.info(f"Actual score evaluated to: {actual_evaluation.get('score', 0)}")
+
     assert (
-        actual_evaluation.get("score", 0) >= 80
-        and actual_evaluation.get("score", 0) <= 90
+        actual_evaluation.get("score", 0) > 80
+        and actual_evaluation.get("score", 0) < 90
     ), (
         f"Expected score between 80 and 90 for the item, got {actual_evaluation.get('score', 0)}"
     )
@@ -2527,3 +2529,29 @@ def test_rare_weapon_caster_grade_S() -> None:
     assert 90 <= actual_score <= 100, f"Expected score 90–100, got {actual_score}"
     assert actual_evaluation.get("verdict", "") == "KEEP"
     assert actual_evaluation.get("grade", "") == "S"
+
+def test_magic_boots() -> None:
+    item_info = {
+        "name": "Magic Boots",
+        "base_type": "boots",
+        "quality": "magic",
+        "item_level": 85,
+        "required_level": 50,
+        "affixes": [
+            {
+                "stat": "faster_run_walk",
+                "value": 30,
+                "unit": "%",
+            },
+            {
+                "stat": "lightning_resist",
+                "value": 33,
+                "unit": "",
+            },
+        ],
+    }
+    actual_evaluation = evaluator.evaluate_item(item_info)
+    actual_score = actual_evaluation.get("score", 0)
+    assert 40 <= actual_score < 60, f"Expected score 40–60, got {actual_score}"
+    assert actual_evaluation.get("verdict", "") == "KEEP"
+    assert actual_evaluation.get("grade", "") == "C"
