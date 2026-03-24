@@ -252,6 +252,20 @@ EXPECTED_ITEMS: dict[str, ExpectedItem] = {
             "bone_spirit",
         ],
     ),
+    "rare_16.png": ExpectedItem(
+        base_type="weapon",
+        quality="rare",
+        affix_stats=[
+            "cold_skills",
+            "faster_cast_rate",
+            "cold_damage",
+            "cold_mastery",
+            "blizzard",
+            "glacial_spike",
+            "energy",
+            "mana",
+        ],
+    ),
 }
 
 _all_images = sorted(PICTURES_DIR.glob("*.png"))

@@ -53,7 +53,7 @@ If still uncertain, pick the closest match from the allowed list — never retur
 
 The "affixes/stat" field MUST be one of these exact values (lowercase):
   all_resistances, fire_resist, cold_resist, lightning_resist, poison_resist,
-  life, mana, strength, lightning_skills, fire_skills, cold_skills, martial_arts, 
+  life, mana, energy, strength, lightning_skills, fire_skills, cold_skills, martial_arts, 
   warcries, traps, elemental_skills, summoning_skills, javelin_and_spear_skills, 
   faster_hit_recovery, attack_rating, better_chance_of_getting_magic_items, faster_cast_rate, 
   faster_run_walk, fire_damage, enhanced_defense, defense, regenerate_mana, all_skills, all_attributes, 
@@ -61,7 +61,7 @@ The "affixes/stat" field MUST be one of these exact values (lowercase):
   blood_golem, damage_reduced, combat_skills, maximum_damage, damage_to_undead, enhanced_damage,
   cold_damage, life_stolen_per_hit, mana_stolen_per_hit, repair_durability, increased_attack_speed, damage_to_demons, attack_rating_against_demons, replenish_life,
   warlock_skills, faster_block_rate, increased_chance_of_blocking, sorceress_skills, necromancer_skills, druid_skills, paladin_skills, barbarian_skills, amazon_skills, assassin_skills,
-  bone_spirit, blizzard, glacial_spike
+  bone_spirit, blizzard, glacial_spike, cold_mastery
 
 Stat mapping examples (use these exact keys):
   "+X to All Skills"                 → all_skills

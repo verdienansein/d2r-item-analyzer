@@ -11,6 +11,7 @@ known_stats: set[str] = {
     "poison_resist",
     "life",
     "mana",
+    "energy",
     "strength",
     "lightning_skills",
     "fire_skills",
@@ -64,6 +65,7 @@ known_stats: set[str] = {
     "bone_spirit",
     "blizzard",
     "glacial_spike",
+    "cold_mastery",
 }
 
 known_base_types: set[str] = {
